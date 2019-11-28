@@ -1,17 +1,16 @@
 <template>
-  <div class="home">
-    <HelloWorld />
-  </div>
+  <v-layout>
+    <h2>BTC算力推荐</h2>
+    <v-layout>
+      <v-card>abc</v-card>
+    </v-layout>
+  </v-layout>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'home',
   components: {
-    HelloWorld
   }
 }
 </script>
