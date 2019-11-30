@@ -22,9 +22,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn href="#/about" text>
-        <span class="mr-2">About</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn href="#/" text>
+        <span class="mr-2">云算力</span>
       </v-btn>
     </v-app-bar>
 
