@@ -168,26 +168,6 @@ export default {
             min: 3
           }
         ],
-        '90D': [
-          {
-            name: 'BTC-S17',
-            rating: 5,
-            seller: 'miningzoo.com',
-            price: 4.9,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: 'BTC-S17',
-            rating: 4,
-            seller: 'miningzoo.com',
-            price: 4.9,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          }
-        ],
         '120D': [
           {
             name: 'BTC-S17',
