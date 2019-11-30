@@ -3,10 +3,14 @@
     <h2>BTC算力</h2>
     <v-row>
       <v-col class="text-center" cols="6" sm="4" md="3" lg="2" v-for="p in products" :key="p.duration">
-        <v-avatar color="indigo" size="100">
-          <span class="white--text headline">{{p.duration}}</span>
-        </v-avatar>
-        <div>{{p.price}}</div>
+        <v-card href="#/product">
+          <v-card-text>
+            <v-avatar color="indigo" size="100">
+              <span class="white--text headline">{{p.duration}}</span>
+            </v-avatar>
+            <div>{{p.price}}</div>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
     <br/><br/>
