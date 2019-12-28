@@ -1,5 +1,29 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col class="col slogan">
+        <span class="yellow">SWEET DEALS</span><br/>
+        <span class="yellow">IN CRYPTO</span><br/>
+        <span class="yellow">MINING</span><br/>
+        <span class="black">BEST PRICE  x  OBJECTIVE METRICS</span>
+        </v-col>
+    </v-row>
+
+
+    <div class="col">
+        <form action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&amp;id=2f33950de0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div class="desc">We aggregate and rate existing cloud mining contracts, for transparency, standardization and price discovery.</div>
+          <div class="desc sign_up">Sign up for fresh updates & never miss a juicy deal.</div>
+
+          <div class="row form">
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_466b3785cad82e2db6271ffcc_2f33950de0" tabindex="-1" value=""></div>
+            <label for="email" style="display: none;">email</label>
+            <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
+            <input type="submit" class="btn" value="GO" />
+          </div>
+        </form>
+      </div>
+      
     <h2>BTC算力</h2>
     <v-row>
       <v-col class="text-center" cols="6" sm="4" md="3" lg="2" v-for="p in products" :key="p.duration">

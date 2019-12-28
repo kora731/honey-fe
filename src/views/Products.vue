@@ -1,14 +1,14 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="8">
+      <v-col cols="3" md="3">
         <v-card>
           <v-card-title>BTC算力推荐</v-card-title>
           <v-card-text>
             <v-item-group mandatory>
               <v-container>
                 <v-row>
-                  <v-col v-for="n in Object.keys(items)" :key="n" cols="2">
+                  <v-col v-for="n in Object.keys(items)" :key="n" cols="12">
                     <v-item v-slot:default="{ active, toggle }">
                       <v-card
                               :color="active ? 'primary' : ''"
@@ -29,7 +29,8 @@
             </v-item-group>
           </v-card-text>
         </v-card>
-        <br/>
+        </v-col>
+        <v-col cols="9" md="9">
         <v-card v-for="(item, index) in items[duration]" :key="index" style="margin-bottom: 10px;">
           <v-card-text>
             <v-row align="center">
@@ -67,22 +68,15 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="4">
-        <difficulty-predictor></difficulty-predictor>
-        <br/>
-        <profit-predictor></profit-predictor>
-      </v-col>
-    </v-row>
+      </v-row>
+    
   </v-container>
 </template>
 
 <script>
-import DifficultyPredictor from "../components/DifficultyPredictor";
-import ProfitPredictor from "../components/ProfitPredictor";
 
 export default {
   name: 'Products',
-  components: { DifficultyPredictor, ProfitPredictor },
   methods: {
     setDuration(d) {
       this.duration = d;
