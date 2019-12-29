@@ -1,109 +1,230 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col class="col slogan">
-        <span class="yellow">SWEET DEALS</span><br/>
-        <span class="yellow">IN CRYPTO</span><br/>
-        <span class="yellow">MINING</span><br/>
-        <span class="black">BEST PRICE  x  OBJECTIVE METRICS</span>
-        </v-col>
+  <v-container class="content">
+    <v-row class="row layout">
+      <v-col class="col slogan" cols="6" sm="12" lg="6">
+        <span class="yellow">SWEET DEALS</span>
+        <br />
+        <span class="yellow">IN CRYPTO</span>
+        <br />
+        <span class="yellow">MINING</span>
+        <br />
+        
+      </v-col>
+      <v-col class="col slogan" cols="6" sm="12" lg="6">
+          <span class="black">BEST PRICE x OBJECTIVE METRICS</span>
+          <form
+            action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&amp;id=2f33950de0"
+            method="post"
+            id="mc-embedded-subscribe-form"
+            name="mc-embedded-subscribe-form"
+            class="validate"
+            target="_blank"
+            novalidate
+          >
+            <div class="desc">
+              We aggregate and rate existing cloud mining contracts, for transparency, standardization and price discovery.
+              </div>
+            <div class="desc sign_up">Sign up for fresh updates & never miss a juicy deal.</div>
+
+            <div class="row form">
+              <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input
+                  type="text"
+                  name="b_466b3785cad82e2db6271ffcc_2f33950de0"
+                  tabindex="-1"
+                  value
+                />
+              </div>
+              <label for="email" style="display: none;">email</label>
+              <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
+              <input type="submit" class="btn" value="GO" />
+            </div>
+          </form>
+      </v-col>
     </v-row>
 
-
-    <div class="col">
-        <form action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&amp;id=2f33950de0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-          <div class="desc">We aggregate and rate existing cloud mining contracts, for transparency, standardization and price discovery.</div>
-          <div class="desc sign_up">Sign up for fresh updates & never miss a juicy deal.</div>
-
-          <div class="row form">
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_466b3785cad82e2db6271ffcc_2f33950de0" tabindex="-1" value=""></div>
-            <label for="email" style="display: none;">email</label>
-            <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
-            <input type="submit" class="btn" value="GO" />
-          </div>
-        </form>
-      </div>
-      
-    <h2>BTC算力</h2>
-    <v-row>
-      <v-col class="text-center" cols="6" sm="4" md="3" lg="2" v-for="p in products" :key="p.duration">
+    
+    <v-row class="row deals">
+      <v-col
+        class="text-center"
+        cols="6"
+        sm="12"
+        md="6"
+        lg="6"
+        v-for="p in products"
+        :key="p.duration"
+      >
         <v-card href="#/products">
           <v-card-text>
-            <v-avatar color="indigo" size="100">
-              <span class="white--text headline">{{p.duration}}</span>
-            </v-avatar>
-            <div>{{p.price}}</div>
+            <div>{{p.type}}</div>
+             <div>{{p.sellers}}</div>
+              <div>{{p.duration}}</div>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <br/><br/>
-    <h2>为什么要买云算力</h2>
-    <v-row>
-      <v-col class="text-center" cols="12" md="6" lg="3">
-        <v-icon size="64">mdi-star</v-icon>
-        <h2>门槛低</h2>
-        <div>
-          矿场提供低廉的电价，维护服务。较低的购买门槛，提供多种合约周期。解决用户投资大，技术难等问题。可以自由挖矿。
-        </div>
-      </v-col>
-      <v-col class="text-center" cols="12" md="6" lg="3">
-        <v-icon size="64">mdi-star</v-icon>
-        <h2>方便快捷</h2>
-        <div>
-          无需自行购置机器，安装配置，维护保修。一切都由矿主为您搞定。省时省力，方便快捷。
-        </div>
-      </v-col>
-      <v-col class="text-center" cols="12" md="6" lg="3">
-        <v-icon size="64">mdi-star</v-icon>
-        <h2>收益稳定</h2>
-        <div>
-          一次购买算力，价格固定，不回因为BTC价格的波动而发生变化。算力稳定，收益基本可以预计。
-        </div>
-      </v-col>
-      <v-col class="text-center" cols="12" md="6" lg="3">
-        <v-icon size="64">mdi-star</v-icon>
-        <h2>优选全球</h2>
-        <div>
-          甄选全球优秀的算力提供厂商，集中选取全球最具有性价比的厂商进行推荐。公司坐落在香港。多年关注算力发展，资深矿业大佬为顾问，及时提供风险预告。
-        </div>
-      </v-col>
 
+    <v-row class="row faq">
+      
+      <h2>FAQ</h2>
+    
     </v-row>
+   
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'home',
-  components: {
-  },
+  name: "home",
+  components: {},
   data() {
     return {
       products: [
         {
-          duration: '30Days',
-          price: '0.45/TH/D',
-          sellers: 12
-        }, {
-          duration: '60Days',
-          price: '0.43/TH/D',
-          sellers: 12
-        }, {
-          duration: '120Days',
-          price: '0.40/TH/D',
-          sellers: 12
-        }, {
-          duration: '360Days',
-          price: '0.39/TH/D',
-          sellers: 12
-        }, {
-          duration: '720Days',
-          price: '0.37/TH/D',
-          sellers: 12
-        }
+          type: "BTC",
+          duration: "30Days",
+          price: "0.45/TH/D",
+          sellers: 10
+        },
+        {
+          type: "ETH",
+          duration: "60Days",
+          price: "0.43/TH/D",
+          sellers: 8
+        },
+
       ]
     };
   }
-}
+};
 </script>
+
+
+<style scoped lang="scss">
+.container
+{
+  margin: 0;
+  max-width: unset;
+  padding: 0;
+}
+
+.content {
+  padding-bottom: 20px;
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+
+      &.deals, &.faq {
+      padding: 40px 60px;
+
+    }
+   &.layout {
+    /*max-width: 1100px;*/
+    justify-content: space-around;
+    align-items: flex-start;
+    background: #FFFEFA;
+    box-shadow: 0px 1px 2px #888888;
+    padding: 40px 60px;
+    .slogan {
+      /*width: 480px;*/
+      > span {
+        display: inline-block;
+
+        &.yellow {
+          background-color: #fef807;
+          padding: 5px 10px;
+          font-size: 44px;
+          margin: 10px 0;
+          box-shadow: 5px 5px 5px #888888;
+          text-shadow: 2px 2px 2px #888888;
+        }
+
+        &.black {
+          background-color: black;
+          color: #fff;
+          margin-top: 10px;
+          padding: 2px 5px;
+          font-size: 24px;
+          font-style: italic;
+          font-weight: 600;
+        }
+      }
+    }
+      
+  }
+
+ 
+
+    .desc {
+      margin: 10px 0 10px 0;
+      font-size: 20px;
+      max-width: 527px;
+
+      &.sign_up {
+        margin: 60px 0 20px 0;
+      }
+    }
+  }
+
+  .row.form {
+    align-items: center;
+
+    input {
+      font-family: "Eras ITC", "Avenir", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid black;
+      border-radius: 5px;
+      box-shadow: 3px 3px 3px #888888;
+      flex-grow: 1;
+      max-width: 25rem;
+      &::placeholder {
+        font-size: 20px;
+      }
+    }
+
+    .btn {
+      cursor: pointer;
+      background-image: url("../assets/logo.png");
+      background-size: 80px;
+      width: 80px;
+      height: 62px;
+      text-align: center;
+      line-height: 62px;
+      font-size: 20px;
+      border: 0;
+      background-color: rgba(0, 0, 0, 0);
+      padding: 0px;
+      margin-right: 0px;
+      border-radius: 0px;
+      box-shadow: none;
+      flex-grow: 0;
+    }
+  }
+}
+
+@media screen and (min-height: 750px) {
+  .content {
+    padding-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .content {
+    margin: 60px 15px 0 15px;
+
+    .row.layout {
+      .black {
+        margin-top: 10px !important;
+      }
+
+      .desc.sign_up {
+        margin: 20px 0;
+      }
+    }
+  }
+}
+</style>

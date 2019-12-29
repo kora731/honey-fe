@@ -1,14 +1,21 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="3" md="3">
+      <v-col cols="3" md="3" lg="3" sm="6">
         <v-card>
-          <v-card-title>BTC算力推荐</v-card-title>
+          <v-card-title>Coin</v-card-title>
+            <v-col cols="4">
+              BTC
+            </v-col>
+            <v-col cols="4">
+              ETH
+            </v-col>
+          <v-card-title>Duration</v-card-title>
           <v-card-text>
             <v-item-group mandatory>
               <v-container>
                 <v-row>
-                  <v-col v-for="n in Object.keys(items)" :key="n" cols="12">
+                  <v-col v-for="n in Object.keys(items)" :key="n" cols="4">
                     <v-item v-slot:default="{ active, toggle }">
                       <v-card
                               :color="active ? 'primary' : ''"
@@ -30,17 +37,12 @@
           </v-card-text>
         </v-card>
         </v-col>
-        <v-col cols="9" md="9">
+        <v-col cols="9" md="9" lg="9" sm="12">
         <v-card v-for="(item, index) in items[duration]" :key="index" style="margin-bottom: 10px;">
           <v-card-text>
             <v-row align="center">
               <v-col cols="6">
                 <h2>{{item.name}}</h2>
-                <div>
-                  <v-icon color="red" v-for="n in item.rating" :key="`${index}_${n}_r`">mdi-star</v-icon>
-                  <v-icon v-for="n in 5 - item.rating" :key="`${index}_${n}`">mdi-star</v-icon>
-                  {{item.seller}}
-                </div>
               </v-col>
               <v-col cols="6" class="text-right">
                 <h2>${{item.price}}/T/D</h2>
@@ -48,20 +50,27 @@
             </v-row>
             <v-row align="center">
               <v-col cols="3">
-                <div>手续费</div>
+                <div>Management Fee</div>
                 <div>{{item.commission * 100}}%</div>
               </v-col>
               <v-col cols="3">
-                <div>电费</div>
+                <div>Electricity Fee</div>
                 <div>${{item.electricityFee}}/T/D</div>
               </v-col>
               <v-col cols="3">
-                <div>起购</div>
+                <div>Min Amount</div>
                 <div>{{item.min}}T</div>
+              </v-col>
+              <v-col cols="9">
+                <div>
+                  <v-icon color="red" v-for="n in item.rating" :key="`${index}_${n}_r`">mdi-star</v-icon>
+                  <v-icon v-for="n in 5 - item.rating" :key="`${index}_${n}`">mdi-star</v-icon>
+                  {{item.seller}}
+                </div>
               </v-col>
               <v-col cols="3" class="text-right">
                 <v-btn href="#/product" color="primary">
-                  <span class="mr-2">View</span>
+                  <span class="mr-2">Check it out</span>
                 </v-btn>
               </v-col>
             </v-row>
