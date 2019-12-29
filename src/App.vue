@@ -11,19 +11,25 @@
             alt="Vuetify Logo"
             class="shrink mr-2"
             contain
-            src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+            src="./assets/hl-logo.svg"
             transition="scale-transition"
             width="40"
           />
 
-          <span class="mr-2">Hashedge</span>
+          <span class="mr-2">Honey Lemon</span>
         </v-btn>
       </div>
 
       <v-spacer></v-spacer>
 
       <v-btn href="#/" text>
-        <span class="mr-2">云算力</span>
+        <span class="mr-2">HOME</span>
+      </v-btn>
+       <v-btn href="#/products" text>
+        <span class="mr-2">DEALS</span>
+      </v-btn>
+       <v-btn href="#/about" text>
+        <span class="mr-2">FAQ</span>
       </v-btn>
     </v-app-bar>
 
