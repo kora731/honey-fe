@@ -1,7 +1,7 @@
 <template>
   <v-container class="content">
-    <v-row class="row layout">
-      <v-col class="col slogan" cols="6" sm="12" lg="6">
+    <v-row class="layout">
+      <v-col class="col slogan pl-10" cols="6" sm="12" lg="6">
         <span class="yellow">SWEET DEALS</span>
         <br />
         <span class="yellow">IN CRYPTO</span>
@@ -43,8 +43,14 @@
       </v-col>
     </v-row>
 
+    <v-row class="d-block ma-10 pa-10">
+      <div class="display-2">Honey Lemon -> Cryptocurrancy Mining
+         </div>
+      <div class="headline">Discover best deals in cloud mining contracts listed across reputable platforms:
+         </div>
+    </v-row>
     
-    <v-row class="row deals">
+    <v-row class="deals">
       <v-col
         class="text-center"
         cols="6"
@@ -54,11 +60,20 @@
         v-for="p in products"
         :key="p.duration"
       >
-        <v-card href="#/products">
-          <v-card-text>
-            <div>{{p.type}}</div>
-             <div>{{p.sellers}}</div>
-              <div>{{p.duration}}</div>
+        <v-card href="#/products"
+          class="mx-auto"
+          height="360"
+          max-width="480"
+        >
+          <v-card-text class="text-left">
+            <div class="display-2 ma-4">{{p.type}}</div>
+            <div class="ma-4">mining contract</div>
+             <div class="ma-4">{{p.sellers}} Platforms</div>
+            <v-divider></v-divider>
+            <div class="ma-4"><v-icon>mdi-sale</v-icon> up to 22% OFF vs buying BTC</div>
+            <div class="ma-4"><v-icon>mdi-tag-heart</v-icon>as low as $0.1139 / T / Day</div>
+            <div class="ma-4"><v-icon>mdi-coin</v-icon>BTC price: $7,147.01 (-1.63%)</div>
+            <div class="ma-4"><v-icon>mdi-treasure-chest</v-icon>BTC mining earnings: $0.1388 / T / Day</div>
           </v-card-text>
         </v-card>
       </v-col>
@@ -172,7 +187,7 @@ export default {
     align-items: center;
 
     input {
-      font-family: "Eras ITC", "Avenir", Helvetica, Arial, sans-serif;
+      font-family: "Roboto", Helvetica, Arial, sans-serif;
       font-size: 20px;
       padding: 10px;
       margin-right: 10px;
