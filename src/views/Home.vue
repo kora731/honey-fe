@@ -1,7 +1,7 @@
 <template>
   <v-container class="content">
-    <v-row class="layout">
-      <v-col class="col slogan pl-10" cols="6" sm="12" lg="6">
+    <v-row class="layout" justify="center">
+      <v-col class="col slogan" cols="4" sm="12" lg="4">
         <span class="yellow">SWEET DEALS</span>
         <br />
         <span class="yellow">IN CRYPTO</span>
@@ -10,7 +10,7 @@
         <br />
         
       </v-col>
-      <v-col class="col slogan" cols="6" sm="12" lg="6">
+      <v-col class="col slogan" cols="5" sm="12" lg="5">
           <span class="black">BEST PRICE x OBJECTIVE METRICS</span>
           <form
             action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&amp;id=2f33950de0"
@@ -43,27 +43,27 @@
       </v-col>
     </v-row>
 
-    <v-row class="d-block ma-10 pa-10">
-      <div class="display-2">Honey Lemon -> Cryptocurrancy Mining
-         </div>
-      <div class="headline">Discover best deals in cloud mining contracts listed across reputable platforms:
-         </div>
+    <v-row class="mt-10" justify="center">
+       <v-col cols="8" sm="12" lg="8"> <div class="display-2">Honey Lemon -> Cryptocurrancy Mining
+            </div>
+          <div class="headline">Discover best deals in cloud mining contracts listed across reputable platforms:
+          </div>
+      </v-col>
     </v-row>
     
-    <v-row class="deals">
-      <v-col
-        class="text-center"
-        cols="6"
+    <v-row class="deals d-flex" justify="center">
+        <v-col class="mx-5"
+        cols="4"
         sm="12"
-        md="6"
-        lg="6"
+        md="4"
+        lg="4"
         v-for="p in products"
         :key="p.duration"
       >
         <v-card href="#/products"
           class="mx-auto"
           height="360"
-          max-width="480"
+          max-width="560"
         >
           <v-card-text class="text-left">
             <div class="display-2 ma-4">{{p.type}}</div>
