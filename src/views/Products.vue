@@ -1,5 +1,10 @@
 <template>
-  <v-container class="d-flex" style="max-width:1280px;">
+  <v-container style="max-width:1280px;">
+    <v-row justify="end" align="center">
+      <v-col cols="12" md="4">
+        <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
+      </v-col>
+    </v-row>
     <v-row justify="center">
       <v-col style="width:60px;">
         <v-card style="background: transparent;" elevation="0">
@@ -159,17 +164,32 @@ export default {
         if (m.coins.indexOf(v.coin) < 0) m.coins.push(v.coin);
 
         return m;
-      }, { durations: [], coins: [] });
+      }, {
+        durations: [],
+        coins: [],
+        sort: [
+          { text: '↑ Contract cost', value: { field: 'contract_cost', order: 'asc' } },
+          { text: '↑ Upfront fees', value: { field:  'upfront_fee', order: 'asc' } },
+          { text: '↓ Today\'s income', value: { field:  'mining_payoff', order: 'asc' } }
+        ]
+      });
 
       filters.durations.sort((a, b) => a - b);
       return filters;
     },
     products() {
-      return this.$store.state.products.filter(v =>
+      const res = this.$store.state.products.filter(v =>
         (!this.filter.showFavOnly || this.favorites.indexOf(v.id) >= 0) &&
         (this.filter.coin.length === 0 || this.filter.coin.indexOf(v.coin) >= 0) &&
         (this.filter.duration.length === 0 || this.filter.duration.indexOf(v.duration) >= 0)
       );
+
+      if (this.filter.sort) {
+        const { field, order } = this.filter.sort;
+        res.sort((a, b) => order === 'asc' ?  a[field] - b[field] : b[field] - a[field]);
+      }
+
+      return res;
     }
   },
   data() {
@@ -177,6 +197,7 @@ export default {
       filter: {
         duration: [],
         coin: ['BTC'],
+        sort: null,
         showFavOnly: false
       }
     };
