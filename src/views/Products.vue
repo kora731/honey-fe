@@ -3,43 +3,34 @@
     <v-row justify="center">
       <v-col style="width:60px;">
         <v-card style="background: transparent;" elevation="0">
-          <v-card-title class="pb-0 body-2">Coin</v-card-title>
-          <v-card-text>
+          <v-card-title class="py-0 body-2">Coin</v-card-title>
+          <v-card-text class="py-0">
             <v-item-group mandatory>
-              <v-container>
+              <v-container >
                 <v-row class="flex-column">
-                  <v-col v-for="n in coinTypes" :key="n">
-                    <v-item v-slot:default="{ active, toggle }">
-                      <v-card :color="active ? 'primary' : ''" class="d-flex align-center" dark>
-                        <v-scroll-y-transition>
-                          <div class="display-1 flex-grow-1 text-center">{{n}}</div>
-                        </v-scroll-y-transition>
-                      </v-card>
-                    </v-item>
-                  </v-col>
+                  <v-checkbox
+                  color="primary"
+                   style="margin: 0; padding: 0"
+                    v-for="coin in filters.coins" :key="coin"
+                        v-model="checkbox"
+                          :label="coin"
+                    ></v-checkbox>
                 </v-row>
               </v-container>
             </v-item-group>
           </v-card-text>
-          <v-card-title class="pb-0 body-2">Duration</v-card-title>
-          <v-card-text>
+          <v-card-title class="py-0 body-2">Duration</v-card-title>
+          <v-card-text class="py-0">
             <v-item-group mandatory>
               <v-container>
                 <v-row class="flex-column">
-                  <v-col v-for="n in Object.keys(items)" :key="n">
-                    <v-item v-slot:default="{ active, toggle }">
-                      <v-card
-                        :color="active ? 'primary' : ''"
-                        class="d-flex align-center"
-                        dark
-                        @click="() => { toggle(); setDuration(n); }"
-                      >
-                        <v-scroll-y-transition>
-                          <div class="display-1 flex-grow-1 text-center">{{n}}</div>
-                        </v-scroll-y-transition>
-                      </v-card>
-                    </v-item>
-                  </v-col>
+                   <v-checkbox
+                   color="primary"
+                   style="margin: 0; padding: 0"
+                    v-for="n in filters.durations" :key="n"
+                        v-model="checkbox"
+                          :label="`${n}Days`"
+                    ></v-checkbox>
                 </v-row>
               </v-container>
             </v-item-group>
@@ -47,21 +38,21 @@
         </v-card>
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
-        <v-card v-for="(item, index) in items[duration]" :key="index" class="mb-5" hover="true">
-          <v-card-text class="py-1">
-            <v-row align="center" justify="space-between">
-              <v-chip class="ma-1" color="accent" text-color="black" label small>BEST DEAL</v-chip>
+        <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover="true">
+          <div class="bestDeal body-2">BEST DEAL</div>
+          <v-card-text class="py-2 px-8">
+            <v-row align="center" justify="end">
 
-              <v-chip class="ma-1" color="secondary" text-color="black" label small>28% OFF</v-chip>
+              <div class="discount body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
             </v-row>
             <v-row align="center" justify="space-between">
               <div class="ma-2">
-                <h1>{{item.name}}</h1>
+                <h1>{{item.honeyLemon_contract_name}}</h1>
                 <p class="body-2 my-2">Pay as You Go | 45 Days to Breakeven</p>
               </div>
               <div class="ma-2 text-right">
-                <h1>${{item.price}}/T/D</h1>
-                <p class="body-2 my-2">Min Amount {{item.min}}T</p>
+                <h1>${{item.contract_cost.toFixed(5)}}/T/D</h1>
+                <p class="body-2 my-2" style="color: red">Min Amount {{item.contract_size}}T</p>
               </div>
             </v-row>
             <v-row align="center">
@@ -75,7 +66,7 @@
                     I'm a tooltip
                   </v-tooltip>
                 </div>
-                <div class="subtitle-1">$1.40</div>
+                <div class="subtitle-1">${{item.mining_payoff.toFixed(5)}}</div>
               </div>
               <div class="d-inline-flex ma-2 text-right">
                 <div style="flex-basis:auto;" class="mr-4">
@@ -88,7 +79,7 @@
                       I'm a tooltip
                     </v-tooltip>
                   </div>
-                  <div class="subtitle-1">{{item.commission * 100}}%</div>
+                  <div class="subtitle-1">${{item.upfront_fee.toFixed(5)}} / 100T</div>
                 </div>
                 <div>
                   <div class="caption">
@@ -100,20 +91,23 @@
                       I'm a tooltip
                     </v-tooltip>
                   </div>
-                  <div class="subtitle-1">${{item.electricityFee}}/T/D</div>
+                  <div class="subtitle-1">${{item.electricity_fee}}/T/D</div>
                 </div>
               </div>
             </v-row>
             <v-row>
-              <v-col cols="9">
-                <div>{{item.seller}}</div>
-              </v-col>
-              <v-col cols="3" class="text-right">
-                <v-btn href="#/product" color="primary" class="check-btn">
+              <div class="ma-2 flex-grow-1">
+                <div>{{item.issuers}}</div>
+              </div>
+              <div class="ma-2 d-flex">
+                <v-btn text icon color="black">
+                  <v-icon>mdi-heart-outline</v-icon>
+                </v-btn>
+                <v-btn :href="item.buy_url" target="_blank" color="primary" class="check-btn">
                   <v-icon>mdi-open-in-new</v-icon>
                   <span class="ml-2">Check it out</span>
                 </v-btn>
-              </v-col>
+              </div>
             </v-row>
           </v-card-text>
         </v-card>
@@ -124,115 +118,37 @@
 
 <script>
 export default {
-  name: "Products",
+  name: 'Products',
   methods: {
     setDuration(d) {
-      this.duration = d;
+      this.filter.duration = d;
+    },
+    setCoin(c) {
+      this.filter.coin = c;
+    }
+  },
+  computed: {
+    filters() {
+      const products = this.$store.state.products;
+      const filters = products.reduce((m, v) => {
+        if (m.durations.indexOf(v.duration) < 0) m.durations.push(v.duration);
+        if (m.coins.indexOf(v.coin) < 0) m.coins.push(v.coin);
+
+        return m;
+      }, { durations: [], coins: [] });
+
+      filters.durations.sort((a, b) => a - b);
+      return filters;
+    },
+    products() {
+      return this.$store.state.products.filter(v => v.coin === this.filter.coin && v.duration === this.filter.duration);
     }
   },
   data() {
     return {
-      duration: "30D",
-      coinTypes: ["BTC", "ETH"],
-      items: {
-        "30D": [
-          {
-            name: "BTC-S17",
-            rating: 5,
-            seller: "miningzoo.com",
-            price: 4.98,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: "BTC-S17",
-            rating: 4,
-            seller: "miningzoo.com",
-            price: 5,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: "BTC-S17",
-            rating: 5,
-            seller: "miningzoo.com",
-            price: 4.88,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: "BTC-S17",
-            rating: 3,
-            seller: "miningzoo.com",
-            price: 4.9,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: "BTC-S17",
-            rating: 1,
-            seller: "miningzoo.com",
-            price: 4.5,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: "BTC-S17",
-            rating: 2,
-            seller: "miningzoo.com",
-            price: 4.67,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          }
-        ],
-        "60D": [
-          {
-            name: "BTC-S17",
-            rating: 4,
-            seller: "miningzoo.com",
-            price: 4.9,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: "BTC-S17",
-            rating: 5,
-            seller: "miningzoo.com",
-            price: 4.9,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          }
-        ],
-        "120D": [
-          {
-            name: "BTC-S17",
-            rating: 4,
-            seller: "miningzoo.com",
-            price: 4.9,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          },
-          {
-            name: "BTC-S17",
-            rating: 5,
-            seller: "miningzoo.com",
-            price: 4.9,
-            commission: 0.05,
-            electricityFee: 0.0811,
-            min: 3
-          }
-        ],
-        "360D": [],
-        "720D": []
+      filter: {
+        duration: 60,
+        coin: 'BTC'
       }
     };
   }
@@ -246,9 +162,9 @@ export default {
 }
 
 .v-card--hover:hover {
-  -webkit-box-shadow: 0px 1px 1px 2px rgba(251, 255, 0, 0.3),
+  -webkit-box-shadow: 0px 0px 0px 2px rgba(251, 255, 0, 0.8),
     0px 2px 2px 2px rgba(251, 255, 0, 0.2);
-  box-shadow: 0px 1px 1px 2px rgba(251, 255, 0, 0.3),
+  box-shadow: 0px 0px 0px 2px rgba(251, 255, 0, 0.8),
     0px 2px 2px 2px rgba(251, 255, 0, 0.2);
 }
 
@@ -262,5 +178,21 @@ export default {
       background: white !important;
       color: black !important;
       }
+}
+
+.bestDeal {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  background: #13B7BD; 
+  padding: 2px 10px;
+  color: white;
+  border-radius: 0 !important;
+}
+
+.discount {
+  background: #ffff00; 
+  padding: 3px 10px 0;
+  border-radius: 0 !important;
 }
 </style>

@@ -2,7 +2,7 @@
   <v-container class="content">
     <v-row class="layout">
       <div class="innerContent">
-        <div class="slogan">
+        <div class="slogan mr-4">
           <span class="slogan-yellow">SWEET DEALS</span>
           <br />
           <span class="slogan-yellow">IN CRYPTO</span>
@@ -10,7 +10,7 @@
           <span class="slogan-yellow">MINING</span>
           <br />
         </div>
-        <div class="slogan" style="margin-right: 60px;">
+        <div class="slogan">
           <span class="slogan-black">BEST PRICE x OBJECTIVE METRICS</span>
           <form
             action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&amp;id=2f33950de0"
@@ -178,13 +178,38 @@ export default {
 
         .slogan:first-child {
           margin-bottom: 2rem;
+          font-size: 36px;
+          flex-shrink: 0;
         }
 
-        @media (min-width: 1100px) {
+        .slogan:last-child {
+          margin: 0;
+          flex-shrink: 1;
+        }
+
+        @media (min-width: 900px) {
           flex-direction: initial;
           .slogan:first-child {
-            flex: 1;
+            flex-grow: 1;
+            font-size: 36px;
             margin-bottom: 0;
+          }
+
+          .slogan:last-child {
+            margin-right: 60px;
+          }
+        }
+
+        @media (min-width: 1200px) {
+          flex-direction: initial;
+          .slogan:first-child {
+            flex-grow: 1;
+            font-size: 48px;
+            margin-bottom: 0;
+          }
+
+          .slogan:last-child {
+            margin-right: 60px;
           }
         }
         .slogan {
@@ -197,8 +222,7 @@ export default {
             padding: 5px 10px;
             font-style: italic;
             font-weight: bold;
-            font-size: 48px;
-            line-height: 76px;
+            line-height: 64px;
             letter-spacing: 2px;
             margin: 10px 0;
             box-shadow: 1px 2px 4px #888888;
@@ -262,26 +286,6 @@ export default {
       border-radius: 0px;
       box-shadow: none;
       flex-grow: 0;
-    }
-  }
-}
-
-// @media screen and (min-height: 750px) {
-//   .content {
-//     padding-bottom: 100px;
-//   }
-// }
-
-@media screen and (max-width: 980px) {
-  .content {
-    .row.layout {
-      .black {
-        margin-top: 10px !important;
-      }
-
-      .desc.sign_up {
-        margin: 20px 0;
-      }
     }
   }
 }
