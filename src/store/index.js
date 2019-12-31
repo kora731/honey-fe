@@ -6,11 +6,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
   },
   mutations: {
     setProducts(state, products) {
       state.products = products;
+    },
+    toggleFavorites(state, id) {
+      if (state.favorites.indexOf(id) < 0) {
+        state.favorites.push(id);
+      } else {
+        state.favorites = state.favorites.filter(v => v !== id);
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(state.favorites));
     }
   },
   actions: {

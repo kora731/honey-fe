@@ -37,6 +37,21 @@
               </v-container>
             </v-item-group>
           </v-card-text>
+          <v-card-title class="py-0 body-2">Filters</v-card-title>
+          <v-card-text class="py-0">
+            <v-item-group mandatory>
+              <v-container >
+                <v-row class="flex-column">
+                  <v-checkbox
+                          color="primary"
+                          style="margin: 0; padding: 0"
+                          v-model="filter.showFavOnly"
+                          label="Favorites"
+                  />
+                </v-row>
+              </v-container>
+            </v-item-group>
+          </v-card-text>
         </v-card>
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
@@ -102,8 +117,9 @@
                 <div>{{item.issuers}}</div>
               </div>
               <div class="ma-2 d-flex">
-                <v-btn text icon color="black">
-                  <v-icon>mdi-heart-outline</v-icon>
+                <v-btn text icon color="black" @click="toggleFavorites(item.id)">
+                  <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
+                  <v-icon v-if="favorites.indexOf(item.id) >= 0">mdi-heart</v-icon>
                 </v-btn>
                 <v-btn :href="item.buy_url" target="_blank" color="primary" class="check-btn">
                   <v-icon>mdi-open-in-new</v-icon>
@@ -119,6 +135,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Products',
   methods: {
@@ -127,9 +145,13 @@ export default {
     },
     setCoin(c) {
       this.filter.coin = c;
+    },
+    toggleFavorites(id) {
+      this.$store.commit('toggleFavorites', id);
     }
   },
   computed: {
+    ...mapState(['favorites']),
     filters() {
       const products = this.$store.state.products;
       const filters = products.reduce((m, v) => {
@@ -144,6 +166,7 @@ export default {
     },
     products() {
       return this.$store.state.products.filter(v =>
+        (!this.filter.showFavOnly || this.favorites.indexOf(v.id) >= 0) &&
         (this.filter.coin.length === 0 || this.filter.coin.indexOf(v.coin) >= 0) &&
         (this.filter.duration.length === 0 || this.filter.duration.indexOf(v.duration) >= 0)
       );
@@ -152,8 +175,9 @@ export default {
   data() {
     return {
       filter: {
-        duration: [60],
-        coin: ['BTC']
+        duration: [],
+        coin: ['BTC'],
+        showFavOnly: false
       }
     };
   }
