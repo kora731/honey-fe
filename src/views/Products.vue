@@ -5,7 +5,7 @@
         <v-card style="background: transparent;" elevation="0">
           <v-card-title>Coin</v-card-title>
           <v-col v-for="coin in filters.coins" :key="coin">
-            <v-card>
+            <v-card @click="() => { setCoin(coin); }">
               <div class="display-1  text-center">{{coin}}</div>
             </v-card>
           </v-col>
@@ -23,7 +23,7 @@
                         @click="() => { toggle(); setDuration(n); }"
                       >
                         <v-scroll-y-transition>
-                          <div class="display-1 flex-grow-1 text-center">{{n}}</div>
+                          <div class="display-1 flex-grow-1 text-center">{{n}}D</div>
                         </v-scroll-y-transition>
                       </v-card>
                     </v-item>
@@ -39,7 +39,7 @@
           <v-card-text>
             <v-row align="center">
               <v-col cols="6">
-                <div class="body-2">BEST DEAL</div>
+                <div class="body-2">BEST DEAL {{item.issuers}}</div>
               </v-col>
               <v-col cols="6" class="text-right">
                 <div class="body-2">{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
@@ -51,14 +51,14 @@
                 <p class="body-2 my-2">Pay as You Go | 45 Days to Breakeven</p>
               </v-col>
               <v-col cols="6" class="text-right">
-                <h1>${{item.upfront_fee}}/T/D</h1>
+                <h1>${{item.upfront_fee.toFixed(2)}}/T/D</h1>
                 <p class="body-2 my-2">Min Amount {{item.min}}T</p>
               </v-col>
             </v-row>
             <v-row align="center">
               <v-col class="flex-grow-1">
                 <div class="caption">Total Mining Income</div>
-                <div class="subtitle-1">${{item.mining_payoff}}</div>
+                <div class="subtitle-1">${{item.mining_payoff.toFixed(5)}}</div>
               </v-col>
               <div class="d-inline-flex">
                 <v-col style="flex-basis:auto">
@@ -98,7 +98,10 @@ export default {
   name: 'Products',
   methods: {
     setDuration(d) {
-      this.duration = d;
+      this.filter.duration = d;
+    },
+    setCoin(c) {
+      this.filter.coin = c;
     }
   },
   computed: {
@@ -115,13 +118,13 @@ export default {
       return filters;
     },
     products() {
-      return this.$store.state.products;
+      return this.$store.state.products.filter(v => v.coin === this.filter.coin && v.duration === this.filter.duration);
     }
   },
   data() {
     return {
       filter: {
-        duration: 30,
+        duration: 60,
         coin: 'BTC'
       }
     };
