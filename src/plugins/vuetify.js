@@ -14,8 +14,8 @@ export default new Vuetify({
         themes: {
           light: {
             primary: colors.grey.darken4,
-            secondary: colors.yellow.darken3,
-            accent: colors.shades.blue,
+            secondary: colors.yellow.accent2,
+            accent: colors.cyan.lighten4,
             error: colors.red.accent3,
           },
           dark: {

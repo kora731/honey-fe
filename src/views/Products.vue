@@ -1,20 +1,32 @@
 <template>
-  <v-container>
+  <v-container class="d-flex" style="max-width:1280px;">
     <v-row justify="center">
-      <v-col style="width:80px;" >
+      <v-col style="width:60px;">
         <v-card style="background: transparent;" elevation="0">
-          <v-card-title>Coin</v-card-title>
-          <v-col>
-            <v-card>
-              <div class="display-1  text-center">BTC</div>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card>
-             <div class="display-1 text-center">ETH</div>
-            </v-card>
-          </v-col>
-          <v-card-title>Duration</v-card-title>
+          <v-card-title class="pb-0">Coin</v-card-title>
+          <v-card-text>
+            <v-item-group mandatory>
+              <v-container>
+                <v-row class="flex-column">
+                  <v-col v-for="n in coinTypes" :key="n">
+                    <v-item v-slot:default="{ active, toggle }">
+                      <v-card
+                        :color="active ? 'primary' : ''"
+                        class="d-flex align-center"
+                        dark
+                        
+                      >
+                        <v-scroll-y-transition>
+                          <div class="display-1 flex-grow-1 text-center">{{n}}</div>
+                        </v-scroll-y-transition>
+                      </v-card>
+                    </v-item>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-item-group>
+          </v-card-text>
+          <v-card-title class="pb-0">Duration</v-card-title>
           <v-card-text>
             <v-item-group mandatory>
               <v-container>
@@ -39,55 +51,52 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="10" md="10" lg="10" sm="12">
-        <v-card v-for="(item, index) in items[duration]" :key="index" style="margin-bottom: 20px;">
-          <v-card-text>
-            <v-row align="center">
-              <v-col cols="6">
-                <div class="body-2">BEST DEAL</div>
-              </v-col>
-              <v-col cols="6" class="text-right">
-                <div class="body-2">28% OFF</div>
-              </v-col>
-            </v-row>  
-            <v-row align="center">
-              <v-col cols="6">
+      <v-col md="10" lg="10" sm="12" cols="12">
+        <v-card v-for="(item, index) in items[duration]" :key="index" class="mb-5" hover="true">
+          <v-card-text class="py-1">
+            <v-row align="center" justify="space-between">
+              
+                <v-chip class="ma-1" color="accent" text-color="black" label>BEST DEAL</v-chip>
+            
+                <v-chip class="ma-1" color="secondary" text-color="black" label>28% OFF</v-chip>
+              
+            </v-row>
+            <v-row align="center" justify="space-between">
+              <div class="ma-2">
                 <h1>{{item.name}}</h1>
                 <p class="body-2 my-2">Pay as You Go | 45 Days to Breakeven</p>
-              </v-col>
-              <v-col cols="6" class="text-right">
+              </div>
+              <div class="ma-2 text-right">
                 <h1>${{item.price}}/T/D</h1>
                 <p class="body-2 my-2">Min Amount {{item.min}}T</p>
-              </v-col>
-            </v-row>           
+              </div>
+            </v-row>
             <v-row align="center">
-              <v-col class="flex-grow-1">
-                <div class="caption">Total Mining Income</div>
+              <div class="flex-grow-1 ma-2">
+                <div class="caption">Today's Mining Income</div>
                 <div class="subtitle-1">$1.40</div>
-              </v-col>
-              <div class="d-inline-flex">
-                <v-col style="flex-basis:auto">
-                  <div class="caption">Management Fee</div>
+              </div>
+              <div class="d-inline-flex ma-2 text-right">
+                <div style="flex-basis:auto;" class="mr-4">
+                  <div class="caption">Upfront Fee</div>
                   <div class="subtitle-1">{{item.commission * 100}}%</div>
-                </v-col>
-                <v-col>
+                </div>
+                <div>
                   <div class="caption">Electricity Fee</div>
                   <div class="subtitle-1">${{item.electricityFee}}/T/D</div>
-                </v-col>
+                </div>
               </div>
             </v-row>
             <v-row>
               <v-col cols="9">
                 <div>
-                  <v-icon color="red" v-for="n in item.rating" :key="`${index}_${n}_r`">mdi-star</v-icon>
-                  <v-icon v-for="n in 5 - item.rating" :key="`${index}_${n}`">mdi-star</v-icon>
                   {{item.seller}}
                 </div>
               </v-col>
               <v-col cols="3" class="text-right">
                 <v-btn href="#/product" color="primary">
-                  <v-icon>mdi-open-in-new</v-icon>
-                  <span class="mr-2">Check it out</span>
+                  <v-icon class="mr-2">mdi-open-in-new</v-icon>
+                  <span>Check it out</span>
                 </v-btn>
               </v-col>
             </v-row>
@@ -109,6 +118,10 @@ export default {
   data() {
     return {
       duration: "30D",
+      coinTypes: [
+        "BTC",
+        "ETH"
+      ],
       items: {
         "30D": [
           {
@@ -218,5 +231,12 @@ export default {
 .v-item--active {
   color: #222;
   background-color: #ffff00 !important;
+}
+
+.v-card--hover:hover {
+  -webkit-box-shadow: 0px 1px 2px 4px rgba(251, 255, 0, 0.3),
+    0px 2px 4px 1px rgba(251, 255, 0, 0.2);
+  box-shadow: 0px 1px 2px 4px rgba(251, 255, 0, 0.3),
+    0px 2px 4px 1px rgba(251, 255, 0, 0.2);
 }
 </style>
