@@ -49,6 +49,10 @@ export default {
     // HelloWorld,
   },
 
+  beforeMount() {
+    this.$store.dispatch('init');
+  },
+
   data: () => ({
     //
   }),
