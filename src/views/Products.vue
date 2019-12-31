@@ -1,17 +1,17 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="2" md="2" lg="2" sm="6">
+    <v-row justify="center">
+      <v-col style="width:80px;" >
         <v-card style="background: transparent;" elevation="0">
           <v-card-title>Coin</v-card-title>
-          <v-col cols="4">
+          <v-col>
             <v-card>
-              <v-card-text>BTC</v-card-text>
+              <div class="display-1  text-center">BTC</div>
             </v-card>
           </v-col>
-          <v-col cols="4">
+          <v-col>
             <v-card>
-              <v-card-text>ETH</v-card-text>
+             <div class="display-1 text-center">ETH</div>
             </v-card>
           </v-col>
           <v-card-title>Duration</v-card-title>
@@ -19,7 +19,7 @@
             <v-item-group mandatory>
               <v-container>
                 <v-row class="flex-column">
-                  <v-col v-for="n in Object.keys(items)" :key="n" cols="4">
+                  <v-col v-for="n in Object.keys(items)" :key="n">
                     <v-item v-slot:default="{ active, toggle }">
                       <v-card
                         :color="active ? 'primary' : ''"
@@ -44,29 +44,35 @@
           <v-card-text>
             <v-row align="center">
               <v-col cols="6">
-                <h2>{{item.name}}</h2>
+                <div class="body-2">BEST DEAL</div>
               </v-col>
               <v-col cols="6" class="text-right">
-                <h2>${{item.price}}/T/D</h2>
+                <div class="body-2">28% OFF</div>
               </v-col>
-            </v-row>
+            </v-row>  
+            <v-row align="center">
+              <v-col cols="6">
+                <h1>{{item.name}}</h1>
+                <p class="body-2 my-2">Pay as You Go | 45 Days to Breakeven</p>
+              </v-col>
+              <v-col cols="6" class="text-right">
+                <h1>${{item.price}}/T/D</h1>
+                <p class="body-2 my-2">Min Amount {{item.min}}T</p>
+              </v-col>
+            </v-row>           
             <v-row align="center">
               <v-col class="flex-grow-1">
-                <div>Total Mining Income</div>
-                <div>$1.40</div>
+                <div class="caption">Total Mining Income</div>
+                <div class="subtitle-1">$1.40</div>
               </v-col>
-              <div class="d-flex">
-                <v-col>
-                  <div>Management Fee</div>
-                  <div>{{item.commission * 100}}%</div>
+              <div class="d-inline-flex">
+                <v-col style="flex-basis:auto">
+                  <div class="caption">Management Fee</div>
+                  <div class="subtitle-1">{{item.commission * 100}}%</div>
                 </v-col>
                 <v-col>
-                  <div>Electricity Fee</div>
-                  <div>${{item.electricityFee}}/T/D</div>
-                </v-col>
-                <v-col>
-                  <div>Min Amount</div>
-                  <div>{{item.min}}T</div>
+                  <div class="caption">Electricity Fee</div>
+                  <div class="subtitle-1">${{item.electricityFee}}/T/D</div>
                 </v-col>
               </div>
             </v-row>
