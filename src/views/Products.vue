@@ -1,10 +1,15 @@
 <template>
   <v-container style="max-width:1280px;">
-    <v-row justify="end" align="center">
-      <v-col cols="12" md="4">
-        <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
-      </v-col>
-    </v-row>
+      <v-row justify="end">
+         <v-col md="10" lg="10" sm="12" cols="12">
+            <v-row justify="space-between" align="center">
+              <div class="display-2 ml-3">Best Deals</div>
+              <div class="mr-3">
+                  <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
+                </div>
+          </v-row>
+        </v-col>
+      </v-row>
     <v-row justify="center">
       <v-col class="filterPanel">
         <v-card class="filterPanel-coin" elevation="0">
@@ -82,7 +87,7 @@
                 <p class="body-2 my-2">Pay as You Go | 45 Days to Breakeven</p>
               </div>
               <div class="ma-2 text-right">
-                <h1 class="black--text">${{item.contract_cost.toFixed(5)}}<span class="subtitle-1"> /T/D</span></h1> 
+                <h1 class="black--text">${{item.contract_cost.toFixed(5)}}<span class="subtitle-1"> /T/Day</span></h1> 
                 <p class="body-2 mb-1 red--text">Min Amount {{item.contract_size}}T</p>
               </div>
             </v-row>
@@ -122,7 +127,7 @@
                       I'm a tooltip
                     </v-tooltip>
                   </div>
-                  <div class="dealData">${{item.electricity_fee}} /T/D</div>
+                  <div class="dealData">${{item.electricity_fee}} /T/Day</div>
                 </div>
               </div>
             </v-row>
@@ -234,13 +239,13 @@ export default {
 <style scoped lang="scss">
 .v-item--active {
   color: #222;
-  background-color: #ffff00 !important;
+  background-color: #ffe500 !important;
 }
 
 .v-card--hover:hover {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(251, 255, 0, 0.8),
+  -webkit-box-shadow: 0px 0px 0px 2px rgba(255, 229, 0, 0.8),
     0px 2px 2px 2px rgba(251, 255, 0, 0.2);
-  box-shadow: 0px 0px 0px 2px rgba(251, 255, 0, 0.8),
+  box-shadow: 0px 0px 0px 2px rgba(255, 229, 0, 0.8),
     0px 2px 2px 2px rgba(251, 255, 0, 0.2);
 }
 
@@ -264,12 +269,15 @@ export default {
   padding: 2px 10px;
   color: white;
   border-radius: 0 !important;
+  font-weight: 500;
 }
 
 .discount {
-  background: #ffff00;
+  background: #ffe500;
+  color: black;
   padding: 3px 10px 0;
-  border-radius: 0 !important;
+  border-radius: 3px !important;
+  font-weight: 500;
 }
 
 .filterPanel {

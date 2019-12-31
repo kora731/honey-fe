@@ -64,7 +64,7 @@
                       color="accent"
                       text-color="black"
                       label
-                    >{{p.sellers}} Platforms</v-chip>
+                    ><span class="font-weight-bold">{{p.sellers}} Platforms</span></v-chip>
                   </div>
                 </div>
                 <div class="pr-2">
@@ -79,7 +79,7 @@
                 <span class="discount">22% OFF</span> vs buying BTC
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">$0.1139 / T / Day</span>
+                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">$0.1139 /T/Day</span>
               </div>
             </v-card-text>
             <div
@@ -89,7 +89,7 @@
                 <v-icon class="ma-2">mdi-coin</v-icon>BTC price: <span class="dealData">$7,147.01 <span class="red--text">(-1.63%)</span> </span>
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>BTC mining earnings:<span class="dealData"> $0.1388 / T / Day</span>
+                <v-icon class="ma-2">mdi-treasure-chest</v-icon>BTC mining earnings:<span class="dealData"> $0.1388 /T/Day</span>
               </div>
             </div>
           </v-card>
@@ -247,7 +247,7 @@ export default {
     }
   }
 .discount{
-  background: #ffff00;
+  background: #ffe500;
   box-shadow: 1px 2px 4px #888888;
   color: black;
   font-weight: 600;
