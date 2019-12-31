@@ -61,7 +61,7 @@
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
-          <div class="bestDeal body-2">BEST DEAL</div>
+          <div class="bestDeal body-2" v-if="index === 0">BEST DEAL</div>
           <v-card-text class="py-2 px-8">
             <v-row align="center" justify="end">
 
@@ -195,9 +195,9 @@ export default {
   data() {
     return {
       filter: {
-        duration: [],
+        duration: [60],
         coin: ['BTC'],
-        sort: null,
+        sort: { field: 'contract_cost', order: 'asc' },
         showFavOnly: false
       }
     };
