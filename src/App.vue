@@ -31,9 +31,9 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="primary" dark="true">
+    <v-footer color="primary" dark>
       <v-spacer></v-spacer>
-      <v-card  color="primary" dark="true"
+      <v-card  color="primary" dark
       flat
         tile
         width="100%"

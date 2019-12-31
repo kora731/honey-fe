@@ -9,12 +9,13 @@
               <v-container >
                 <v-row class="flex-column">
                   <v-checkbox
-                  color="primary"
-                   style="margin: 0; padding: 0"
+                    color="primary"
+                    style="margin: 0; padding: 0"
                     v-for="coin in filters.coins" :key="coin"
-                        v-model="checkbox"
-                          :label="coin"
-                    ></v-checkbox>
+                    v-model="filter.coin"
+                    :value="coin"
+                    :label="coin"
+                  />
                 </v-row>
               </v-container>
             </v-item-group>
@@ -24,13 +25,14 @@
             <v-item-group mandatory>
               <v-container>
                 <v-row class="flex-column">
-                   <v-checkbox
-                   color="primary"
-                   style="margin: 0; padding: 0"
+                  <v-checkbox
+                    color="primary"
+                    style="margin: 0; padding: 0"
                     v-for="n in filters.durations" :key="n"
-                        v-model="checkbox"
-                          :label="`${n}Days`"
-                    ></v-checkbox>
+                    v-model="filter.duration"
+                    :value="n"
+                    :label="`${n}Days`"
+                  />
                 </v-row>
               </v-container>
             </v-item-group>
@@ -38,7 +40,7 @@
         </v-card>
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
-        <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover="true">
+        <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
           <div class="bestDeal body-2">BEST DEAL</div>
           <v-card-text class="py-2 px-8">
             <v-row align="center" justify="end">
@@ -141,14 +143,17 @@ export default {
       return filters;
     },
     products() {
-      return this.$store.state.products.filter(v => v.coin === this.filter.coin && v.duration === this.filter.duration);
+      return this.$store.state.products.filter(v =>
+        (this.filter.coin.length === 0 || this.filter.coin.indexOf(v.coin) >= 0) &&
+        (this.filter.duration.length === 0 || this.filter.duration.indexOf(v.duration) >= 0)
+      );
     }
   },
   data() {
     return {
       filter: {
-        duration: 60,
-        coin: 'BTC'
+        duration: [60],
+        coin: ['BTC']
       }
     };
   }
