@@ -45,16 +45,13 @@
     </v-row>
 
     <v-row class="mt-10" justify="center">
-      <v-col style="max-width: 1280px;">
-        <div class="display-2">Honey Lemon -> Cryptocurrancy Mining</div>
-        <div
-          class="headline"
-        >Discover best deals in cloud mining contracts listed across reputable platforms:</div>
+      <v-col style="max-width: 1080px;">
+        <div class="display-2">Discover best deals in cloud mining contracts listed across reputable platforms:</div>
       </v-col>
     </v-row>
 
     <v-row class="deals d-flex" justify="center">
-      <v-row style="max-width: 1280px;" justify="center">
+      <v-row style="max-width: 1080px;" justify="center">
         <v-col cols="12" sm="12" md="6" lg="6" v-for="p in products" :key="p.duration">
           <v-card href="#/products" class="mx-auto" height="450" max-width="560">
             <v-card-text class="text-left">
@@ -63,11 +60,11 @@
                   <div class="ma-4">
                     <span class="display-3 mr-4 font-weight-bold">{{p.type}}</span>
                     <v-chip
-                      class="ma-2"
+                      class="mb-3"
                       color="accent"
                       text-color="black"
                       label
-                    >{{p.sellers}} Platforms</v-chip>
+                    ><span class="font-weight-bold">{{p.sellers}} Platforms</span></v-chip>
                   </div>
                 </div>
                 <div class="pr-2">
@@ -78,20 +75,21 @@
 
               <v-divider></v-divider>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-sale</v-icon>up to 22% OFF vs buying BTC
+                <v-icon class="ma-2">mdi-sale</v-icon>up to 
+                <span class="discount">22% OFF</span> vs buying BTC
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as $0.1139 / T / Day
+                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">$0.1139 /T/Day</span>
               </div>
             </v-card-text>
             <div
               style="background: #f8f8f8; bottom: 0; position: absolute; width: 100%; padding: 16px;"
             >
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-coin</v-icon>BTC price: $7,147.01 (-1.63%)
+                <v-icon class="ma-2">mdi-coin</v-icon>BTC price: <span class="dealData">$7,147.01 <span class="red--text">(-1.63%)</span> </span>
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>BTC mining earnings: $0.1388 / T / Day
+                <v-icon class="ma-2">mdi-treasure-chest</v-icon>BTC mining earnings:<span class="dealData"> $0.1388 /T/Day</span>
               </div>
             </div>
           </v-card>
@@ -100,7 +98,7 @@
     </v-row>
 
     <v-row class="faq d-flex" justify="center">
-      <v-row style="max-width: 1280px;">
+      <v-row style="max-width: 1080px;">
         <div class="display-2 mr-10">FAQ</div>
         
         <v-expansion-panels style="width:auto; flex:1; " class="mx-10">
@@ -158,11 +156,8 @@ export default {
     flex-wrap: wrap;
     margin: 0;
 
-    &.deals,
     &.faq {
       padding: 40px 60px;
-    }
-    &.faq {
       background-color: white;
     }
     &.layout {
@@ -173,7 +168,7 @@ export default {
       .innerContent {
         display: flex;
         flex: 1;
-        max-width: 1280px;
+        max-width: 1080px;
         flex-direction: column;
 
         .slogan:first-child {
@@ -196,7 +191,7 @@ export default {
           }
 
           .slogan:last-child {
-            margin-right: 60px;
+            margin-right: 20px;
           }
         }
 
@@ -209,7 +204,7 @@ export default {
           }
 
           .slogan:last-child {
-            margin-right: 60px;
+            margin-right: 20px;
           }
         }
         .slogan {
@@ -251,6 +246,16 @@ export default {
       }
     }
   }
+.discount{
+  background: #ffe500;
+  box-shadow: 1px 2px 4px #888888;
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 2px;
+
+
+}
 
   .row.form {
     align-items: center;
@@ -289,4 +294,11 @@ export default {
     }
   }
 }
+.dealData{
+  //headline font-weight-medium black--text
+  font-weight: 500;
+  font-size: 18px;
+  color: #333;
+}
+
 </style>
