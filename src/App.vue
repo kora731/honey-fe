@@ -70,4 +70,11 @@ export default {
   border-bottom: 3px solid #ffe500;
   padding: 6px;
 }
+
+@media only screen and (max-width: 500px) {
+  .v-toolbar__content:nth-child(3)
+  {
+    display: none !important;
+    }
+}
 </style>

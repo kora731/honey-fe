@@ -147,7 +147,7 @@
             </v-row>
             <v-row>
               <div class="ma-2 flex-grow-1">
-                <img style="width: 100px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
+                <img style="width: 140px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
               </div>
               <div class="ma-2 d-flex">
                 <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
@@ -314,6 +314,10 @@ export default {
   font-weight: 500;
   font-size: 18px;
   color: #333;
+}
+
+@media only screen and (max-width: 500px) {
+
 }
 
 </style>
