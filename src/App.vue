@@ -16,14 +16,8 @@
         </v-btn>
       </div>
       <v-spacer></v-spacer>
-      <v-btn href="#/" text>
-        <span class="mr-2 nav-active">HOME</span>
-      </v-btn>
-      <v-btn href="#/products" text>
-        <span class="mr-2">DEALS</span>
-      </v-btn>
-      <v-btn href="#/about" text>
-        <span class="mr-2">FAQ</span>
+      <v-btn v-for="[name, url] of navItems" :key="url" :href="url" text>
+        <span class="mr-2" :class="{ 'nav-active': '#' + $route.path === url }">{{name}}</span>
       </v-btn>
     </v-app-bar>
 
@@ -52,16 +46,16 @@
 export default {
   name: "App",
 
-  components: {
-    // HelloWorld,
-  },
-
   beforeMount() {
     this.$store.dispatch('init');
   },
 
   data: () => ({
-    //
+    navItems: [
+      ['HOME', '#/'],
+      ['DEALS', '#/products'],
+      ['FAQ', '#/about']
+    ]
   })
 };
 </script>

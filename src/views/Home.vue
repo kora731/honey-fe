@@ -52,8 +52,8 @@
 
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
-        <v-col cols="12" sm="12" md="6" lg="6" v-for="p in products" :key="p.duration">
-          <v-card href="#/products" class="mx-auto" height="450" max-width="560" :ripple="false">
+        <v-col cols="12" sm="12" md="6" lg="6" v-for="p in summary" :key="p.duration">
+          <v-card href="#/products" class="mx-auto" height="450" max-width="560" v-ripple="{ class: 'secondary--text' }">
             <v-card-text class="text-left">
               <v-row>
                 <div class="flex-grow-1">
@@ -64,7 +64,7 @@
                       color="accent"
                       text-color="black"
                       label
-                    ><span class="font-weight-bold">{{p.sellers}} Platforms</span></v-chip>
+                    ><span class="font-weight-bold">{{p.sellers.size}} Platforms</span></v-chip>
                   </div>
                 </div>
                 <div class="pr-2">
@@ -76,20 +76,20 @@
               <v-divider></v-divider>
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-sale</v-icon>up to 
-                <span class="discount">22% OFF</span> vs buying {{p.type}}
+                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span> vs buying {{p.type}}
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">$0.1139 /T/Day</span>
+                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">${{p.price.toFixed(6)}} {{p.unit}}</span>
               </div>
             </v-card-text>
             <div
               style="background: #f8f8f8; bottom: 0; position: absolute; width: 100%; padding: 16px;"
             >
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-coin</v-icon>{{p.type}} price: <span class="dealData">$7,147.01 <span class="red--text">(-1.63%)</span> </span>
+                <v-icon class="ma-2">mdi-coin</v-icon>{{p.type}} price: <span class="dealData">${{p.coinPrice.toFixed(2)}} <!--<span class="red--text">(-1.63%)</span>--> </span>
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData"> $0.1388 /T/Day</span>
+                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData"> ${{p.maxPayOff.toFixed(5)}} {{p.unit}}</span>
               </div>
             </div>
           </v-card>
@@ -137,26 +137,44 @@ The investor of cloud mining contracts and the miner/platform issuing these cont
 <script>
 export default {
   name: "home",
-  components: {},
-  data() {
-    return {
-      products: [
+  computed: {
+    summary() {
+      return this.$store.state.products.reduce((m, p) => {
+        const summary = m.find(v => v.type === p.coin);
+        if (summary) {
+          summary.sellers.add(p.issuers);
+          summary.maxDiscount = Math.max(summary.maxDiscount, p.expected_discount);
+          summary.price = Math.min(summary.price, p.contract_cost);
+          summary.coinPrice = p.btc_price;
+          summary.maxPayOff = Math.max(summary.maxPayOff, p.mining_payoff);
+        }
+
+        return m;
+      }, [
         {
           type: "BTC",
+          coinPrice: 0,
+          maxDiscount: 0,
+          maxPayOff: 0,
           duration: "30Days",
-          price: "0.45/TH/D",
-          sellers: 10,
+          price: 99999999,
+          unit: "/TH/Day",
+          sellers: new Set(),
           img: require("../assets/btc-logo.png")
         },
         {
           type: "ETH",
+          coinPrice: 0,
+          maxDiscount: 0,
+          maxPayOff: 0,
           duration: "60Days",
-          price: "0.43/TH/D",
-          sellers: 8,
+          price: 99999999,
+          unit: "/MH/Day",
+          sellers: new Set(),
           img: require("../assets/eth-logo.png")
         }
-      ]
-    };
+      ]);
+    }
   }
 };
 </script>
