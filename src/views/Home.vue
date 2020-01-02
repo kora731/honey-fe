@@ -53,7 +53,7 @@
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
         <v-col cols="12" sm="12" md="6" lg="6" v-for="p in products" :key="p.duration">
-          <v-card href="#/products" class="mx-auto" height="450" max-width="560" v-ripple="{ class: 'secondary--text' }">
+          <v-card href="#/products" class="mx-auto" height="450" max-width="560" :ripple="false">
             <v-card-text class="text-left">
               <v-row>
                 <div class="flex-grow-1">
