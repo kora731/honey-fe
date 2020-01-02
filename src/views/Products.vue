@@ -147,7 +147,7 @@
             </v-row>
             <v-row>
               <div class="ma-2 flex-grow-1">
-                <span class="body-1">{{item.issuers}}</span>
+                <img style="width: 100px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
               </div>
               <div class="ma-2 d-flex">
                 <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
