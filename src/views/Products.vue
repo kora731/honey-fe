@@ -291,9 +291,7 @@ export default {
       display: none;
     }
 
-    &-duration {
-      
-    }
+
   }
 }
 
