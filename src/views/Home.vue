@@ -337,8 +337,7 @@ export default {
   color: #333;
 }
 
-@media screen {
+@media only screen and (max-width: 500px) {
   
 }
-
 </style>
