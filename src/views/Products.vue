@@ -87,7 +87,11 @@
                 <p class="body-2 my-2">Pay as You Go | 45 Days to Breakeven</p>
               </div>
               <div class="ma-2 text-right">
-                <h1 class="black--text">${{item.contract_cost.toFixed(5)}}<span class="subtitle-1"> /T/Day</span></h1> 
+                <h1 class="black--text">
+                  ${{item.contract_cost.toFixed(5)}}
+                  <span v-if="item.coin !== 'ETH'" class="subtitle-1"> /T/Day</span>
+                  <span v-if="item.coin === 'ETH'" class="subtitle-1"> /M/Day</span>
+                </h1>
                 <p class="body-2 mb-1 red--text">Min Amount {{item.contract_size}}T</p>
               </div>
             </v-row>
