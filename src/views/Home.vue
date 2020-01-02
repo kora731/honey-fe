@@ -76,7 +76,7 @@
               <v-divider></v-divider>
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-sale</v-icon>up to 
-                <span class="discount">22% OFF</span> vs buying BTC
+                <span class="discount">22% OFF</span> vs buying {{p.type}}
               </div>
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">$0.1139 /T/Day</span>
@@ -86,10 +86,10 @@
               style="background: #f8f8f8; bottom: 0; position: absolute; width: 100%; padding: 16px;"
             >
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-coin</v-icon>BTC price: <span class="dealData">$7,147.01 <span class="red--text">(-1.63%)</span> </span>
+                <v-icon class="ma-2">mdi-coin</v-icon>{{p.type}} price: <span class="dealData">$7,147.01 <span class="red--text">(-1.63%)</span> </span>
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>BTC mining earnings:<span class="dealData"> $0.1388 /T/Day</span>
+                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData"> $0.1388 /T/Day</span>
               </div>
             </div>
           </v-card>
@@ -104,7 +104,7 @@
         
          <v-expansion-panels style="width:auto; flex:1; " class="mx-10">
           <v-expansion-panel>
-            <v-expansion-panel-header class="subtitle-1">Economics 101: What does Mining and Lemon have in common?</v-expansion-panel-header>
+            <v-expansion-panel-header class="display-1 font-weight-bold">Economics 101: What does Mining and Lemon have in common?</v-expansion-panel-header>
             <v-expansion-panel-content>
             <p>"The Market for Lemons: Quality Uncertainty and the Market Mechanism" is a well-known 1978 paper by economist <a href="https://en.wikipedia.org/wiki/George_Akerlof" target="_blank">George Akerlof</a> 
             which examines how the quality of goods traded in a market can degrade in the presence of <a href="https://en.wikipedia.org/wiki/Information_asymmetry" target="_blank">information asymmetry</a> between 
@@ -120,7 +120,7 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header class="subtitle-1">What are the typical cloud mining contracts in financial terms?</v-expansion-panel-header>
+            <v-expansion-panel-header class="display-1 font-weight-bold">What are the typical cloud mining contracts in financial terms?</v-expansion-panel-header>
             <v-expansion-panel-content>
               According to <a href="https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf" target="_blank">FinCEN</a>, “persons (contract purchasers) may purchase “mining contracts” from a seller of computer processing (the cloud miner) that grants these purchasers permission to use the cloud miner’s computers to mine CVCs on the purchaser’s behalf.”
 Cloud mining contracts can be commonly classified into two types: termed contracts with fixed duration such as 180 days or 1 year contract, and “lifetime” contracts that terminate after the mining earnings falls below electricity cost.
@@ -211,9 +211,23 @@ export default {
             font-size: 36px;
             margin-bottom: 0;
           }
+          
 
           .slogan:last-child {
             margin-right: 20px;
+          }
+        }
+        @media (min-width: 450px) {
+          flex-direction: initial;
+          .slogan:first-child {
+            flex-grow: 1;
+            font-size: 24px;
+            margin-bottom: 0;
+          }
+          
+
+          .slogan:last-child {
+            margin-right: 10px;
           }
         }
 
@@ -274,7 +288,7 @@ export default {
   color: black;
   font-weight: 600;
   font-size: 18px;
-  padding: 2px;
+  padding: 2px 8px;
 
 
 }
@@ -321,6 +335,10 @@ export default {
   font-weight: 500;
   font-size: 18px;
   color: #333;
+}
+
+@media screen {
+  
 }
 
 </style>
