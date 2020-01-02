@@ -17,7 +17,7 @@
       </div>
       <v-spacer></v-spacer>
       <v-btn href="#/" text>
-        <span class="mr-2">HOME</span>
+        <span class="mr-2 nav-active">HOME</span>
       </v-btn>
       <v-btn href="#/products" text>
         <span class="mr-2">DEALS</span>
@@ -65,3 +65,15 @@ export default {
   })
 };
 </script>
+
+<style>
+.nav-active{
+  border-bottom: 3px solid #ffe500;
+  padding: 6px;
+}
+
+.nav-active:hover {
+  border-bottom: 3px solid #ffe500;
+  padding: 6px;
+}
+</style>
