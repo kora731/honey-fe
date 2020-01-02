@@ -4,7 +4,7 @@
          <v-col md="10" lg="10" sm="12" cols="12">
             <v-row justify="space-between" align="center">
               <div class="display-2 ml-3">Best Deals</div>
-              <div class="mr-3">
+              <div class="mx-3">
                   <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
                 </div>
           </v-row>
@@ -99,7 +99,7 @@
                     discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost (BTC: $ per Th per Day, or ETH: $ per Mh per Day) </span>
                   </v-tooltip>
                 </h1>
-                <p class="body-2 mb-1 red--text">Min Amount {{item.contract_size}}T</p>
+                <p class="body-2 mb-1 red--text min-text">Min Amount {{item.contract_size}}T</p>
               </div>
             </v-row>
             <v-row align="center">
@@ -317,7 +317,8 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
-
+  .caption, .min-text
+  {text-align: left;}
 }
 
 </style>

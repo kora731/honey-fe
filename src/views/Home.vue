@@ -27,15 +27,6 @@
             <div class="desc sign_up">Sign up for fresh updates & never miss a juicy deal.</div>
 
             <div class="row form">
-              <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                <input
-                  type="text"
-                  name="b_466b3785cad82e2db6271ffcc_2f33950de0"
-                  tabindex="-1"
-                  value
-                />
-              </div>
-              <label for="email" style="display: none;">email</label>
               <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
               <input type="submit" class="btn" value="GO" />
             </div>
@@ -46,7 +37,7 @@
 
     <v-row class="mt-10" justify="center">
       <v-col style="max-width: 1080px;">
-        <div class="display-2">Discover best deals in cloud mining contracts listed across reputable platforms:</div>
+        <div class="display-2 deal-header">Discover best deals in cloud mining contracts listed across reputable platforms:</div>
       </v-col>
     </v-row>
 
@@ -106,10 +97,10 @@
 
     <v-row class="faq d-flex" justify="center">
       <v-row style="max-width: 1080px;" class="mt-10">
-        <div class="display-2 mr-10 ml-4">FAQ</div>
+        <div class="display-2 mr-10 ml-4 mb-4">FAQ</div>
         
-        
-         <v-expansion-panels style="width:auto; flex:1; " class="mx-10">
+        <div>
+      <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header class="display-1 font-weight-bold">Economics 101: What does Mining and Lemon have in common?</v-expansion-panel-header>
             <v-expansion-panel-content>
@@ -136,6 +127,8 @@ The investor of cloud mining contracts and the miner/platform issuing these cont
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
+        </div>
+   
       </v-row>
     </v-row>
   </v-container>
@@ -204,8 +197,14 @@ export default {
     margin: 0;
 
     &.faq {
-      padding: 40px 60px;
+      padding: 0;
       background-color: white;
+      @media (min-width: 500px) {
+          padding: 40px 60px;
+          div:last-child {
+          flex: 1;
+        }
+        }
     }
     &.layout {
       background: #fffefa;
@@ -363,7 +362,10 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
-
+  .deal-header
+  {
+    font-size: 18px;
+  }
 }
 
 </style>
