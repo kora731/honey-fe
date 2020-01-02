@@ -76,7 +76,14 @@
               <v-divider></v-divider>
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-sale</v-icon>up to 
-                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span> vs buying {{p.type}}
+                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span> vs buying {{p.type}} 
+                 <v-tooltip top max-width="400px">
+                    <template v-slot:activator="{ on }">
+                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
+                    </template>
+                    Note: Discount calculated as the cost of buying BTC compared to BTC earned via buying the cloud mining contract. 
+                    The BTC earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
+                  </v-tooltip>
               </div>
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">${{p.price.toFixed(6)}} {{p.unit}}</span>

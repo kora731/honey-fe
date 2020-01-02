@@ -91,6 +91,13 @@
                   ${{item.contract_cost.toFixed(5)}}
                   <span v-if="item.coin !== 'ETH'" class="subtitle-1"> /T/Day</span>
                   <span v-if="item.coin === 'ETH'" class="subtitle-1"> /M/Day</span>
+                  <v-tooltip right max-width="400px">
+                    <template v-slot:activator="{ on }">
+                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
+                    </template>
+                    <span>Note: sum of upfront fees and present value of expected future cashflow earned over duration of the contract, 
+                    discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost (BTC: $ per Th per Day, or ETH: $ per Mh per Day) </span>
+                  </v-tooltip>
                 </h1>
                 <p class="body-2 mb-1 red--text">Min Amount {{item.contract_size}}T</p>
               </div>
@@ -99,11 +106,13 @@
               <div class="flex-grow-1 ma-2">
                 <div class="caption">
                   Today's Mining Income
-                  <v-tooltip bottom>
+                  <v-tooltip top max-width="400px">
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                     </template>
-                    I'm a tooltip
+                   Note: Sometimes called theoretical mining yield, is the actual mining income in 
+                   the past 24 hours (BTC: $ per Th per Day, or ETH: $ per Mh per Day). This estimate of mining income assumes current difficulty and price (Source: btc.com and sparkpool.com).
+
                   </v-tooltip>
                 </div>
                 <div class="dealData">${{item.mining_payoff.toFixed(5)}}</div>
@@ -112,11 +121,11 @@
                 <div style="flex-basis:auto;" class="mr-4">
                   <div class="caption">
                     Upfront Fee
-                    <v-tooltip bottom>
+                    <v-tooltip top max-width="400px">
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                       </template>
-                      I'm a tooltip
+                     Note: Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
                     </v-tooltip>
                   </div>
                   <div class="dealData">${{item.upfront_fee.toFixed(5)}} /100T</div>
@@ -124,11 +133,12 @@
                 <div>
                   <div class="caption">
                     Electricity Fee
-                    <v-tooltip bottom>
+                    <v-tooltip top max-width="400px">
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                       </template>
-                      I'm a tooltip
+                      Note: Sometimes called maintenance fee, is the additional daily fee consists of several costs including but not limited to mining's electricity fee, mining farm maintenance, heat dissipation, operation and maintenance for miners etc.
+
                     </v-tooltip>
                   </div>
                   <div class="dealData">${{item.electricity_fee}} /T/Day</div>
