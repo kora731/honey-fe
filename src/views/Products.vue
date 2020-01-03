@@ -72,7 +72,7 @@
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
-          <div class="bestDeal body-2" v-if="index === 0">BEST DEAL</div>
+          <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
           <v-card-text class="py-2 px-8">
             <v-row align="center" justify="end">
               
@@ -214,10 +214,6 @@ export default {
             {
               text: "↑ Upfront fees",
               value: { field: "upfront_fee", order: "asc" }
-            },
-            {
-              text: "↓ Today's income",
-              value: { field: "mining_payoff", order: "asc" }
             }
           ]
         }
@@ -235,6 +231,9 @@ export default {
           (this.filter.duration.length === 0 ||
             this.filter.duration.indexOf(v.duration) >= 0)
       );
+
+      const minCost = Math.min(...res.map(v => v.contract_cost));
+      res.forEach(v => { if (v.contract_cost === minCost) v.isBestDeal = true; });
 
       if (this.filter.sort) {
         const { field, order } = this.filter.sort;

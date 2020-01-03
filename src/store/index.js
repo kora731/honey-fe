@@ -27,7 +27,10 @@ export default new Vuex.Store({
   actions: {
     async init({ commit }) {
       const res = await axios.get('https://api.i43.io/honey');
-      commit('setProducts', res.data);
+      const data = res.data;
+      const lastUpdate = Math.max(...data.map(v => v.update_time));
+
+      commit('setProducts', data.filter(v => lastUpdate - v.update_time < 3600));
     }
   },
   modules: {
