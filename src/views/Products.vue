@@ -72,7 +72,7 @@
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
-          <div class="bestDeal body-2" v-if="index === 0">BEST DEAL</div>
+          <div class="bestDeal body-2" v-if="index === 0">Mining Contracts</div>
           <v-card-text class="py-2 px-8">
             <v-row align="center" justify="end">
               
@@ -93,11 +93,11 @@
             <v-row align="center" justify="space-between">
               <div class="ma-2">
                 <h1 class="black--text">{{item.honeyLemon_contract_name}}</h1>
-                <p class="body-2 my-2">{{item.expected_breakeven_days.toFixed(0)}} Days to Breakeven</p>
+                <p class="body-2 my-2">Estimated {{item.expected_breakeven_days.toFixed(0)}} Days to Breakeven</p>
               </div>
               <div class="ma-2 text-right">
                 <h1 class="black--text">
-                  ${{item.contract_cost.toFixed(5)}}
+                  ${{item.contract_cost.toFixed(4)}}
                   <span v-if="item.coin !== 'ETH'" class="subtitle-1"> /T/Day</span>
                   <span v-if="item.coin === 'ETH'" class="subtitle-1"> /M/Day</span>
                   <v-tooltip right max-width="400px">
@@ -124,7 +124,7 @@
 
                   </v-tooltip>
                 </div>
-                <div class="dealData">${{item.mining_payoff.toFixed(5)}}</div>
+                <div class="dealData">${{item.mining_payoff.toFixed(4)}}</div>
               </div>
               <div class="d-inline-flex ma-2 text-right">
                 <div style="flex-basis:auto;" class="mr-4">
@@ -137,7 +137,7 @@
                      Note: Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
                     </v-tooltip>
                   </div>
-                  <div class="dealData mr-5">${{item.upfront_fee.toFixed(5)}}</div>
+                  <div class="dealData mr-5">${{item.upfront_fee.toFixed(4)}}</div>
                 </div>
                 <div>
                   <div class="caption">
