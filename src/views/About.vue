@@ -1,10 +1,10 @@
 <template>
 <v-container class="mt-10">
    <v-row class="faq d-flex" justify="center">
-      <v-row style="max-width: 1280px;">
-        <div class="display-2 mr-10">FAQ</div>
+      <v-row style="flex-direction:column;">
+        <div class="display-2" style="margin-left:40px; margin-bottom:20px;">FAQ</div>
         
-        <v-expansion-panels style="width:auto; flex:1; " class="mx-10" 
+        <v-expansion-panels class="faq-layout" 
           v-model="panel"
           multiple>
           <v-expansion-panel>
@@ -50,3 +50,35 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+
+     .faq-layout{
+       width:auto; 
+       flex:1;
+       margin: 0 20px;
+     }
+  .faq{  
+
+    // margin-right: 40px;
+
+     @media (max-width: 500px) {
+          padding:0;
+          flex-direction: row;
+          div:last-child {
+          flex: 1;
+        }
+
+    margin-right:0;
+      }
+
+  }
+    @media (max-width: 500px) {
+         .title
+         {
+           margin-right: 0 !important;
+         }
+    
+    }
+
+</style>

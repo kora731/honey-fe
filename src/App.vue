@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
-        <v-btn href="#/" text>
+        <v-btn href="#/" text class="hlHeader">
           <v-img
             alt="Honey Lemon Logo"
             class="shrink mr-2"
@@ -74,10 +74,19 @@ export default {
 @media only screen and (max-width: 500px) {
   .v-toolbar__content
   {
+
+    .v-btn{
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
     *:nth-child(3) {
       display: none !important;
     }
 
+  }
+  .hlHeader
+  {
+    padding:0px !important;
   }
 }
 </style>

@@ -26,7 +26,7 @@
             >We aggregate and rate existing cloud mining contracts, for transparency, standardization and price discovery.</div>
             <div class="desc sign_up">Sign up for fresh updates & never miss a juicy deal.</div>
 
-            <div class="row form">
+            <div class="row form inputEmail">
               <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
               <input type="submit" class="btn" value="GO" />
             </div>
@@ -44,7 +44,7 @@
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
         <v-col cols="12" sm="12" md="6" lg="6" v-for="p in summary" :key="p.duration">
-          <v-card href="#/products" class="mx-auto" height="450" max-width="560" :ripple="false">
+          <v-card href="#/products" class="mx-auto coinDetail" height="450" max-width="560" :ripple="false">
             <v-card-text class="text-left">
               <v-row>
                 <div class="flex-grow-1">
@@ -81,7 +81,7 @@
               </div>
             </v-card-text>
             <div
-              style="background: #f8f8f8; bottom: 0; position: absolute; width: 100%; padding: 16px;"
+              class="coinDetailPart"
             >
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-coin</v-icon>{{p.type}} price: <span class="dealData">${{p.coinPrice.toFixed(2)}} <!--<span class="red--text">(-1.63%)</span>--> </span>
@@ -204,12 +204,16 @@ export default {
           div:last-child {
           flex: 1;
         }
-        }
+      }
     }
     &.layout {
       background: #fffefa;
       box-shadow: 0px 1px 2px #888888;
       padding: 40px 20px;
+
+       @media (max-width: 500px) {
+              padding: 20px;
+             }
       justify-content: center;
       .innerContent {
         display: flex;
@@ -227,22 +231,9 @@ export default {
           margin: 0;
           flex-shrink: 1;
         }
-
-        @media (min-width: 900px) {
-          flex-direction: initial;
-          .slogan:first-child {
-            flex-grow: 1;
-            font-size: 36px;
-            margin-bottom: 0;
-          }
-          
-
-          .slogan:last-child {
-            margin-right: 20px;
-          }
-        }
-        @media (min-width: 450px) {
-          flex-direction: initial;
+       
+        @media (min-width: 300px) {
+          // flex-direction: initial;
           .slogan:first-child {
             flex-grow: 1;
             font-size: 24px;
@@ -251,9 +242,25 @@ export default {
           
 
           .slogan:last-child {
+            margin-right: 20px;
+          }
+        }
+
+        @media (min-width: 900px) {
+          flex-direction: initial;
+          .slogan:first-child {
+            flex-grow: 1;
+            font-size: 36px;
+            margin-bottom: 0;
+            margin-left: 10px;
+          }
+          
+
+          .slogan:last-child {
             margin-right: 10px;
           }
         }
+        
 
         @media (min-width: 1200px) {
           flex-direction: initial;
@@ -282,6 +289,12 @@ export default {
             margin: 10px 0;
             box-shadow: 1px 2px 4px #888888;
             text-shadow: 1px 1px 1px #888888;
+
+             @media (max-width: 500px) {
+               font-size: 24px;
+               line-height: 32px;
+               margin-top: 10px;
+             }
           }
 
           &-black {
@@ -291,6 +304,11 @@ export default {
             font-size: 24px;
             font-style: italic;
             font-weight: 600;
+
+            @media (max-width: 500px) {
+               font-size: 20px;
+               
+             }
           }
         }
       }
@@ -300,9 +318,17 @@ export default {
       margin: 10px 0 10px 0;
       font-size: 20px;
       max-width: 640px;
-
+      @media (max-width: 500px) {
+               font-size: 16px;  
+               margin: 10px;  
+             }
       &.sign_up {
-        margin: 60px 0 20px 0;
+          margin: 60px 0 20px 0;
+      @media (max-width: 500px) {
+               margin: 20px 0 10px 10px;
+  
+             }
+
       }
     }
   }
@@ -360,12 +386,50 @@ export default {
   font-size: 18px;
   color: #333;
 }
+.coinDetailPart{
 
-@media only screen and (max-width: 500px) {
+  background: #f8f8f8; 
+  bottom: 0; 
+  position: absolute; 
+  width: 100%; 
+  padding: 16px;
+}
+
+@media only screen and (max-width: 600px) {
   .deal-header
   {
+    font-size: 18px !important;
+  }
+  .slogan{
     font-size: 18px;
   }
+
+  .inputEmail input{
+    font-size: 18px !important;
+    padding: 6px;
+
+  }
+  .inputEmail .btn{
+    position: absolute;
+    right: 0;
+  }
+  .v-card--link
+  {
+    padding: 0 !important;
+  }
+  .v-card--link .ma-4
+  {
+    margin:4px !important;
+  }
+  .coinDetail{
+    height: 380px !important;
+    max-width: 560px;
+  
+  }
+  .coinDetailPart{
+    padding: 16px;
+  }
+
 }
 
 </style>
