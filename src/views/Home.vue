@@ -44,7 +44,7 @@
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
         <v-col cols="12" sm="12" md="6" lg="6" v-for="p in summary" :key="p.duration">
-          <v-card href="#/products" class="mx-auto coinDetail" height="450" max-width="560" :ripple="false">
+          <v-card @click="$store.state.selectedCoins = [p.type]" href="#/products" class="mx-auto coinDetail" height="450" max-width="560" :ripple="false">
             <v-card-text class="text-left">
               <v-row>
                 <div class="flex-grow-1">
@@ -66,13 +66,13 @@
 
               <v-divider></v-divider>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-sale</v-icon>up to 
-                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span> vs buying {{p.type}} 
+                <v-icon class="ma-2">mdi-sale</v-icon>up to
+                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span> vs buying {{p.type}}
                  <v-tooltip top max-width="400px">
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                     </template>
-                    Note: Discount calculated as the cost of buying BTC compared to BTC earned via buying the cloud mining contract. 
+                    Note: Discount calculated as the cost of buying BTC compared to BTC earned via buying the cloud mining contract.
                     The BTC earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
                   </v-tooltip>
               </div>
@@ -98,22 +98,22 @@
     <v-row class="faq d-flex" justify="center">
       <v-row style="max-width: 1080px;" class="mt-10">
         <div class="display-2 mr-10 ml-4 mb-4">FAQ</div>
-        
+
         <div>
       <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header class="display-1 font-weight-bold">Economics 101: What does Mining and Lemon have in common?</v-expansion-panel-header>
             <v-expansion-panel-content>
-            <p>"The Market for Lemons: Quality Uncertainty and the Market Mechanism" is a well-known 1978 paper by economist <a href="https://en.wikipedia.org/wiki/George_Akerlof" target="_blank">George Akerlof</a> 
-            which examines how the quality of goods traded in a market can degrade in the presence of <a href="https://en.wikipedia.org/wiki/Information_asymmetry" target="_blank">information asymmetry</a> between 
+            <p>"The Market for Lemons: Quality Uncertainty and the Market Mechanism" is a well-known 1978 paper by economist <a href="https://en.wikipedia.org/wiki/George_Akerlof" target="_blank">George Akerlof</a>
+            which examines how the quality of goods traded in a market can degrade in the presence of <a href="https://en.wikipedia.org/wiki/Information_asymmetry" target="_blank">information asymmetry</a> between
             buyers and sellers, leaving only "lemons" behind (Wikipedia).</p>
-            <p>Mining contracts serve a function in the financialization of mining. Miners have traditionally resorted to selling cloud mining contracts to hedge risk by locking in future mining rewards ahead of time 
-              or earning premium for performing mining services. However, there have been few credible choices available for miners of small to medium size operations to list their mining services.</p> 
-            <p>On the other hand, investors who are interested in exposure to mining cashflow without having to deal with the hassle of actual mining, only have the choice of centralized cloud mining or staking 
-              platforms that leave them with little pricing power or choice of cryptocurrencies. Moreover, prevalent cloud mining contract design which requires investors to put up full collateral upfront 
+            <p>Mining contracts serve a function in the financialization of mining. Miners have traditionally resorted to selling cloud mining contracts to hedge risk by locking in future mining rewards ahead of time
+              or earning premium for performing mining services. However, there have been few credible choices available for miners of small to medium size operations to list their mining services.</p>
+            <p>On the other hand, investors who are interested in exposure to mining cashflow without having to deal with the hassle of actual mining, only have the choice of centralized cloud mining or staking
+              platforms that leave them with little pricing power or choice of cryptocurrencies. Moreover, prevalent cloud mining contract design which requires investors to put up full collateral upfront
               but no collateral for the issuers, exposing investors to significant counterparty risk.</p>
-            <p>Even across reputable platforms, existing cloud mining market is far from standardized or efficient. Price disparities of 10-40% for the same type of mining contract underwritten by different platforms is common.</p> 
-            <p>That’s why we created HoneyLemon, and start by aggregating available cloud mining contracts from select platforms with a track record of operations, for transparency, standardization and price discovery.</p> 
+            <p>Even across reputable platforms, existing cloud mining market is far from standardized or efficient. Price disparities of 10-40% for the same type of mining contract underwritten by different platforms is common.</p>
+            <p>That’s why we created HoneyLemon, and start by aggregating available cloud mining contracts from select platforms with a track record of operations, for transparency, standardization and price discovery.</p>
 
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -128,7 +128,7 @@ The investor of cloud mining contracts and the miner/platform issuing these cont
           </v-expansion-panel>
         </v-expansion-panels>
         </div>
-   
+
       </v-row>
     </v-row>
   </v-container>
@@ -231,7 +231,7 @@ export default {
           margin: 0;
           flex-shrink: 1;
         }
-       
+
         @media (min-width: 300px) {
           // flex-direction: initial;
           .slogan:first-child {
@@ -239,7 +239,7 @@ export default {
             font-size: 24px;
             margin-bottom: 0;
           }
-          
+
 
           .slogan:last-child {
             margin-right: 20px;
@@ -254,13 +254,13 @@ export default {
             margin-bottom: 0;
             margin-left: 10px;
           }
-          
+
 
           .slogan:last-child {
             margin-right: 10px;
           }
         }
-        
+
 
         @media (min-width: 1200px) {
           flex-direction: initial;
@@ -307,7 +307,7 @@ export default {
 
             @media (max-width: 500px) {
                font-size: 20px;
-               
+
              }
           }
         }
@@ -319,14 +319,14 @@ export default {
       font-size: 20px;
       max-width: 640px;
       @media (max-width: 500px) {
-               font-size: 16px;  
-               margin: 10px;  
+               font-size: 16px;
+               margin: 10px;
              }
       &.sign_up {
           margin: 60px 0 20px 0;
       @media (max-width: 500px) {
                margin: 20px 0 10px 10px;
-  
+
              }
 
       }
@@ -388,10 +388,10 @@ export default {
 }
 .coinDetailPart{
 
-  background: #f8f8f8; 
-  bottom: 0; 
-  position: absolute; 
-  width: 100%; 
+  background: #f8f8f8;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
   padding: 16px;
 }
 
@@ -424,7 +424,7 @@ export default {
   .coinDetail{
     height: 380px !important;
     max-width: 560px;
-  
+
   }
   .coinDetailPart{
     padding: 16px;
