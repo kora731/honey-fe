@@ -34,6 +34,24 @@
               (floating leg), and the miner/platform either receives cash upfront or across multiple (often equal) installments over a period of time (fixed leg).</p>
             </v-expansion-panel-content>
           </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header class="display-1 font-weight-bold">Disclaimer</v-expansion-panel-header>
+            <v-expansion-panel-content>
+            <p>
+              The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website's 
+              content as such. Honeyl Lemon does not recommend that any mining contract should be bought, sold, or held by you. Do conduct your own due diligence and consult your financial advisor before making any investment decisions.
+            </p>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+           <v-expansion-panel>
+            <v-expansion-panel-header class="display-1 font-weight-bold">Accuracy of Information</v-expansion-panel-header>
+            <v-expansion-panel-content>
+            <p>
+              Honeylemon will strive to ensure accuracy of information listed on this website although it will not hold any responsibility for any missing or wrong information. 
+              Honeylemon provides all information as is. You understand that you are using any and all information available here at your own risk.
+              </p>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
         </v-expansion-panels>
       </v-row>
     </v-row>

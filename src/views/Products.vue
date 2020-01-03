@@ -13,7 +13,7 @@
     <v-row justify="center">
       <v-col class="filterPanel">
         <v-card class="filterPanel-coin" elevation="0">
-          <v-card-title class="py-0 body-2">Coin</v-card-title>
+          <v-card-title class="pa-0 body-2">Coin</v-card-title>
           <v-card-text class="py-0">
             <v-item-group mandatory>
               <v-container>
@@ -33,7 +33,7 @@
           </v-card-text>
         </v-card>
         <v-card class="filterPanel-duration" elevation="0">
-          <v-card-title class="py-0 body-2">Duration</v-card-title>
+          <v-card-title class="pa-0 body-2">Duration</v-card-title>
           <v-card-text class="py-0">
             <v-item-group mandatory>
               <v-container>
@@ -53,7 +53,7 @@
           </v-card-text>
         </v-card>
         <v-card class="filterPanel-favorite" elevation="0">
-          <v-card-title class="py-0 body-2">Filters</v-card-title>
+          <v-card-title class="pa-0 body-2">Filters</v-card-title>
           <v-card-text class="py-0">
             <v-item-group mandatory>
               <v-container>
@@ -75,11 +75,20 @@
           <div class="bestDeal body-2" v-if="index === 0">BEST DEAL</div>
           <v-card-text class="py-2 px-8">
             <v-row align="center" justify="end">
+              
               <div
                 class="discount body-2"
                 label
                 small
               >{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
+                <v-tooltip top max-width="400px" class="ml-2">
+                    <template v-slot:activator="{ on }">
+                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
+                    </template>
+                    Note: Discount calculated as the cost of buying {{item.coin}} compared to {{item.coin}} earned via buying the cloud mining contract. 
+                    The {{item.coin}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
+                  </v-tooltip>
+             
             </v-row>
             <v-row align="center" justify="space-between">
               <div class="ma-2">
