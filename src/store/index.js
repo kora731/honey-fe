@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     products: [],
+    selectedCoins: ['BTC'],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
   },
   mutations: {

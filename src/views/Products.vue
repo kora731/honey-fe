@@ -23,7 +23,7 @@
                     style="margin: 0; padding: 0"
                     v-for="coin in filters.coins"
                     :key="coin"
-                    v-model="filter.coin"
+                    v-model="$store.state.selectedCoins"
                     :value="coin"
                     :label="coin"
                   />
@@ -104,7 +104,7 @@
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                     </template>
-                    <span>Note: sum of upfront fees and present value of expected future cashflow earned over duration of the contract, 
+                    <span>Note: sum of upfront fees and present value of expected future cashflow earned over duration of the contract,
                     discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost (BTC: $ per Th per Day, or ETH: $ per Mh per Day) </span>
                   </v-tooltip>
                 </h1>
@@ -119,7 +119,7 @@
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                     </template>
-                   Note: Sometimes called theoretical mining yield, is the actual mining income in 
+                   Note: Sometimes called theoretical mining yield, is the actual mining income in
                    the past 24 hours (BTC: $ per Th per Day, or ETH: $ per Mh per Day). This estimate of mining income assumes current difficulty and price (Source: btc.com and sparkpool.com).
 
                   </v-tooltip>
@@ -230,8 +230,8 @@ export default {
       const res = this.$store.state.products.filter(
         v =>
           (!this.filter.showFavOnly || this.favorites.indexOf(v.id) >= 0) &&
-          (this.filter.coin.length === 0 ||
-            this.filter.coin.indexOf(v.coin) >= 0) &&
+          (this.$store.state.selectedCoins.length === 0 ||
+            this.$store.state.selectedCoins.indexOf(v.coin) >= 0) &&
           (this.filter.duration.length === 0 ||
             this.filter.duration.indexOf(v.duration) >= 0)
       );
@@ -249,8 +249,7 @@ export default {
   data() {
     return {
       filter: {
-        duration: [60],
-        coin: ["BTC"],
+        duration: [],
         sort: { field: "contract_cost", order: "asc" },
         showFavOnly: false
       }
