@@ -138,7 +138,7 @@
                      Note: Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
                     </v-tooltip>
                   </div>
-                  <div class="dealData mr-5">${{item.upfront_fee.toFixed(4)}}</div>
+                  <div class="dealData mr-5">${{item.upfront_fee.toFixed(2)}}</div>
                 </div>
                 <div>
                   <div class="caption">
@@ -160,7 +160,7 @@
                 <img style="width: 140px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
               </div>
               <div class="ma-2 d-flex" style="align-items: center;">
-                <div style="display: block;" class="body-1 font-weight-medium">OUT OF STOCK</div>
+                <div style="display: block;" class="body-1 font-weight-medium" v-if="item.sold_percent >= 99.999">OUT OF STOCK</div>
                 <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
                   <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
                   <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
