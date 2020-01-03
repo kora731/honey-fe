@@ -83,12 +83,12 @@
               >{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
                 <v-tooltip top max-width="400px" class="ml-2">
                     <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1 mr-2">mdi-help-circle-outline</v-icon>
+                      <v-icon v-on="on" class="body-1 mx-1">mdi-help-circle-outline</v-icon>
                     </template>
                     Note: Discount calculated as the cost of buying {{item.coin}} compared to {{item.coin}} earned via buying the cloud mining contract. 
                     The {{item.coin}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
                   </v-tooltip>
-             
+             <span class="mr-2 caption">vs buying {{item.coin}} </span>
             </v-row>
             <v-row align="center" justify="space-between">
               <div class="ma-2">
@@ -120,7 +120,8 @@
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                     </template>
                    Note: Sometimes called theoretical mining yield, is the actual mining income in
-                   the past 24 hours (BTC: $ per Th per Day, or ETH: $ per Mh per Day). This estimate of mining income assumes current difficulty and price (Source: btc.com and sparkpool.com).
+                   the past 24 hours ({{item.coin  === 'BTC' ? 'BTC: $ per Th per Day' : 'ETH: $ per Mh per Day'}}). This estimate of mining income assumes current difficulty and price 
+                   (Source: {{item.coin  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}).
 
                   </v-tooltip>
                 </div>
@@ -158,7 +159,8 @@
               <div class="ma-2 flex-grow-1">
                 <img style="width: 140px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
               </div>
-              <div class="ma-2 d-flex">
+              <div class="ma-2 d-flex" style="align-items: center;">
+                <div style="display: block;" class="body-1 font-weight-medium">OUT OF STOCK</div>
                 <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
                   <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
                   <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
@@ -215,10 +217,10 @@ export default {
               text: "↑ Upfront fees",
               value: { field: "upfront_fee", order: "asc" }
             },
-            {
-              text: "↓ Today's income",
-              value: { field: "mining_payoff", order: "asc" }
-            }
+            // {
+            //   text: "↓ Today's income",
+            //   value: { field: "mining_payoff", order: "asc" }
+            // }
           ]
         }
       );
