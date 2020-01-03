@@ -72,7 +72,7 @@
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
-          <div class="bestDeal body-2" v-if="item.isBestDeal">Mining Contracts</div>
+          <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
           <v-card-text class="py-2 px-8">
             <v-row align="center" justify="end">
               
