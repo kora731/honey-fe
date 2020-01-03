@@ -44,26 +44,28 @@
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
         <v-col cols="12" sm="12" md="6" lg="6" v-for="p in summary" :key="p.duration">
-          <v-card @click="$store.state.selectedCoins = [p.type]" href="#/products" class="mx-auto coinDetail" height="450" max-width="560" :ripple="false">
+          <v-card @click="$store.state.selectedCoins = [p.type]" href="#/products" class="mx-auto coinDetail" height="420" max-width="560" :ripple="false">
             <v-card-text class="text-left">
               <v-row>
                 <div class="flex-grow-1">
-                  <div class="ma-4">
+                  <div class="mx-4 mt-4">
                     <span class="display-3 mr-4 font-weight-bold">{{p.type}}</span>
                     <v-chip
                       class="mb-3"
                       color="accent"
                       text-color="black"
                       label
-                    ><span class="font-weight-bold">{{p.sellers.size}} Platforms</span></v-chip>
+                    ><span class="font-weight-bold">{{p.sellers.size}} Platforms</span>
+                    </v-chip>
                   </div>
+                   <div class="mb-4 ml-4">mining contract</div>
+
                 </div>
                 <div class="pr-2">
                   <v-img width="80" :src="p.img"></v-img>
                 </div>
               </v-row>
-              <div class="ma-4">mining contract</div>
-
+             
               <v-divider></v-divider>
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-sale</v-icon>up to 
@@ -138,21 +140,18 @@ The investor of cloud mining contracts and the miner/platform issuing these cont
            <v-expansion-panel>
             <v-expansion-panel-header class="display-1 font-weight-bold">Disclaimer</v-expansion-panel-header>
             <v-expansion-panel-content>
+            <span class="title-1">No Investment Advice</span>
             <p>
               The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website's 
               content as such. Honeyl Lemon does not recommend that any mining contract should be bought, sold, or held by you. Do conduct your own due diligence and consult your financial advisor before making any investment decisions.
             </p>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-           <v-expansion-panel>
-            <v-expansion-panel-header class="display-1 font-weight-bold">Accuracy of Information</v-expansion-panel-header>
-            <v-expansion-panel-content>
+            <span class="title-1">Accuracy of Information</span>
             <p>
               Honeylemon will strive to ensure accuracy of information listed on this website although it will not hold any responsibility for any missing or wrong information. 
               Honeylemon provides all information as is. You understand that you are using any and all information available here at your own risk.
               </p>
             </v-expansion-panel-content>
-          </v-expansion-panel>
+         </v-expansion-panel>
         </v-expansion-panels>
         </div>
 

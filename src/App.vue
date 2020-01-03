@@ -12,7 +12,7 @@
             width="40"
           />
 
-          <span class="mr-2">Honey Lemon</span>
+          <span class="mr-2 hlLogo">Honey Lemon</span>
         </v-btn>
       </div>
       <v-spacer></v-spacer>
@@ -30,6 +30,9 @@
         <div>
           Honey Lemon &copy;{{ new Date().getFullYear() }}
         </div>
+        <a class="mx-4 white--text" href="#/about" style="text-decoration:none;"> 
+          Disclaimer
+          </a>
 
       <v-spacer></v-spacer>
      
@@ -67,6 +70,7 @@ export default {
 .nav-active{
   border-bottom: 3px solid #ffe500;
   padding: 6px;
+
 }
 
 .nav-active:hover {
@@ -77,7 +81,10 @@ export default {
 @media only screen and (max-width: 500px) {
   .v-toolbar__content
   {
-
+    .hlLogo
+    {
+      display: none;
+    }
     .v-btn{
       padding-left: 0 !important;
       padding-right: 0 !important;
