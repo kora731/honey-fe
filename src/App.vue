@@ -25,17 +25,20 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="primary" dark>
-      <v-spacer></v-spacer>
-      <v-card  color="primary" dark
-      flat
-        tile
-        width="100%"
-        class="text-right">
-        <v-card-text class="white--text">
+    <v-footer color="primary" dark class="px-10 white--text"> 
+  
+        <div>
           Honey Lemon &copy;{{ new Date().getFullYear() }}
-        </v-card-text>
-      </v-card>
+        </div>
+
+      <v-spacer></v-spacer>
+     
+      <div>
+            <a href="mailto:yours@honeylemon.market" target="_top" class="white--text mr-1" style="text-decoration:none;"><v-icon class="ma-2 white--text display-1">mdi-email</v-icon></a>
+            <a href="https://twitter.com/HoneylemonM" target="_blank"><v-icon class="ma-2 white--text display-1">mdi-twitter</v-icon></a>
+            <a href="https://t.me/joinchat/HD_sbVF5xOzoBZNuIcDlqQ" target="_blank"><v-icon class="ma-2 white--text display-1">mdi-telegram</v-icon></a>
+
+      </div>
     </v-footer>
   </v-app>
 </template>

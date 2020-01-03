@@ -66,15 +66,17 @@
 
               <v-divider></v-divider>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-sale</v-icon>up to
-                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span> vs buying {{p.type}}
+                <v-icon class="ma-2">mdi-sale</v-icon>up to 
+                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span>
                  <v-tooltip top max-width="400px">
                     <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
+                      <v-icon v-on="on" class="body-1 ml-1">mdi-help-circle-outline</v-icon>
                     </template>
-                    Note: Discount calculated as the cost of buying BTC compared to BTC earned via buying the cloud mining contract.
-                    The BTC earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
+                    Note: Discount calculated as the cost of buying {{p.type}} compared to {{p.type}} earned via buying the cloud mining contract. 
+                    The {{p.type}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
                   </v-tooltip>
+                 vs buying {{p.type}} 
+                 
               </div>
               <div class="ma-4">
                 <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">${{p.price.toFixed(6)}} {{p.unit}}</span>
@@ -84,10 +86,17 @@
               class="coinDetailPart"
             >
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-coin</v-icon>{{p.type}} price: <span class="dealData">${{p.coinPrice.toFixed(2)}} <!--<span class="red--text">(-1.63%)</span>--> </span>
+                <v-icon class="ma-2">mdi-coin</v-icon>{{p.type}} price: <span class="dealData">${{p.coinPrice.toFixed(2)}} 
+                  <!--<span class="red--text">(-1.63%)</span>--> </span>
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData"> ${{p.maxPayOff.toFixed(5)}} {{p.unit}}</span>
+                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData"> ${{p.maxPayOff.toFixed(5)}} {{p.unit}} </span>
+                 <v-tooltip top max-width="400px">
+                    <template v-slot:activator="{ on }">
+                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
+                    </template>
+                    Theoretical output from {{p.type  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}
+                  </v-tooltip>
               </div>
             </div>
           </v-card>
@@ -124,6 +133,24 @@
 Cloud mining contracts can be commonly classified into two types: termed contracts with fixed duration such as 180 days or 1 year contract, and “lifetime” contracts that terminate after the mining earnings falls below electricity cost.
 The investor of cloud mining contracts and the miner/platform issuing these contracts are essentially exchanging a cashflow swap: investor receives the mining cashflow produced by the mining asset (floating leg), and the miner/platform either receives cash upfront or across multiple (often equal) installments over a period of time (fixed leg).
 
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+           <v-expansion-panel>
+            <v-expansion-panel-header class="display-1 font-weight-bold">Disclaimer</v-expansion-panel-header>
+            <v-expansion-panel-content>
+            <p>
+              The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website's 
+              content as such. Honeyl Lemon does not recommend that any mining contract should be bought, sold, or held by you. Do conduct your own due diligence and consult your financial advisor before making any investment decisions.
+            </p>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+           <v-expansion-panel>
+            <v-expansion-panel-header class="display-1 font-weight-bold">Accuracy of Information</v-expansion-panel-header>
+            <v-expansion-panel-content>
+            <p>
+              Honeylemon will strive to ensure accuracy of information listed on this website although it will not hold any responsibility for any missing or wrong information. 
+              Honeylemon provides all information as is. You understand that you are using any and all information available here at your own risk.
+              </p>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
