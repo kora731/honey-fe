@@ -93,7 +93,7 @@
             <v-row align="center" justify="space-between">
               <div class="ma-2">
                 <h1 class="black--text">{{item.honeyLemon_contract_name}}</h1>
-                <p class="body-2 my-2">45 Days to Breakeven</p>
+                <p class="body-2 my-2">{{item.expected_breakeven_days.toFixed(0)}} Days to Breakeven</p>
               </div>
               <div class="ma-2 text-right">
                 <h1 class="black--text">
