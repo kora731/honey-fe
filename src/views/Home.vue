@@ -95,7 +95,7 @@
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                     </template>
-                    {{p.type}}{{p.type  === 'BTC' ? '-theoretical output from BTC.com' : '-mining earning comes from sparkpool.com'}}
+                    Theoretical output from {{p.type  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}
                   </v-tooltip>
               </div>
             </div>
