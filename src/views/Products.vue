@@ -3,7 +3,7 @@
       <v-row justify="end">
          <v-col md="10" lg="10" sm="12" cols="12">
             <v-row justify="space-between" align="center">
-              <div class="display-2 ml-3">Best Deals</div>
+              <div class="display-2 ml-3">Mining Contracts</div>
               <div class="mx-3">
                   <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
                 </div>
@@ -83,7 +83,7 @@
               >{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
                 <v-tooltip top max-width="400px" class="ml-2">
                     <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
+                      <v-icon v-on="on" class="body-1 mr-2">mdi-help-circle-outline</v-icon>
                     </template>
                     Note: Discount calculated as the cost of buying {{item.coin}} compared to {{item.coin}} earned via buying the cloud mining contract. 
                     The {{item.coin}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
@@ -93,7 +93,7 @@
             <v-row align="center" justify="space-between">
               <div class="ma-2">
                 <h1 class="black--text">{{item.honeyLemon_contract_name}}</h1>
-                <p class="body-2 my-2">Pay as You Go | 45 Days to Breakeven</p>
+                <p class="body-2 my-2">45 Days to Breakeven</p>
               </div>
               <div class="ma-2 text-right">
                 <h1 class="black--text">
@@ -102,13 +102,13 @@
                   <span v-if="item.coin === 'ETH'" class="subtitle-1"> /M/Day</span>
                   <v-tooltip right max-width="400px">
                     <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
+                      <v-icon v-on="on" class="body-1 ml-1">mdi-help-circle-outline</v-icon>
                     </template>
                     <span>Note: sum of upfront fees and present value of expected future cashflow earned over duration of the contract,
                     discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost (BTC: $ per Th per Day, or ETH: $ per Mh per Day) </span>
                   </v-tooltip>
                 </h1>
-                <p class="body-2 mb-1 red--text min-text">Min Amount {{item.contract_size}}T</p>
+                <p class="body-2 mb-1 mr-5 red--text min-text">Min Amount {{item.contract_size}}T</p>
               </div>
             </v-row>
             <v-row align="center">
@@ -129,7 +129,7 @@
               <div class="d-inline-flex ma-2 text-right">
                 <div style="flex-basis:auto;" class="mr-4">
                   <div class="caption">
-                    Upfront Fee
+                    Min Upfront Fee
                     <v-tooltip top max-width="400px">
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
@@ -137,11 +137,11 @@
                      Note: Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
                     </v-tooltip>
                   </div>
-                  <div class="dealData">${{item.upfront_fee.toFixed(5)}} /100T</div>
+                  <div class="dealData mr-5">${{item.upfront_fee.toFixed(5)}}</div>
                 </div>
                 <div>
                   <div class="caption">
-                    Electricity Fee
+                    Additional Daily Fee
                     <v-tooltip top max-width="400px">
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
@@ -150,7 +150,7 @@
 
                     </v-tooltip>
                   </div>
-                  <div class="dealData">${{item.electricity_fee}} /T/Day</div>
+                  <div class="dealData mr-5">${{item.electricity_fee}} /T/Day</div>
                 </div>
               </div>
             </v-row>
@@ -327,6 +327,12 @@ export default {
 @media only screen and (max-width: 500px) {
   .caption, .min-text
   {text-align: left;}
+
+  .dealData
+  {
+    margin-right: 0 !important;
+    text-align: left;
+  }
 }
 
 </style>
