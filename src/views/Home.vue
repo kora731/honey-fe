@@ -35,7 +35,7 @@
       </div>
     </v-row>
 
-    <v-row class="mt-10" justify="center">
+    <v-row class="mt-10 dealContainer" justify="center">
       <v-col style="max-width: 1080px;">
         <div class="display-2 deal-header">Discover best deals in cloud mining contracts listed across reputable platforms:</div>
       </v-col>
@@ -92,13 +92,14 @@
                   <!--<span class="red--text">(-1.63%)</span>--> </span>
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData"> ${{p.maxPayOff.toFixed(5)}} {{p.unit}} </span>
+                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData dealDataEarning"> ${{p.maxPayOff.toFixed(4)}} {{p.unit}} 
                  <v-tooltip top max-width="400px">
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
                     </template>
                     Theoretical output from {{p.type  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}
                   </v-tooltip>
+                  </span>
               </div>
             </div>
           </v-card>
@@ -333,7 +334,7 @@ export default {
 
             @media (max-width: 500px) {
                font-size: 20px;
-
+               padding: 0
              }
           }
         }
@@ -346,12 +347,12 @@ export default {
       max-width: 640px;
       @media (max-width: 500px) {
                font-size: 16px;
-               margin: 10px;
+               margin: 10px 0;
              }
       &.sign_up {
           margin: 60px 0 20px 0;
       @media (max-width: 500px) {
-               margin: 20px 0 10px 10px;
+               margin: 20px 0 10px 0;
 
              }
 
@@ -424,7 +425,7 @@ export default {
 @media only screen and (max-width: 600px) {
   .deal-header
   {
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
   .slogan{
     font-size: 18px;
@@ -435,9 +436,12 @@ export default {
     padding: 6px;
 
   }
+  .inputEmail{
+    width: 300px;
+  }
   .inputEmail .btn{
     position: absolute;
-    right: 0;
+    right: 20px;
   }
   .v-card--link
   {
@@ -455,7 +459,26 @@ export default {
   .coinDetailPart{
     padding: 16px;
   }
+  .dealDataEarning
+  {
+    display: block;
+    margin-left: 40px;
+  }
+  .dealContainer{
+    margin-top: 20px !important;
+    padding: 0 12px;
+  }
 
+}
+@media only screen and (max-width: 400px)
+{
+  .inputEmail{
+    width: 240px;
+  }
+  .inputEmail .btn{
+    position: absolute;
+    right: 30px;
+  }
 }
 
 </style>

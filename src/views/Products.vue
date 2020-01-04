@@ -334,6 +334,16 @@ export default {
     margin-right: 0 !important;
     text-align: left;
   }
+  .filterPanel{
+    padding: 0 12px;
+  }
+
+  .filterPanel .v-card__text
+  {
+    padding:0;
+  
+  }
+  
 }
 
 </style>

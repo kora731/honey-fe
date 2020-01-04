@@ -7,9 +7,9 @@
             alt="Honey Lemon Logo"
             class="shrink mr-2"
             contain
-            src="./assets/hl-logo.svg"
+            src="./assets/hl-logo.png"
             transition="scale-transition"
-            width="40"
+            width="36"
           />
 
           <span class="mr-2 hlLogo">Honey Lemon</span>
