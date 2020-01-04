@@ -125,7 +125,7 @@
 
                   </v-tooltip>
                 </div>
-                <div class="dealData">${{item.mining_payoff.toFixed(4)}}</div>
+                <div class="dealData">${{item.mining_payoff.toFixed(4)}} /T/Day</div>
               </div>
               <div class="d-inline-flex ma-2 text-right">
                 <div style="flex-basis:auto;" class="mr-4">
