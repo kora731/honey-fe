@@ -7,9 +7,9 @@
             alt="Honey Lemon Logo"
             class="shrink mr-2"
             contain
-            src="./assets/hl-logo.svg"
+            src="./assets/hl-logo.png"
             transition="scale-transition"
-            width="40"
+            width="36"
           />
 
           <span class="mr-2 hlLogo">Honey Lemon</span>
@@ -25,7 +25,7 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="primary" dark class="px-10 white--text"> 
+    <v-footer color="primary" dark class="footer-space white--text"> 
   
         <div>
           Honey Lemon &copy;{{ new Date().getFullYear() }}
@@ -36,7 +36,7 @@
 
       <v-spacer></v-spacer>
      
-      <div>
+      <div class="footer-social">
             <a href="mailto:yours@honeylemon.market" target="_top" class="white--text mr-1" style="text-decoration:none;"><v-icon class="ma-2 white--text display-1">mdi-email</v-icon></a>
             <a href="https://twitter.com/HoneylemonM" target="_blank"><v-icon class="ma-2 white--text display-1">mdi-twitter</v-icon></a>
             <a href="https://t.me/joinchat/HD_sbVF5xOzoBZNuIcDlqQ" target="_blank"><v-icon class="ma-2 white--text display-1">mdi-telegram</v-icon></a>
@@ -78,6 +78,12 @@ export default {
   padding: 6px;
 }
 
+.footer-space
+{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 @media only screen and (max-width: 500px) {
   .v-toolbar__content
   {
@@ -97,6 +103,14 @@ export default {
   .hlHeader
   {
     padding:0px !important;
+  }
+  .footer-social{
+    margin-left: 25%;
+  }
+  .footer-space
+  {
+    padding-left: 60px !important;
+   
   }
 }
 </style>
