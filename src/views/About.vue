@@ -35,6 +35,40 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
+            <v-expansion-panel-header class="display-1 font-weight-bold">How are the HoneyLemon mining contract metrics calculated?</v-expansion-panel-header>
+            <v-expansion-panel-content>
+            <span class="title-1 font-weight-bold">% off discount</span>
+            <p>
+              Discount calculated as the cost of buying BTC or ETH compared to BTC or ETH earned via buying the cloud mining contract. The BTC or ETH earned via contract is calculated 
+              based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
+            </p>
+            <span class="title-1 font-weight-bold">Contract cost</span>
+            <p>
+             Sum of upfront fees and present value of expected future cashflow earned over duration of the contract, discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost 
+             (BTC: $ per Th per Day, or ETH: $ per Mh per Day)
+              </p>
+            <span class="title-1 font-weight-bold">Today’s mining income</span>
+            <p>
+             Sometimes called theoretical mining yield, is the actual mining income in the past 24 hours (BTC: $ per Th per Day, or ETH: $ per Mh per Day). 
+             This estimate of mining income assumes current difficulty and price (Source: btc.com and sparkpool.com).
+              </p>
+            <span class="title-1 font-weight-bold">Upfront fee</span>
+            <p>
+            Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
+              </p>
+              <span class="title-1 font-weight-bold">Additional daily fee</span>
+            <p>
+            Sometimes called electricity or maintenance fee, is the additional daily fee consists of several costs including but not limited to mining's electricity fee, 
+            mining farm maintenance, heat dissipation, operation and maintenance for miners etc.
+              </p>
+                <span class="title-1 font-weight-bold">Today's mining earnings:</span>
+            <p>
+            Theoretical Output from BTC.com for BTC, sparkpool.com for ETH.
+              </p>
+        
+            </v-expansion-panel-content>
+         </v-expansion-panel>
+          <v-expansion-panel>
             <v-expansion-panel-header class="display-1 font-weight-bold">Disclaimer</v-expansion-panel-header>
             <v-expansion-panel-content>
             <span class="title-1">No Investment Advice</span>

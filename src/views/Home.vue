@@ -44,25 +44,27 @@
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
         <v-col cols="12" sm="12" md="6" lg="6" v-for="p in summary" :key="p.duration">
-          <v-card @click="$store.state.selectedCoins = [p.type]" href="#/products" class="mx-auto coinDetail" height="420" max-width="560" :ripple="false">
+          <v-card @click="$store.state.selectedCoins = [p.type]" href="#/products" class="mx-auto coinDetail" height="440" max-width="560" :ripple="false">
             <v-card-text class="text-left">
-              <v-row>
+              <v-row class="mb-2">
                 <div class="flex-grow-1">
-                  <div class="mx-4 mt-4">
+                  <div class="mx-4">
                     <span class="display-3 mr-4 font-weight-bold">{{p.type}}</span>
+                    <span class="display-1">Mining Contracts</span> 
+                    
+                    <div>available across 
                     <v-chip
-                      class="mb-3"
+                      class="mb-1 platformChip"
                       color="accent"
                       text-color="black"
                       label
                     ><span class="font-weight-bold">{{p.sellers.size}} Platforms</span>
                     </v-chip>
                   </div>
-                   <div class="mb-4 ml-4">mining contract</div>
-
+                  </div>
                 </div>
                 <div class="pr-2">
-                  <v-img width="80" :src="p.img"></v-img>
+                  <v-img width="80" class="coinLogo" :src="p.img"></v-img>
                 </div>
               </v-row>
              
@@ -81,7 +83,7 @@
                  
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">${{p.price.toFixed(6)}} {{p.unit}}</span>
+                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">${{p.price.toFixed(4)}} {{p.unit}}</span>
               </div>
             </v-card-text>
             <div
@@ -92,7 +94,7 @@
                   <!--<span class="red--text">(-1.63%)</span>--> </span>
               </div>
               <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>{{p.type}} mining earnings:<span class="dealData dealDataEarning"> ${{p.maxPayOff.toFixed(4)}} {{p.unit}} 
+                <v-icon class="ma-2">mdi-treasure-chest</v-icon>Today's {{p.type}} mining earnings <span class="dealSource">({{p.type  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}):</span><span class="dealData dealDataEarning"> ${{p.maxPayOff.toFixed(4)}} {{p.unit}} 
                  <v-tooltip top max-width="400px">
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
@@ -138,6 +140,40 @@ The investor of cloud mining contracts and the miner/platform issuing these cont
 
             </v-expansion-panel-content>
           </v-expansion-panel>
+           <v-expansion-panel>
+            <v-expansion-panel-header class="display-1 font-weight-bold">How are the HoneyLemon mining contract metrics calculated?</v-expansion-panel-header>
+            <v-expansion-panel-content>
+            <span class="title-1 font-weight-bold">% off discount</span>
+            <p>
+              Discount calculated as the cost of buying BTC or ETH compared to BTC or ETH earned via buying the cloud mining contract. The BTC or ETH earned via contract is calculated 
+              based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
+            </p>
+            <span class="title-1 font-weight-bold">Contract cost</span>
+            <p>
+             Sum of upfront fees and present value of expected future cashflow earned over duration of the contract, discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost 
+             (BTC: $ per Th per Day, or ETH: $ per Mh per Day)
+              </p>
+            <span class="title-1 font-weight-bold">Today’s mining income</span>
+            <p>
+             Sometimes called theoretical mining yield, is the actual mining income in the past 24 hours (BTC: $ per Th per Day, or ETH: $ per Mh per Day). 
+             This estimate of mining income assumes current difficulty and price (Source: btc.com and sparkpool.com).
+              </p>
+            <span class="title-1 font-weight-bold">Upfront fee</span>
+            <p>
+            Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
+              </p>
+              <span class="title-1 font-weight-bold">Additional daily fee</span>
+            <p>
+            Sometimes called electricity or maintenance fee, is the additional daily fee consists of several costs including but not limited to mining's electricity fee, 
+            mining farm maintenance, heat dissipation, operation and maintenance for miners etc.
+              </p>
+                <span class="title-1 font-weight-bold">Today's mining earnings:</span>
+            <p>
+            Theoretical Output from BTC.com for BTC, sparkpool.com for ETH.
+              </p>
+        
+            </v-expansion-panel-content>
+         </v-expansion-panel>
            <v-expansion-panel>
             <v-expansion-panel-header class="display-1 font-weight-bold">Disclaimer</v-expansion-panel-header>
             <v-expansion-panel-content>
@@ -185,7 +221,7 @@ export default {
           maxPayOff: 0,
           duration: "30Days",
           price: 99999999,
-          unit: "/TH/Day",
+          unit: "/Th/Day",
           sellers: new Set(),
           img: require("../assets/btc-logo.png")
         },
@@ -196,7 +232,7 @@ export default {
           maxPayOff: 0,
           duration: "60Days",
           price: 99999999,
-          unit: "/MH/Day",
+          unit: "/Mh/Day",
           sellers: new Set(),
           img: require("../assets/eth-logo.png")
         }
@@ -333,7 +369,7 @@ export default {
             font-weight: 600;
 
             @media (max-width: 500px) {
-               font-size: 20px;
+               font-size: 18px;
                padding: 0
              }
           }
@@ -421,6 +457,12 @@ export default {
   width: 100%;
   padding: 16px;
 }
+.dealDataEarning
+  {
+    display: block;
+    margin-left: 40px;
+  }
+
 
 @media only screen and (max-width: 600px) {
   .deal-header
@@ -459,16 +501,28 @@ export default {
   .coinDetailPart{
     padding: 16px;
   }
-  .dealDataEarning
-  {
-    display: block;
-    margin-left: 40px;
-  }
+  
   .dealContainer{
     margin-top: 20px !important;
     padding: 0 12px;
   }
+  .dealSource
+  {
+    display: block;
+    margin-left: 40px;
+  }
 
+  .mdi-help-circle-outline{
+    display: none;
+  }
+  .coinLogo{
+    width:50px !important;
+  }
+  .platformChip
+  {
+    padding: 4px;
+    height: 24px;
+  }
 }
 @media only screen and (max-width: 400px)
 {
