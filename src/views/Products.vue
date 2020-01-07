@@ -43,6 +43,7 @@
                     style="margin: 0 8px 0 0; padding: 0"
                     v-for="n in filters.durations"
                     :key="n"
+                    @click="$gtag.event('FilterDuration:' + n)"
                     v-model="filter.duration"
                     :value="n"
                     :label="`${n} Days`"
@@ -61,6 +62,7 @@
                   <v-checkbox
                     color="primary"
                     style="margin: 0; padding: 0"
+                    @click="$gtag.event('FilterFavorites')"
                     v-model="filter.showFavOnly"
                     label="Favorites"
                   />
@@ -165,7 +167,7 @@
                   <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
                   <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
                 </v-btn>
-                <v-btn :href="item.buy_url" target="_blank" color="primary" class="check-btn">
+                <v-btn @click="$gtag.event('CheckItOut')" :href="item.buy_url" target="_blank" color="primary" class="check-btn">
                   <v-icon>mdi-open-in-new</v-icon>
                   <span class="ml-2">Check it out</span>
                 </v-btn>
@@ -184,13 +186,12 @@ import { mapState } from "vuex";
 export default {
   name: "Products",
   methods: {
-    setDuration(d) {
-      this.filter.duration = d;
-    },
     setCoin(c) {
+      this.$gtag.event('FilterCoin:' + c);
       this.filter.coin = c;
     },
     toggleFavorites(id) {
+      this.$gtag.event('ToggleFavorites');
       this.$store.commit("toggleFavorites", id);
     }
   },
