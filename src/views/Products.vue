@@ -26,6 +26,7 @@
                     v-model="$store.state.selectedCoins"
                     :value="coin"
                     :label="coin"
+                    @change="$gtag.event('FilterCoin:' + coin)"
                   />
                 </v-row>
               </v-container>
@@ -186,10 +187,6 @@ import { mapState } from "vuex";
 export default {
   name: "Products",
   methods: {
-    setCoin(c) {
-      this.$gtag.event('FilterCoin:' + c);
-      this.filter.coin = c;
-    },
     toggleFavorites(id) {
       this.$gtag.event('ToggleFavorites');
       this.$store.commit("toggleFavorites", id);
