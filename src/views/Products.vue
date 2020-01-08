@@ -43,7 +43,7 @@
                     style="margin: 0 8px 0 0; padding: 0"
                     v-for="n in filters.durations"
                     :key="n"
-                    @click="$gtag.event('FilterDuration:' + n)"
+                    @change="$gtag.event('FilterDuration:' + n)"
                     v-model="filter.duration"
                     :value="n"
                     :label="`${n} Days`"
@@ -62,7 +62,7 @@
                   <v-checkbox
                     color="primary"
                     style="margin: 0; padding: 0"
-                    @click="$gtag.event('FilterFavorites')"
+                    @change="$gtag.event('FilterFavorites')"
                     v-model="filter.showFavOnly"
                     label="Favorites"
                   />
