@@ -73,8 +73,8 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col md="10" lg="10" sm="12" cols="12">
-        <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
+      <!-- <v-col md="10" lg="10" sm="12" cols="12"> -->
+        <!-- <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
           <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
           <v-card-text class="py-2 px-8">
             <v-row align="center" justify="end">
@@ -176,6 +176,31 @@
             </v-row>
           </v-card-text>
         </v-card>
+      </v-col> -->
+      <v-col md="10" lg="10" sm="12" cols="12">
+        <v-data-table
+          :headers="headers"
+          :items="deals"
+          :single-expand="singleExpand"
+          :expanded.sync="expanded"
+          item-key="name"
+          show-expand
+          class="elevation-1"
+        >
+          <template v-slot:top>
+            <v-toolbar flat>
+              <v-toolbar-title></v-toolbar-title>
+              <v-spacer></v-spacer>
+            </v-toolbar>
+          </template>
+          <template v-slot:expanded-item="{ headers }">
+            <td :colspan="headers.length">
+              <v-card>
+                <v-card-text>Expand Card Detail </v-card-text>
+                </v-card>
+            </td>
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
   </v-container>
@@ -251,10 +276,43 @@ export default {
         duration: [],
         sort: { field: "contract_cost", order: "asc" },
         showFavOnly: false
-      }
+      },
+      expanded: [],
+        singleExpand: false,
+        headers: [
+         
+          {
+            text: 'Contract Name',
+            align: 'left',
+            value: 'name',
+          },
+          { text: 'Unit Cost(/T/Day)', value: 'unit_cost' },
+          { text: 'Promotion', value: 'promotion' },
+          { text: 'ROI (%)', value: 'roi' },
+          { text: '', value: 'data-table-expand' },
+        ],
+        deals: [
+          {
+            logo: 'logo-img',
+            name: 'BTC 30 Days 1',
+            unit_cost: 159,
+            promotion: '10% off cost',
+            roi: '80%',
+          },
+          {
+            logo: 'logo-img',
+            name: 'BTC 30 Days 2',
+            unit_cost: 230,
+            promotion: 'new user',
+            roi: '23%',
+          },
+          
+        ],
     };
   }
 };
+
+
 </script>
 
 <style scoped lang="scss">
