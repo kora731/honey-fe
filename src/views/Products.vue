@@ -75,134 +75,8 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <!-- <v-col md="10" lg="10" sm="12" cols="12"> -->
-        <!-- <v-card v-for="(item, index) in products" :key="index" class="mb-5 pb-1" hover>
-          <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
-          <v-card-text class="py-2 px-8">
-            <v-row align="center" justify="end">
-              
-              <div
-                class="discount body-2"
-                label
-                small
-              >{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
-                <v-tooltip top max-width="400px" class="ml-2">
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1 mx-1">mdi-help-circle-outline</v-icon>
-                    </template>
-                    Note: Discount calculated as the cost of buying {{item.coin}} compared to {{item.coin}} earned via buying the cloud mining contract. 
-                    The {{item.coin}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
-                  </v-tooltip>
-             <span class="mr-2 caption">vs buying {{item.coin}} </span>
-            </v-row>
-            <v-row align="center" justify="space-between">
-              <div class="ma-2">
-                <h1 class="black--text">{{item.honeyLemon_contract_name}}</h1>
-                <p class="body-2 my-2">Estimated {{item.expected_breakeven_days.toFixed(0)}} Days to Breakeven</p>
-              </div>
-              <div class="ma-2 text-right">
-                <h1 class="black--text">
-                  ${{item.contract_cost.toFixed(4)}}
-                  <span v-if="item.coin !== 'ETH'" class="subtitle-1"> /T/Day</span>
-                  <span v-if="item.coin === 'ETH'" class="subtitle-1"> /M/Day</span>
-                  <v-tooltip right max-width="400px">
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1 ml-1">mdi-help-circle-outline</v-icon>
-                    </template>
-                    <span>Note: sum of upfront fees and present value of expected future cashflow earned over duration of the contract,
-                    discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost (BTC: $ per Th per Day, or ETH: $ per Mh per Day) </span>
-                  </v-tooltip>
-                </h1>
-                <p class="body-2 mb-1 mr-5 red--text min-text">Min Amount {{item.contract_size}}T</p>
-              </div>
-            </v-row>
-            <v-row align="center">
-              <div class="flex-grow-1 ma-2">
-                <div class="caption">
-                  Today's Mining Income
-                  <v-tooltip top max-width="400px">
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                    </template>
-                   Note: Sometimes called theoretical mining yield, is the actual mining income in
-                   the past 24 hours ({{item.coin  === 'BTC' ? 'BTC: $ per Th per Day' : 'ETH: $ per Mh per Day'}}). This estimate of mining income assumes current difficulty and price
-                   (Source: {{item.coin  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}).
-
-                  </v-tooltip>
-                </div>
-                <div class="dealData">${{item.mining_payoff.toFixed(4)}} /TH/Day</div>
-              </div>
-              <div class="d-inline-flex ma-2 text-right">
-                <div style="flex-basis:auto;" class="mr-4">
-                  <div class="caption">
-                    Min Upfront Fee
-                    <v-tooltip top max-width="400px">
-                      <template v-slot:activator="{ on }">
-                        <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                      </template>
-                     Note: Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
-                    </v-tooltip>
-                  </div>
-                  <div class="dealData mr-5">${{item.upfront_fee.toFixed(2)}}</div>
-                </div>
-                <div>
-                  <div class="caption">
-                    Additional Daily Fee
-                    <v-tooltip top max-width="400px">
-                      <template v-slot:activator="{ on }">
-                        <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                      </template>
-                      Note: Sometimes called maintenance fee, is the additional daily fee consists of several costs including but not limited to mining's electricity fee, mining farm maintenance, heat dissipation, operation and maintenance for miners etc.
-
-                    </v-tooltip>
-                  </div>
-                  <div class="dealData mr-5">${{item.electricity_fee}} /T/Day</div>
-                </div>
-              </div>
-            </v-row>
-            <v-row>
-              <div class="ma-2 flex-grow-1">
-                <img style="width: 140px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
-              </div>
-              <div class="ma-2 d-flex" style="align-items: center;">
-                <div style="display: block;" class="body-1 font-weight-medium" v-if="item.sold_percent >= 99.999">OUT OF STOCK</div>
-                <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
-                  <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
-                  <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
-                </v-btn>
-                <v-btn @click="$gtag.event('CheckItOut')" :href="item.buy_url" target="_blank" color="primary" class="check-btn">
-                  <v-icon>mdi-open-in-new</v-icon>
-                  <span class="ml-2">Check it out</span>
-                </v-btn>
-              </div>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col> -->
       <v-col md="10" lg="10" sm="12" cols="12">
-        <v-data-table
-          :headers="headers"
-          :items="deals"
-          :single-expand="singleExpand"
-          :expanded.sync="expanded"
-          item-key="name"
-          show-expand
-          class="elevation-1"
-        >
-          <template v-slot:top>
-            <v-toolbar flat>
-              <v-toolbar-title></v-toolbar-title>
-              <v-spacer></v-spacer>
-            </v-toolbar>
-          </template>
-          <template v-slot:expanded-item="{ headers }">
-            <td :colspan="headers.length">
-              <v-card>
-                <v-card-text>Expand Card Detail </v-card-text>
-                </v-card>
-            </td>
-          </template>
-        </v-data-table>
+        <product v-for="(item, index) in products" :key="index" :item="item" />
       </v-col>
     </v-row>
   </v-container>
@@ -210,15 +84,11 @@
 
 <script>
 import { mapState } from "vuex";
+import Product from "../components/Product";
 
 export default {
   name: "Products",
-  methods: {
-    toggleFavorites(id) {
-      this.$gtag.event('ToggleFavorites');
-      this.$store.commit("toggleFavorites", id);
-    }
-  },
+  components: { Product },
   computed: {
     ...mapState(["favorites"]),
     filters() {
@@ -278,43 +148,10 @@ export default {
         duration: [],
         sort: { field: "contract_cost", order: "asc" },
         showFavOnly: false
-      },
-      expanded: [],
-        singleExpand: false,
-        headers: [
-         
-          {
-            text: 'Contract Name',
-            align: 'left',
-            value: 'name',
-          },
-          { text: 'Unit Cost(/T/Day)', value: 'unit_cost' },
-          { text: 'Promotion', value: 'promotion' },
-          { text: 'ROI (%)', value: 'roi' },
-          { text: '', value: 'data-table-expand' },
-        ],
-        deals: [
-          {
-            logo: 'logo-img',
-            name: 'BTC 30 Days 1',
-            unit_cost: 159,
-            promotion: '10% off cost',
-            roi: '80%',
-          },
-          {
-            logo: 'logo-img',
-            name: 'BTC 30 Days 2',
-            unit_cost: 230,
-            promotion: 'new user',
-            roi: '23%',
-          },
-          
-        ],
+      }
     };
   }
 };
-
-
 </script>
 
 <style scoped lang="scss">
@@ -330,36 +167,6 @@ export default {
     0px 2px 2px 2px rgba(251, 255, 0, 0.2);
 }
 
-.check-btn {
-  span {
-    @media (max-width: 800px) {
-      display: none;
-    }
-  }
-  @media (max-width: 800px) {
-    background: white !important;
-    color: black !important;
-  }
-}
-
-.bestDeal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #13b7bd;
-  padding: 2px 10px;
-  color: white;
-  border-radius: 0 !important;
-  font-weight: 500;
-}
-
-.discount {
-  background: #ffe500;
-  color: black;
-  padding: 3px 10px 0;
-  border-radius: 3px !important;
-  font-weight: 500;
-}
 
 .filterPanel {
   width: 80px;
@@ -376,35 +183,18 @@ export default {
   }
 }
 
-.dealData{
-  //headline font-weight-medium black--text
-  font-weight: 500;
-  font-size: 18px;
-  color: #333;
-}
-
 @media only screen and (max-width: 500px) {
-  .caption, .min-text
-  {text-align: left;}
-
-  .dealData
-  {
-    margin-right: 0 !important;
-    text-align: left;
-  }
-  .filterPanel{
+  .filterPanel {
     padding: 0 12px;
   }
 
-  .filterPanel .v-card__text
-  {
+  .filterPanel .v-card__text {
     padding:0;
-  
   }
-   .mdi-help-circle-outline{
+
+  .mdi-help-circle-outline {
     display: none;
   }
-  
 }
 
 </style>
