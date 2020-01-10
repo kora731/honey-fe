@@ -43,69 +43,24 @@
 
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
-        <v-col cols="12" sm="12" md="6" lg="6" v-for="p in summary" :key="p.duration">
-          <v-card @click="$store.state.selectedCoins = [p.type]" href="#/products" class="mx-auto coinDetail" height="440" max-width="560" :ripple="false">
-            <v-card-text class="text-left">
-              <v-row class="mb-2">
-                <div class="flex-grow-1">
-                  <div class="mx-4">
-                    <span class="display-3 mr-4 font-weight-bold">{{p.type}}</span>
-                    <span class="display-1">Mining Contracts</span> 
-                    
-                    <div>available across 
-                    <v-chip
-                      class="mb-1 platformChip"
-                      color="accent"
-                      text-color="black"
-                      label
-                    ><span class="font-weight-bold">{{p.sellers.size}} Platforms</span>
-                    </v-chip>
-                  </div>
-                  </div>
-                </div>
-                <div class="pr-2">
-                  <v-img width="80" class="coinLogo" :src="p.img"></v-img>
-                </div>
-              </v-row>
-             
-              <v-divider></v-divider>
-              <div class="ma-4">
-                <v-icon class="ma-2">mdi-sale</v-icon>up to 
-                <span class="discount">{{(p.maxDiscount * 100).toFixed(0)}}% OFF</span>
-                 <v-tooltip top max-width="400px">
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1 ml-1">mdi-help-circle-outline</v-icon>
-                    </template>
-                    Note: Discount calculated as the cost of buying {{p.type}} compared to {{p.type}} earned via buying the cloud mining contract. 
-                    The {{p.type}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
-                  </v-tooltip>
-                 vs buying {{p.type}} 
-                 
-              </div>
-              <div class="ma-4">
-                <v-icon class="ma-2">mdi-tag-heart</v-icon>as low as <span class="dealData">${{p.price.toFixed(4)}} {{p.unit}}</span>
-              </div>
-            </v-card-text>
-            <div
-              class="coinDetailPart"
-            >
-              <div class="ma-4">
-                <v-icon class="ma-2">mdi-coin</v-icon>{{p.type}} price: <span class="dealData">${{p.coinPrice.toFixed(2)}} 
-                  <!--<span class="red--text">(-1.63%)</span>--> </span>
-              </div>
-              <div class="ma-4">
-                <v-icon class="ma-2">mdi-treasure-chest</v-icon>Today's {{p.type}} mining earnings <span class="dealSource">({{p.type  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}):</span><span class="dealData dealDataEarning"> ${{p.maxPayOff.toFixed(4)}} {{p.unit}} 
-                 <v-tooltip top max-width="400px">
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                    </template>
-                    Theoretical output from {{p.type  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}
-                  </v-tooltip>
-                  </span>
-              </div>
-            </div>
-          </v-card>
-        </v-col>
+
+          <v-tabs
+          :centered="true"
+          >
+            <v-tab>BTC</v-tab>
+            <v-tab>ETH</v-tab>
+            <v-tab>BCH</v-tab>
+          </v-tabs>
+
+          <v-data-table
+            :headers="headers"
+            :items="desserts"
+            :items-per-page="5"
+            class="elevation-1"
+            disable-pagination='true'
+            hide-default-footer="true"
+            style="width:100%"
+          ></v-data-table>
       </v-row>
     </v-row>
 
@@ -199,6 +154,75 @@ The investor of cloud mining contracts and the miner/platform issuing these cont
 
 <script>
 export default {
+  data () {
+      return {
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            sortable: false,
+            value: 'name',
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+        desserts: [
+          {
+            name: 'Frozen Yogurt',
+            calories: 159,
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0,
+            iron: '1%',
+          },
+          {
+            name: 'Ice cream sandwich',
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+            iron: '1%',
+          },
+          {
+            name: 'Eclair',
+            calories: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+            iron: '7%',
+          },
+          {
+            name: 'Cupcake',
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+            iron: '8%',
+          },
+          {
+            name: 'Gingerbread',
+            calories: 356,
+            fat: 16.0,
+            carbs: 49,
+            protein: 3.9,
+            iron: '16%',
+          },
+          {
+            name: 'Jelly bean',
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0,
+            iron: '0%',
+          },
+          
+        ],
+      }
+    },
+
   name: "home",
   computed: {
     summary() {
@@ -426,7 +450,7 @@ export default {
 
     .btn {
       cursor: pointer;
-      background-image: url("../assets/logo.png");
+      //background-image: url("../assets/logo.png");
       background-size: 80px;
       width: 80px;
       height: 62px;
@@ -434,7 +458,8 @@ export default {
       line-height: 62px;
       font-size: 20px;
       border: 0;
-      background-color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 1);
+      color: white;
       padding: 0px;
       margin-right: 0px;
       border-radius: 0px;

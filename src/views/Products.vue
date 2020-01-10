@@ -4,14 +4,16 @@
          <v-col md="10" lg="10" sm="12" cols="12">
             <v-row justify="space-between" align="center">
               <div class="display-2 ml-3">Mining Contracts</div>
-              <div class="mx-3">
-                  <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
-                </div>
+             
           </v-row>
         </v-col>
       </v-row>
     <v-row justify="center">
       <v-col class="filterPanel">
+         <div class="mx-3">
+                  <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
+                </div>
+                
         <v-card class="filterPanel-coin" elevation="0">
           <v-card-title class="pa-0 body-2">Coin</v-card-title>
           <v-card-text class="py-0">
