@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-5 pb-1" hover>
+  <v-card class="mb-5 pb-1" hover @click="showDetail = true">
     <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
     <v-card-text class="py-2 px-8">
       <v-row align="center" justify="end">
@@ -99,6 +99,7 @@
           </v-btn>
         </div>
       </v-row>
+      <product-detail :item="item" :show="showDetail" @hide="showDetail = false" />
     </v-card-text>
   </v-card>
 
@@ -106,10 +107,12 @@
 
 <script>
 import { mapState } from "vuex";
+import ProductDetail from "./ProductDetail";
 
 export default {
-  name: "ProductDetail",
+  name: "Product",
   props: ["item"],
+  components: { ProductDetail },
   methods: {
     toggleFavorites(id) {
       this.$gtag.event("ToggleFavorites");
@@ -118,6 +121,11 @@ export default {
   },
   computed: {
     ...mapState(["favorites"])
+  },
+  data() {
+    return {
+      showDetail: false
+    };
   }
 }
 </script>
