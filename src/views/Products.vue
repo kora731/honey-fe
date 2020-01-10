@@ -165,36 +165,6 @@ export default {
     0px 2px 2px 2px rgba(251, 255, 0, 0.2);
 }
 
-.check-btn {
-  span {
-    @media (max-width: 800px) {
-      display: none;
-    }
-  }
-  @media (max-width: 800px) {
-    background: white !important;
-    color: black !important;
-  }
-}
-
-.bestDeal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #13b7bd;
-  padding: 2px 10px;
-  color: white;
-  border-radius: 0 !important;
-  font-weight: 500;
-}
-
-.discount {
-  background: #ffe500;
-  color: black;
-  padding: 3px 10px 0;
-  border-radius: 3px !important;
-  font-weight: 500;
-}
 
 .filterPanel {
   width: 80px;
@@ -211,35 +181,18 @@ export default {
   }
 }
 
-.dealData{
-  //headline font-weight-medium black--text
-  font-weight: 500;
-  font-size: 18px;
-  color: #333;
-}
-
 @media only screen and (max-width: 500px) {
-  .caption, .min-text
-  {text-align: left;}
-
-  .dealData
-  {
-    margin-right: 0 !important;
-    text-align: left;
-  }
-  .filterPanel{
+  .filterPanel {
     padding: 0 12px;
   }
 
-  .filterPanel .v-card__text
-  {
+  .filterPanel .v-card__text {
     padding:0;
-  
   }
-   .mdi-help-circle-outline{
+
+  .mdi-help-circle-outline {
     display: none;
   }
-  
 }
 
 </style>
