@@ -72,80 +72,8 @@
                   <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
               </div>
 
-        <v-card class="filterPanel-duration" elevation="0">
-          <v-card-title class="pa-0 body-2">Duration</v-card-title>
-          <v-card-text class="py-0">
-            <v-item-group mandatory>
-              <v-container>
-                <v-row>
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0 4px 0 0; padding: 0"
-                    v-for="n in filters.durations"
-                    :key="n"
-                    @change="$gtag.event('FilterDuration:' + n)"
-                    v-model="filter.duration"
-                    :value="n"
-                    :label="`${n} Days`"
-                  />
-                </v-row>
-              </v-container>
-            </v-item-group>
-          </v-card-text>
-        </v-card>
-         <v-card class="filterPanel-duration" elevation="0">
-          <v-card-title class="pa-0 body-2">Seller</v-card-title>
-          <v-card-text class="py-0">
-            <v-item-group mandatory>
-              <v-container>
-                <v-row>
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0 4px 0 0; padding: 0"
-                    v-for="n in filters.durations"
-                    :key="n"
-                    @change="$gtag.event('FilterDuration:' + n)"
-                    v-model="filter.duration"
-                    :value="n"
-                    :label="`${n} Days`"
-                  />
-                </v-row>
-              </v-container>
-            </v-item-group>
-          </v-card-text>
-        </v-card>
-        <v-card class="filterPanel-favorite" elevation="0">
-          <v-card-title class="pa-0 body-2">Filters</v-card-title>
-          <v-card-text class="py-0">
-            <v-item-group mandatory>
-              <v-container>
-                <v-row>
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0; padding: 0"
-                    @change="$gtag.event('FilterFavorites')"
-                    v-model="filter.showFavOnly"
-                    label="Favorites"
-                  />
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0; padding: 0"
-                    @change="$gtag.event('FilterFavorites')"
-                    v-model="filter.showFavOnly"
-                    label="In Stock"
-                  />
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0; padding: 0"
-                    @change="$gtag.event('FilterFavorites')"
-                    v-model="filter.showFavOnly"
-                    label="Promotion"
-                  />
-                </v-row>
-              </v-container>
-            </v-item-group>
-          </v-card-text>
-        </v-card>
+         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />	        
+         <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-row justify="space-between" align-content="center" class="caption" style="margin: 0">
@@ -165,11 +93,11 @@
 import { mapState } from "vuex";
 
 import Product from "../components/Product";
-// import FilterPanel from "../components/FilterPanel";
+import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
-  components: { Product },
+  components: { Product, FilterPanel },
   computed: {
     ...mapState(["favorites"]),
     filters() {
