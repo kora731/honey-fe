@@ -78,9 +78,13 @@
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-row justify="space-between" align-content="center" class="caption" style="margin: 0">
           <v-col cols="3">Contract Name</v-col>
-          <v-col cols="2">Unit Cost (/T/Day)</v-col>
+          <v-col cols="2">Unit Cost (/T/Day)
+             <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+          </v-col>
           <v-col cols="2">Stock and Promotion</v-col>
-          <v-col cols="2">ROI</v-col>
+          <v-col cols="2">ROI
+            <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+          </v-col>
           <v-col cols="3"></v-col>
         </v-row>
         <product v-for="(item, index) in products" :key="index" :item="item" />
