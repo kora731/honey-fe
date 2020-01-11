@@ -254,7 +254,7 @@ export default {
   background: #ffe500;
   color: black;
   padding: 3px 10px 0;
-  border-radius: 3px !important;
+  // border-radius: 3px !important;
   font-weight: 500;
 }
 
@@ -304,4 +304,5 @@ export default {
 .v-card--link:before {
   background-color: #fff;
 }
+
 </style>

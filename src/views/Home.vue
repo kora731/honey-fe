@@ -50,17 +50,57 @@
             <v-tab>BTC</v-tab>
             <v-tab>ETH</v-tab>
             <v-tab>BCH</v-tab>
+          
+            <v-tab-item>
+               <v-row class="mx-4 mt-4 d-flex" justify="center">
+                        <div class="mx-4">BTC price: </div>
+                        <div class="mx-4">BTC mining earnings: </div>
+                    </v-row>
+                  <v-data-table
+                    :headers="headers"
+                    :items="contracts"
+                    :items-per-page="5"
+                    class="elevation-1"
+                    disable-pagination='true'
+                    hide-default-footer="true"
+                    style="width:100%"
+                  ></v-data-table>
+            </v-tab-item>
+             <v-tab-item>
+                <v-row class="mx-4 mt-4 d-flex" justify="center">
+                        <div class="mx-4">ETH price: </div>
+                        <div class="mx-4">ETH mining earnings: </div>
+                    </v-row>
+                  <v-data-table
+                    :headers="headers"
+                    :items="contracts"
+                    :items-per-page="5"
+                    class="elevation-1"
+                    disable-pagination='true'
+                    hide-default-footer="true"
+                    style="width:100%"
+                  ></v-data-table>
+            </v-tab-item>
+            <v-tab-item>
+                  <v-row class="mx-4 mt-4 d-flex" justify="center">
+                        <div class="mx-4">BCH price: </div>
+                        <div class="mx-4">BCH mining earnings: </div>
+                    </v-row>
+                  <v-data-table
+                    :headers="headers"
+                    :items="contracts"
+                    :items-per-page="5"
+                    class="elevation-1"
+                    disable-pagination='true'
+                    hide-default-footer="true"
+                    style="width:100%"
+                  ></v-data-table>
+            </v-tab-item>
+         
+
           </v-tabs>
 
-          <v-data-table
-            :headers="headers"
-            :items="contracts"
-            :items-per-page="5"
-            class="elevation-1"
-            disable-pagination='true'
-            hide-default-footer="true"
-            style="width:100%"
-          ></v-data-table>
+         
       </v-row>
     </v-row>
 

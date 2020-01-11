@@ -5,25 +5,61 @@
             <v-row>
               <v-col cols="2" class="px-4" style="text-align: center;padding-top: 40px;"><h2>Sweet Deals</h2></v-col>
               <v-col cols="10">
-                <v-tabs class="ma-4">
+                <v-tabs class="mx-4 mt-4" color="primary">
                   <v-tab @click="$store.state.selectedCoins = ['BTC']">BTC</v-tab>
                   <v-tab @click="$store.state.selectedCoins = ['ETH']">ETH</v-tab>
                   <v-tab @click="$store.state.selectedCoins = ['BCH']">BCH</v-tab>
-                </v-tabs>
-                <v-row class="d-flex" justify="space-between">
-                  <div class="ml-4">
-                      <div class="">BTC price: </div>
-                      <div class="">BTC mining earnings: </div>
-                  </div>
-                  <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
-                    <v-btn>
-                      USD
-                    </v-btn>
-                    <v-btn>
-                      BTC
-                    </v-btn>
-                  </v-btn-toggle>
-              </v-row>
+
+                  <v-tab-item>
+                    <v-row class="d-flex" justify="space-between">
+                      <div class="mx-4 mt-4">
+                        <div class="mx-4">BTC price: </div>
+                        <div class="mx-4">BTC mining earnings: </div>
+                    </div>
+                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                      <v-btn>
+                        USD
+                      </v-btn>
+                      <v-btn>
+                        BTC
+                      </v-btn>
+                      </v-btn-toggle>
+                    </v-row>
+                  </v-tab-item>
+                         <v-tab-item>
+                    <v-row class="d-flex" justify="space-between">
+                      <div class="ma-4">
+                        <div class="">ETH price: </div>
+                        <div class="">ETH mining earnings: </div>
+                    </div>
+                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                      <v-btn>
+                        USD
+                      </v-btn>
+                      <v-btn>
+                        ETH
+                      </v-btn>
+                      </v-btn-toggle>
+                    </v-row>
+                  </v-tab-item>
+                         <v-tab-item>
+                    <v-row class="d-flex" justify="space-between">
+                      <div class="ma-4">
+                        <div class="">BCH price: </div>
+                        <div class="">BCH mining earnings: </div>
+                    </div>
+                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                      <v-btn>
+                        USD
+                      </v-btn>
+                      <v-btn>
+                        BCH
+                      </v-btn>
+                      </v-btn-toggle>
+                    </v-row>
+                  </v-tab-item>
+               </v-tabs>
+                
               </v-col>
               </v-row>   
         </v-col>
@@ -44,7 +80,28 @@
                 <v-row>
                   <v-checkbox
                     color="primary"
-                    style="margin: 0 8px 0 0; padding: 0"
+                    style="margin: 0 4px 0 0; padding: 0"
+                    v-for="n in filters.durations"
+                    :key="n"
+                    @change="$gtag.event('FilterDuration:' + n)"
+                    v-model="filter.duration"
+                    :value="n"
+                    :label="`${n} Days`"
+                  />
+                </v-row>
+              </v-container>
+            </v-item-group>
+          </v-card-text>
+        </v-card>
+         <v-card class="filterPanel-duration" elevation="0">
+          <v-card-title class="pa-0 body-2">Seller</v-card-title>
+          <v-card-text class="py-0">
+            <v-item-group mandatory>
+              <v-container>
+                <v-row>
+                  <v-checkbox
+                    color="primary"
+                    style="margin: 0 4px 0 0; padding: 0"
                     v-for="n in filters.durations"
                     :key="n"
                     @change="$gtag.event('FilterDuration:' + n)"
@@ -69,6 +126,20 @@
                     @change="$gtag.event('FilterFavorites')"
                     v-model="filter.showFavOnly"
                     label="Favorites"
+                  />
+                  <v-checkbox
+                    color="primary"
+                    style="margin: 0; padding: 0"
+                    @change="$gtag.event('FilterFavorites')"
+                    v-model="filter.showFavOnly"
+                    label="In Stock"
+                  />
+                  <v-checkbox
+                    color="primary"
+                    style="margin: 0; padding: 0"
+                    @change="$gtag.event('FilterFavorites')"
+                    v-model="filter.showFavOnly"
+                    label="Promotion"
                   />
                 </v-row>
               </v-container>
@@ -168,6 +239,13 @@ export default {
   background-color: #ffe500 !important;
 }
 
+.v-card{
+  box-shadow: 
+      0px 0px 5px 1px rgba(0, 0, 0, 0.2), 
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 
+      0px 1px 5px 0px rgba(0, 0, 0, 0.12)
+}
+
 .v-card--hover:hover {
   -webkit-box-shadow: 0px 0px 0px 2px rgba(255, 229, 0, 0.8),
     0px 2px 2px 2px rgba(251, 255, 0, 0.2);
@@ -208,4 +286,8 @@ export default {
 body{
   background: #F5F5F5;
 }
+.v-btn--active::before{
+   opacity:0 !important;
+}
+
 </style>
