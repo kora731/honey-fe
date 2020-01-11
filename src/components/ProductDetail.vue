@@ -38,16 +38,16 @@
           <tr v-if="selected === 1"><td>Breakeven Days</td><td>{{data.expected_breakeven_days.toFixed(0)}}</td></tr>
         </v-simple-table>
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col cols="12" sm="6" style="background: #FCFBF4;">
         <h4>DETAILS</h4>
-        <v-simple-table dense>
+        <v-simple-table dense class="detailTable">
           <tr><td>Guaranteed Uptime</td><td>95%???</td></tr>
           <tr><td>Guaranteed Uptime</td><td>{{item.contract_size}}{{item.coin === 'ETH' ? 'M' : 'T'}}</td></tr>
           <tr><td>Available Date</td><td>???</td></tr>
         </v-simple-table>
         <div class="my-2"></div>
         <h4>PAYMENT</h4>
-        <v-simple-table dense>
+        <v-simple-table dense class="detailTable">
           <tr><td>Payment Term</td><td>Pay as you go/ Pay all upfront / Set and forget???</td></tr>
           <tr><td>Accepted Payment</td><td>???</td></tr>
           <tr><td>Payout Type</td><td>???</td></tr>
@@ -111,6 +111,9 @@ export default {
 .v-data-table--dense td {
     height: 24px;
     width: 50%;
+}
+.detailTable{
+  background-color: transparent;
 }
 
 </style>
