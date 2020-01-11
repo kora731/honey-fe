@@ -85,7 +85,8 @@
           </v-col>
           <v-col cols="3"></v-col>
         </v-row>
-        <v-lazy v-for="(item, index) in products" :key="index">
+        <product v-for="(item, index) in products.slice(0, 10)" :key="index" :item="item" />
+        <v-lazy v-for="(item, index) in products.slice(10)" :key="index">
           <product :item="item" />
         </v-lazy>
       </v-col>
