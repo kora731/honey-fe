@@ -163,11 +163,13 @@
 
 <script>
 import { mapState } from "vuex";
+
 import Product from "../components/Product";
+import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
-  components: { Product },
+  components: { Product, FilterPanel },
   computed: {
     ...mapState(["favorites"]),
     filters() {
