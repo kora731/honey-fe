@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="py-2 px-8">
+  <div v-if="show" class="py-2 px-8" @click.stop>
     <v-divider />
     <v-row>
       <v-col cols="11">
