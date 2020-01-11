@@ -1,19 +1,41 @@
 <template>
   <v-container style="max-width:1280px;">
       <v-row justify="end">
-         <v-col md="10" lg="10" sm="12" cols="12">
-            <v-row justify="space-between" align="center">
-              <div class="display-2 ml-3">Mining Contracts</div>
-             
-          </v-row>
+         <v-col md="12" lg="12" sm="12" cols="12">
+            <v-row>
+              <v-col cols="2" class="px-4" style="text-align: center;padding-top: 40px;"><h2>Sweet Deals</h2></v-col>
+              <v-col cols="10">
+                <v-tabs class="ma-4">
+                  <v-tab>BTC</v-tab>
+                  <v-tab>ETH</v-tab>
+                  <v-tab>BCH</v-tab>
+                </v-tabs>
+                <v-row class="d-flex" justify="space-between">
+                  <div class="ml-4">
+                      <div class="">BTC price: </div>
+                      <div class="">BTC mining earnings: </div>
+                  </div>
+                  <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                    <v-btn>
+                      USD
+                    </v-btn>
+                    <v-btn>
+                      BTC
+                    </v-btn>
+                  </v-btn-toggle>
+              </v-row>
+              </v-col>
+              </v-row>   
         </v-col>
       </v-row>
     <v-row justify="center">
       <v-col class="filterPanel">
-         <div class="mx-3">
+            
+
+              <div class="mx-3">
                   <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
-                </div>
-                
+              </div>
+
         <v-card class="filterPanel-coin" elevation="0">
           <v-card-title class="pa-0 body-2">Coin</v-card-title>
           <v-card-text class="py-0">
@@ -76,6 +98,13 @@
         </v-card>
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
+        <v-row justify="space-between" align-content="center" class="caption" style="margin: 0">
+          <v-col cols="3">Contract Name</v-col>
+          <v-col cols="2">Unit Cost (/T/Day)</v-col>
+          <v-col cols="2">Stock and Promotion</v-col>
+          <v-col cols="2">ROI</v-col>
+          <v-col cols="3"></v-col>
+        </v-row>
         <product v-for="(item, index) in products" :key="index" :item="item" />
       </v-col>
     </v-row>
@@ -197,4 +226,7 @@ export default {
   }
 }
 
+body{
+  background: #F5F5F5;
+}
 </style>

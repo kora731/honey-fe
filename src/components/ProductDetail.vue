@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show">
+  <div v-if="show" class="py-2 px-8">
     <v-divider />
     <v-row>
       <v-col cols="11">
@@ -45,6 +45,7 @@
           <tr><td>Guaranteed Uptime</td><td>{{item.contract_size}}{{item.coin === 'ETH' ? 'M' : 'T'}}</td></tr>
           <tr><td>Available Date</td><td>???</td></tr>
         </v-simple-table>
+        <div class="my-2"></div>
         <h4>PAYMENT</h4>
         <v-simple-table dense>
           <tr><td>Payment Term</td><td>Pay as you go/ Pay all upfront / Set and forget???</td></tr>
@@ -107,5 +108,9 @@ export default {
 </script>
 
 <style scoped>
+.v-data-table--dense td {
+    height: 24px;
+    width: 50%;
+}
 
 </style>

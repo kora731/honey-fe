@@ -28,7 +28,7 @@
 
             <div class="row form inputEmail">
               <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
-              <input type="submit" class="btn" value="GO" />
+              <input type="submit" class="btn" value="GO!" />
             </div>
           </form>
         </div>
@@ -36,7 +36,7 @@
     </v-row>
 
     <v-row class="mt-10 dealContainer" justify="center">
-      <v-col style="max-width: 1080px;">
+      <v-col style="max-width: 1080px; text-align:center">
         <div class="display-2 deal-header">Discover best deals in cloud mining contracts listed across reputable platforms:</div>
       </v-col>
     </v-row>
@@ -54,12 +54,12 @@
 
           <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="contracts"
             :items-per-page="5"
             class="elevation-1"
             disable-pagination='true'
             hide-default-footer="true"
-            style="width:100%"
+            style="width:80%"
           ></v-data-table>
       </v-row>
     </v-row>
@@ -158,21 +158,20 @@ export default {
       return {
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            text: 'Contract Types',
             align: 'left',
             sortable: false,
             value: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { text: 'Lowest Unit Cost', value: 'unitCost' },
+          { text: 'Total Cost', value: 'fat' },
+          { text: 'Expected Revenue', value: 'carbs' },
+          { text: 'Expected ROI (%)', value: 'protein' }
         ],
-        desserts: [
+        contracts: [
           {
             name: 'Frozen Yogurt',
-            calories: 159,
+            unitCost: 159,
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
@@ -180,7 +179,7 @@ export default {
           },
           {
             name: 'Ice cream sandwich',
-            calories: 237,
+            unitCost: 237,
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
@@ -188,7 +187,7 @@ export default {
           },
           {
             name: 'Eclair',
-            calories: 262,
+            unitCost: 262,
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
@@ -196,7 +195,7 @@ export default {
           },
           {
             name: 'Cupcake',
-            calories: 305,
+            unitCost: 305,
             fat: 3.7,
             carbs: 67,
             protein: 4.3,
@@ -204,7 +203,7 @@ export default {
           },
           {
             name: 'Gingerbread',
-            calories: 356,
+            unitCost: 356,
             fat: 16.0,
             carbs: 49,
             protein: 3.9,
@@ -212,7 +211,7 @@ export default {
           },
           {
             name: 'Jelly bean',
-            calories: 375,
+            unitCost: 375,
             fat: 0.0,
             carbs: 94,
             protein: 0.0,
@@ -437,10 +436,10 @@ export default {
       font-family: "Roboto", Helvetica, Arial, sans-serif;
       font-size: 20px;
       padding: 10px;
-      margin-right: 10px;
+      margin-right: 0;
       border: 1px solid black;
       border-radius: 5px;
-      box-shadow: 3px 3px 3px #888888;
+      
       flex-grow: 1;
       max-width: 25rem;
       &::placeholder {
@@ -451,18 +450,21 @@ export default {
     .btn {
       cursor: pointer;
       //background-image: url("../assets/logo.png");
-      background-size: 80px;
-      width: 80px;
-      height: 62px;
+      margin-left: -8px;
+      width: 64px;
+      height: 52px;
       text-align: center;
-      line-height: 62px;
+      line-height: 48px;
       font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
       border: 0;
       background-color: rgba(0, 0, 0, 1);
+      box-shadow: 3px 3px 3px #888888;
       color: white;
       padding: 0px;
       margin-right: 0px;
-      border-radius: 0px;
+      border-radius: 5px;
       box-shadow: none;
       flex-grow: 0;
     }
