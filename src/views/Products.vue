@@ -15,7 +15,7 @@
                       <div class="">BTC price: </div>
                       <div class="">BTC mining earnings: </div>
                   </div>
-                  <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                  <v-btn-toggle mandatory class="mr-4">
                     <v-btn>
                       USD
                     </v-btn>
@@ -36,27 +36,8 @@
                   <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
               </div>
 
-        <v-card class="filterPanel-duration" elevation="0">
-          <v-card-title class="pa-0 body-2">Duration</v-card-title>
-          <v-card-text class="py-0">
-            <v-item-group mandatory>
-              <v-container>
-                <v-row>
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0 8px 0 0; padding: 0"
-                    v-for="n in filters.durations"
-                    :key="n"
-                    @change="$gtag.event('FilterDuration:' + n)"
-                    v-model="filter.duration"
-                    :value="n"
-                    :label="`${n} Days`"
-                  />
-                </v-row>
-              </v-container>
-            </v-item-group>
-          </v-card-text>
-        </v-card>
+        <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
+
         <v-card class="filterPanel-favorite" elevation="0">
           <v-card-title class="pa-0 body-2">Filters</v-card-title>
           <v-card-text class="py-0">
@@ -92,11 +73,13 @@
 
 <script>
 import { mapState } from "vuex";
+
 import Product from "../components/Product";
+import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
-  components: { Product },
+  components: { Product, FilterPanel },
   computed: {
     ...mapState(["favorites"]),
     filters() {
