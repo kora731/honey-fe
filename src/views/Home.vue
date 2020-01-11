@@ -59,7 +59,7 @@
             class="elevation-1"
             disable-pagination='true'
             hide-default-footer="true"
-            style="width:80%"
+            style="width:100%"
           ></v-data-table>
       </v-row>
     </v-row>
