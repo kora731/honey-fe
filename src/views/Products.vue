@@ -6,9 +6,9 @@
               <v-col cols="2" class="px-4" style="text-align: center;padding-top: 40px;"><h2>Sweet Deals</h2></v-col>
               <v-col cols="10">
                 <v-tabs class="ma-4">
-                  <v-tab>BTC</v-tab>
-                  <v-tab>ETH</v-tab>
-                  <v-tab>BCH</v-tab>
+                  <v-tab @click="$store.state.selectedCoins = ['BTC']">BTC</v-tab>
+                  <v-tab @click="$store.state.selectedCoins = ['ETH']">ETH</v-tab>
+                  <v-tab @click="$store.state.selectedCoins = ['BCH']">BCH</v-tab>
                 </v-tabs>
                 <v-row class="d-flex" justify="space-between">
                   <div class="ml-4">
@@ -36,27 +36,6 @@
                   <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
               </div>
 
-        <v-card class="filterPanel-coin" elevation="0">
-          <v-card-title class="pa-0 body-2">Coin</v-card-title>
-          <v-card-text class="py-0">
-            <v-item-group mandatory>
-              <v-container>
-                <v-row class="flex-column">
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0; padding: 0"
-                    v-for="coin in filters.coins"
-                    :key="coin"
-                    v-model="$store.state.selectedCoins"
-                    :value="coin"
-                    :label="coin"
-                    @change="$gtag.event('FilterCoin:' + coin)"
-                  />
-                </v-row>
-              </v-container>
-            </v-item-group>
-          </v-card-text>
-        </v-card>
         <v-card class="filterPanel-duration" elevation="0">
           <v-card-title class="pa-0 body-2">Duration</v-card-title>
           <v-card-text class="py-0">
