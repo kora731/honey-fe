@@ -66,14 +66,12 @@
       </v-row>
     <v-row justify="center">
       <v-col class="filterPanel">
-            
+        <div class="mx-3">
+          <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
+        </div>
 
-              <div class="mx-3">
-                  <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
-              </div>
-
-         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />	        
-         <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
+        <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
+        <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-row justify="space-between" align-content="center" class="caption" style="margin: 0">
@@ -106,7 +104,7 @@ export default {
     ...mapState(["favorites"]),
     filters() {
       const products = this.$store.state.products;
-      const filters = products.reduce(
+      const filters = products.filter(v => this.$store.state.selectedCoins.indexOf(v.coin) >= 0).reduce(
         (m, v) => {
           if (m.durations.indexOf(v.duration) < 0) m.durations.push(v.duration);
           if (m.coins.indexOf(v.coin) < 0) m.coins.push(v.coin);
