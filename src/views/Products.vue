@@ -16,7 +16,7 @@
                         <div class="mx-4">BTC price: </div>
                         <div class="mx-4">BTC mining earnings: </div>
                     </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
                       <v-btn>
                         USD
                       </v-btn>
@@ -28,11 +28,11 @@
                   </v-tab-item>
                          <v-tab-item>
                     <v-row class="d-flex" justify="space-between">
-                      <div class="ma-4">
+                      <div class="mx-4 mt-4">
                         <div class="">ETH price: </div>
                         <div class="">ETH mining earnings: </div>
                     </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
                       <v-btn>
                         USD
                       </v-btn>
@@ -44,11 +44,11 @@
                   </v-tab-item>
                          <v-tab-item>
                     <v-row class="d-flex" justify="space-between">
-                      <div class="ma-4">
+                      <div class="mx-4 mt-4">
                         <div class="">BCH price: </div>
                         <div class="">BCH mining earnings: </div>
                     </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4">
+                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
                       <v-btn>
                         USD
                       </v-btn>
