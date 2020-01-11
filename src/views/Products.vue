@@ -85,7 +85,9 @@
           </v-col>
           <v-col cols="3"></v-col>
         </v-row>
-        <product v-for="(item, index) in products" :key="index" :item="item" />
+        <v-lazy v-for="(item, index) in products" :key="index">
+          <product :item="item" />
+        </v-lazy>
       </v-col>
     </v-row>
   </v-container>
