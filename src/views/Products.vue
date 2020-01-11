@@ -37,25 +37,7 @@
               </div>
 
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
-
-        <v-card class="filterPanel-favorite" elevation="0">
-          <v-card-title class="pa-0 body-2">Filters</v-card-title>
-          <v-card-text class="py-0">
-            <v-item-group mandatory>
-              <v-container>
-                <v-row>
-                  <v-checkbox
-                    color="primary"
-                    style="margin: 0; padding: 0"
-                    @change="$gtag.event('FilterFavorites')"
-                    v-model="filter.showFavOnly"
-                    label="Favorites"
-                  />
-                </v-row>
-              </v-container>
-            </v-item-group>
-          </v-card-text>
-        </v-card>
+        <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
         <v-row justify="space-between" align-content="center" class="caption" style="margin: 0">
