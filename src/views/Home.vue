@@ -50,17 +50,33 @@
             <v-tab>BTC</v-tab>
             <v-tab>ETH</v-tab>
             <v-tab>BCH</v-tab>
+          
+            <v-tab-item>
+               <v-row class="mx-4 mt-4 d-flex" justify="center">
+                        <div class="mx-4">BTC price: </div>
+                        <div class="mx-4">BTC mining earnings: </div>
+                    </v-row>
+                <div>Lvzi to add the 6 product cards here from different duration categories</div>
+            </v-tab-item>
+             <v-tab-item>
+                <v-row class="mx-4 mt-4 d-flex" justify="center">
+                        <div class="mx-4">ETH price: </div>
+                        <div class="mx-4">ETH mining earnings: </div>
+                    </v-row>
+                <div>Lvzi to add the 6 product cards here from different duration categories</div>
+            </v-tab-item>
+            <v-tab-item>
+                  <v-row class="mx-4 mt-4 d-flex" justify="center">
+                        <div class="mx-4">BCH price: </div>
+                        <div class="mx-4">BCH mining earnings: </div>
+                    </v-row>
+                <div>Lvzi to add the 6 product cards here from different duration categories</div>
+            </v-tab-item>
+         
+
           </v-tabs>
 
-          <v-data-table
-            :headers="headers"
-            :items="contracts"
-            :items-per-page="5"
-            class="elevation-1"
-            disable-pagination='true'
-            hide-default-footer="true"
-            style="width:100%"
-          ></v-data-table>
+         
       </v-row>
     </v-row>
 
@@ -156,69 +172,7 @@ The investor of cloud mining contracts and the miner/platform issuing these cont
 export default {
   data () {
       return {
-        headers: [
-          {
-            text: 'Contract Types',
-            align: 'left',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Lowest Unit Cost', value: 'unitCost' },
-          { text: 'Total Cost', value: 'fat' },
-          { text: 'Expected Revenue', value: 'carbs' },
-          { text: 'Expected ROI (%)', value: 'protein' }
-        ],
-        contracts: [
-          {
-            name: 'Frozen Yogurt',
-            unitCost: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
-          },
-          {
-            name: 'Ice cream sandwich',
-            unitCost: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
-          },
-          {
-            name: 'Eclair',
-            unitCost: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%',
-          },
-          {
-            name: 'Cupcake',
-            unitCost: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%',
-          },
-          {
-            name: 'Gingerbread',
-            unitCost: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%',
-          },
-          {
-            name: 'Jelly bean',
-            unitCost: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%',
-          },
-          
-        ],
+       
       }
     },
 

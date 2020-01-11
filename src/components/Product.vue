@@ -116,7 +116,7 @@
               </span>
             </v-tooltip>
           </span>
-          <!-- <p class="body-2 mb-1 mr-5 red--text min-text">Min Amount {{item.contract_size}}T</p> -->
+          
         </div>
 
         <!-- Stock Promotion -->
@@ -126,6 +126,7 @@
             class="body-1 font-weight-medium"
             v-if="item.sold_percent >= 99.999"
           >OUT OF STOCK</div>
+          
         </div>
 
         <!-- ROI -->
@@ -251,10 +252,10 @@ export default {
 }
 
 .discount {
-  background: #ffe500;
+  background: #FFFACC;
   color: black;
   padding: 3px 10px 0;
-  border-radius: 3px !important;
+  // border-radius: 3px !important;
   font-weight: 500;
 }
 
@@ -304,4 +305,5 @@ export default {
 .v-card--link:before {
   background-color: #fff;
 }
+
 </style>
