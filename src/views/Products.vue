@@ -9,7 +9,6 @@
                   <v-tab @click="$store.state.selectedCoins = ['BTC']">BTC</v-tab>
                   <v-tab @click="$store.state.selectedCoins = ['ETH']">ETH</v-tab>
                   <v-tab @click="$store.state.selectedCoins = ['BCH']">BCH</v-tab>
-<<<<<<< HEAD
 
                   <v-tab-item>
                     <v-row class="d-flex" justify="space-between">
@@ -61,23 +60,6 @@
                   </v-tab-item>
                </v-tabs>
                 
-=======
-                </v-tabs>
-                <v-row class="d-flex" justify="space-between">
-                  <div class="ml-4">
-                      <div class="">BTC price: </div>
-                      <div class="">BTC mining earnings: </div>
-                  </div>
-                  <v-btn-toggle mandatory class="mr-4">
-                    <v-btn>
-                      USD
-                    </v-btn>
-                    <v-btn>
-                      BTC
-                    </v-btn>
-                  </v-btn-toggle>
-              </v-row>
->>>>>>> upstream/master
               </v-col>
               </v-row>   
         </v-col>
@@ -183,11 +165,11 @@
 import { mapState } from "vuex";
 
 import Product from "../components/Product";
-import FilterPanel from "../components/FilterPanel";
+// import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
-  components: { Product, FilterPanel },
+  components: { Product },
   computed: {
     ...mapState(["favorites"]),
     filters() {
