@@ -15,6 +15,7 @@ const summaryData = {
 
 export default new Vuex.Store({
   state: {
+    selectedProduct: null,
     products: [],
     summary: {
       BTC: { ...summaryData, unit: 'T', sellers: new Set(), contracts: [] },
@@ -58,6 +59,9 @@ export default new Vuex.Store({
       }
 
       localStorage.setItem('favorites', JSON.stringify(state.favorites));
+    },
+    selectProduct(state, product) {
+      state.selectedProduct = product;
     }
   },
   actions: {
@@ -67,7 +71,7 @@ export default new Vuex.Store({
       const lastUpdate = Math.max(...data.map(v => v.update_time));
 
       commit('setProducts', data.filter(v => lastUpdate - v.update_time < 3600));
-    }
+    },
   },
   modules: {
   }

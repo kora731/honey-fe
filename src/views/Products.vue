@@ -38,7 +38,8 @@
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
         <filter-panel ga="FilterSeller" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
       </v-col>
-       
+
+      <product-dialog />
       <v-col md="10" lg="10" sm="12" cols="12">
          <v-row justify="space-between" align-content="center" class="caption d-none d-sm-flex" style="margin: 0">
                   <v-col cols="3">Contract Name</v-col>
@@ -49,13 +50,13 @@
                   <v-col cols="2">ROI
                     <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
-                  <v-col cols="3"></v-col>
+                  <v-col cols="3" />
         </v-row>
         <div class="productContainer">
           <product v-for="(item, index) in products.slice(0, 10)" :key="index" :item="item" />
           <v-lazy v-for="(item, index) in products.slice(10)" :key="index + 10">
-          <product :item="item" />
-        </v-lazy>
+            <product :item="item" />
+          </v-lazy>
         </div>
       </v-col>
     </v-row>
@@ -66,11 +67,12 @@
 import { mapState } from "vuex";
 
 import Product from "../components/Product";
+import ProductDialog from "../components/ProductDialog";
 import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
-  components: { Product, FilterPanel },
+  components: { Product, ProductDialog, FilterPanel },
   computed: {
     ...mapState(["favorites", "summary"]),
     filters() {

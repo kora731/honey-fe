@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-3 v-card--hover" hover @click="showDetail = !showDetail" :ripple="false">
+  <v-card class="mb-3 v-card--hover" hover @click="$store.commit('selectProduct', item)" :ripple="false">
     <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
 
     <v-row justify="space-between" align-content="center" style="margin: 0">
@@ -69,8 +69,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <product-detail :item="item" :show="showDetail" @hide="showDetail = false" />
-
+    <product-detail :item="item" :show="showDetail" />
   </v-card>
 </template>
 
@@ -80,7 +79,7 @@ import ProductDetail from "./ProductDetail";
 
 export default {
   name: "Product",
-  props: ["item"],
+  props: ["item", "showDetail"],
   components: { ProductDetail },
   methods: {
     toggleFavorites(id) {
@@ -93,7 +92,7 @@ export default {
   },
   data() {
     return {
-      showDetail: false
+      //showDetail: false
     };
   }
 };
