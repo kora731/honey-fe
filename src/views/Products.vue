@@ -36,7 +36,7 @@
         </div>
 
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
-        <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
+        <filter-panel ga="FilterSeller" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
       </v-col>
        
       <v-col md="10" lg="10" sm="12" cols="12">
@@ -105,6 +105,7 @@ export default {
       const res = this.$store.state.products.filter(
         v =>
           (!this.filter.showFavOnly || this.favorites.indexOf(v.id) >= 0) &&
+          (!this.filter.showInStockOnly || v.sold_percent < 100) &&
           (this.$store.state.selectedCoins.length === 0 ||
             this.$store.state.selectedCoins.indexOf(v.coin) >= 0) &&
           (this.filter.duration.length === 0 ||
@@ -129,7 +130,8 @@ export default {
       filter: {
         duration: [],
         sort: { field: "contract_cost", order: "asc" },
-        showFavOnly: false
+        showFavOnly: false,
+        showInStockOnly: false
       }
     };
   }
