@@ -20,22 +20,14 @@
           style="margin: 0"
         >
           <v-col cols="3">Contract Duration</v-col>
-          <v-col cols="2">
-            Lowest Unit Cost (/T/Day)
-          </v-col>
-          <v-col cols="2">Stock and Promotion</v-col>
-          <v-col cols="2">
-            Cost Basis
-          </v-col>
-          <v-col cols="3">
-            Expected ROI
-          </v-col>
+          <v-col cols="2">Lowest Unit Cost (/T/Day)</v-col>
+          <v-col cols="2">Cost Basis</v-col>
+          <v-col cols="3">Expected ROI</v-col>
         </v-row>
-        <v-row v-for="(c, idx) in summary[coin].contracts" :key="idx">
+        <v-row v-for="(c, idx) in summary[coin].contracts" :key="idx" justify="space-between" align-content="center">
           <v-col cols="3">{{c.duration}} Days</v-col>
           <v-col cols="2">{{c.contract_cost.toFixed(4)}}(/{{summary[coin].unit}}/Day)</v-col>
-          <v-col cols="2"></v-col>
-          <v-col cols="2"></v-col>
+          <v-col cols="2">11</v-col>
           <v-col cols="3">{{(c.mining_payoff / c.contract_cost) -1 | percent}}</v-col>
         </v-row>
       </div>
