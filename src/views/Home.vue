@@ -216,56 +216,7 @@
 
 <script>
 export default {
-  data() {
-    return {};
-  },
-
-  name: "home",
-  computed: {
-    summary() {
-      return this.$store.state.products.reduce(
-        (m, p) => {
-          const summary = m.find(v => v.type === p.coin);
-          if (summary) {
-            summary.sellers.add(p.issuers);
-            summary.maxDiscount = Math.max(
-              summary.maxDiscount,
-              p.expected_discount
-            );
-            summary.price = Math.min(summary.price, p.contract_cost);
-            summary.coinPrice = p.btc_price;
-            summary.maxPayOff = Math.max(summary.maxPayOff, p.mining_payoff);
-          }
-
-          return m;
-        },
-        [
-          {
-            type: "BTC",
-            coinPrice: 0,
-            maxDiscount: 0,
-            maxPayOff: 0,
-            duration: "30Days",
-            price: 99999999,
-            unit: "/Th/Day",
-            sellers: new Set(),
-            img: require("../assets/btc-logo.png")
-          },
-          {
-            type: "ETH",
-            coinPrice: 0,
-            maxDiscount: 0,
-            maxPayOff: 0,
-            duration: "60Days",
-            price: 99999999,
-            unit: "/Mh/Day",
-            sellers: new Set(),
-            img: require("../assets/eth-logo.png")
-          }
-        ]
-      );
-    }
-  }
+  name: "home"
 };
 </script>
 
