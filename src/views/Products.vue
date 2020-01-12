@@ -58,8 +58,7 @@
                       </v-btn-toggle>
                     </v-row>
                   </v-tab-item>
-               </v-tabs>
-                
+               </v-tabs>      
               </v-col>
               </v-row>   
         </v-col>
@@ -73,22 +72,25 @@
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
         <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
       </v-col>
-      <v-col md="10" lg="10" sm="12" cols="12" class="productContainer">
-        <v-row justify="space-between" align-content="center" class="caption d-none d-sm-flex" style="margin: 0">
-          <v-col cols="3">Contract Name</v-col>
-          <v-col cols="2">Unit Cost (/T/Day)
-             <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
-          </v-col>
-          <v-col cols="2">Stock and Promotion</v-col>
-          <v-col cols="2">ROI
-            <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
-          </v-col>
-          <v-col cols="3"></v-col>
+       
+      <v-col md="10" lg="10" sm="12" cols="12">
+         <v-row justify="space-between" align-content="center" class="caption d-none d-sm-flex" style="margin: 0">
+                  <v-col cols="3">Contract Name</v-col>
+                  <v-col cols="2">Unit Cost (/T/Day)
+                    <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+                  </v-col>
+                  <v-col cols="2">Stock and Promotion</v-col>
+                  <v-col cols="2">ROI
+                    <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+                  </v-col>
+                  <v-col cols="3"></v-col>
         </v-row>
-        <product v-for="(item, index) in products.slice(0, 10)" :key="index" :item="item" />
-        <v-lazy v-for="(item, index) in products.slice(10)" :key="index">
+        <div class="productContainer">
+          <product v-for="(item, index) in products.slice(0, 10)" :key="index" :item="item" />
+          <v-lazy v-for="(item, index) in products.slice(10)" :key="index">
           <product :item="item" />
         </v-lazy>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -236,6 +238,7 @@ body{
 .productContainer {
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  padding: 8px;
 }
 
 </style>

@@ -4,14 +4,14 @@
 
     <v-row justify="space-between" align-content="center" style="margin: 0">
       <v-col cols="8" class="py-4 order-0" xs="8" sm="8" ml="3" lg="3">
-        <div class="d-flex flex-lg-column align-center align-lg-start align-xl-start">
+        <div class="d-flex flex-lg-column align-center align-lg-start align-xl-start cardComp">
           <img style="width: 120px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
            <span class="black--text title-2">{{item.honeyLemon_contract_name}}</span>
         </div>
        
       </v-col>
 
-      <v-col cols="4" class="d-flex align-center order-2 order-lg-1" xs="4" ml="2" lg="2">
+      <v-col cols="5" class="d-flex align-center order-2 order-lg-1" xs="4" ml="2" lg="2">
         <span class="black--text title-2">
           ${{item.contract_cost.toFixed(4)}}
           <span
@@ -31,15 +31,15 @@
         </span>
       </v-col>
 
-      <v-col cols="3" class="d-flex align-center order-1 order-lg-2" xs="3" ml="2" lg="2">
+      <v-col cols="4" class="d-flex align-center order-1 order-lg-2" xs="4" ml="2" lg="2">
         <div
           style="display: block;"
           class="body-1 font-weight-medium"
-          v-if="item.sold_percent >= 50"
-        >OUT OF STOCK</div>
+          v-if="item.sold_percent >= 99.99"
+        ><span class="stockStyle">OUT OF STOCK</span></div>
       </v-col>
 
-      <v-col cols="4" class="d-flex order-3" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
+      <v-col cols="3" class="d-flex order-3" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
         <div class="d-flex discount align-center">
           <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>
         </div>
@@ -118,6 +118,9 @@ export default {
     }
   color: black;
   padding: 3px 10px 0;
+   @media (max-width: 500px) {
+       padding:0;
+    }
   // border-radius: 3px !important;
   font-weight: 500;
 }
@@ -134,6 +137,7 @@ export default {
     min-width: 40px !important;
     width: 40px !important;
     height: 40px !important;
+    box-shadow: none;
   }
 }
 
@@ -167,6 +171,14 @@ export default {
   .mdi-help-circle-outline {
     display: none;
   }
+  .cardComp img{
+    width: 100px !important;
+  }
+  .cardComp span{
+    margin-left: -10px !important;
+    font-weight: 500;
+    font-size: 14px;
+  }
 }
 
 .v-item--active {
@@ -184,5 +196,18 @@ export default {
 .v-card--link:before {
   background-color: #fff;
 }
+
+.stockStyle{
+    font-size: 0.85rem;
+    font-weight: 400;
+    background: #FFF2A9;
+    color: #9F8703;
+    padding: 4px;
+    border-radius: 4px;
+    @media (max-width: 500px) {
+      font-size: 0.6rem;
+    }
+}
+
 
 </style>

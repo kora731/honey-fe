@@ -5,8 +5,8 @@
       <v-col cols="11">
         Review:&nbsp;&nbsp;
         <v-btn-toggle dense v-model="selected">
-          <v-btn>Daily</v-btn>
-          <v-btn>Total</v-btn>
+          <v-btn small>Daily</v-btn>
+          <v-btn small>Total</v-btn>
         </v-btn-toggle>
       </v-col>
       <v-col cols="1" style="text-align: right;">
@@ -114,6 +114,10 @@ export default {
 }
 .detailTable{
   background-color: transparent;
+}
+.v-item--active {
+  color: #222;
+  background-color: #ffe500 !important;
 }
 
 </style>
