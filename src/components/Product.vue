@@ -3,7 +3,7 @@
     <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
 
     <v-row justify="space-between" align-content="center" style="margin: 0">
-      <v-col cols="3" class="py-4">
+      <v-col cols="12" class="py-4" xs="12" sm="3" ml="3" lg="3">
         <div class="d-flex flex-column">
           <img style="width: 120px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
            <span class="black--text title-2">{{item.honeyLemon_contract_name}}</span>
@@ -11,7 +11,7 @@
        
       </v-col>
 
-      <v-col cols="2" class="d-flex align-center">
+      <v-col cols="3" class="d-flex align-center" xs="3" ml="2" lg="2">
         <span class="black--text title-2">
           ${{item.contract_cost.toFixed(4)}}
           <span
@@ -31,7 +31,7 @@
         </span>
       </v-col>
 
-      <v-col cols="2" class="d-flex align-center">
+      <v-col cols="3" class="d-flex align-center" xs="3" ml="2" lg="2">
         <div
           style="display: block;"
           class="body-1 font-weight-medium"
@@ -39,7 +39,7 @@
         >OUT OF STOCK</div>
       </v-col>
 
-      <v-col cols="2" class="d-flex" style="padding-top: 0; padding-bottom: 0;">
+      <v-col cols="4" class="d-flex" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
         <div class="d-flex discount align-center">
           <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>
         </div>
@@ -52,7 +52,7 @@
         </v-tooltip>
       </v-col>
 
-      <v-col cols="3" class="d-flex align-center">
+      <v-col cols="2" class="d-lg-flex align-center"  xs="2" ml="3" lg="3">
         <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
           <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
           <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
@@ -99,6 +99,7 @@
         </div>
         <!-- Unit Cost -->
         <div class="ma-2 flex-grow-1">
+          
           <span class="black--text title-2">
             ${{item.contract_cost.toFixed(4)}}
             <span
@@ -116,7 +117,7 @@
               </span>
             </v-tooltip>
           </span>
-          
+          <p class="body-2 mb-1 mr-5 red--text min-text">Min Amount {{item.contract_size}}T</p>
         </div>
 
         <!-- Stock Promotion -->
@@ -126,7 +127,6 @@
             class="body-1 font-weight-medium"
             v-if="item.sold_percent >= 99.999"
           >OUT OF STOCK</div>
-          
         </div>
 
         <!-- ROI -->
@@ -134,7 +134,8 @@
           class="discount body-2 flex-grow-2"
           label
           small
-        >{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
+        >
+        {{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
         <v-tooltip top max-width="400px" class="ml-2">
           <template v-slot:activator="{ on }">
             <v-icon v-on="on" class="body-1 mx-1">mdi-help-circle-outline</v-icon>
@@ -253,6 +254,9 @@ export default {
 
 .discount {
   background: #FFFACC;
+  @media (max-width: 800px) {
+       background: transparent;
+    }
   color: black;
   padding: 3px 10px 0;
   // border-radius: 3px !important;
@@ -268,6 +272,9 @@ export default {
   @media (max-width: 800px) {
     background: white !important;
     color: black !important;
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
   }
 }
 

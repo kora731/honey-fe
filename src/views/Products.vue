@@ -1,10 +1,10 @@
 <template>
   <v-container style="max-width:1280px;">
       <v-row justify="end">
-         <v-col md="12" lg="12" sm="12" cols="12">
+         <v-col md="12" lg="12" sm="12" cols="12" >
             <v-row>
-              <v-col cols="2" class="px-4" style="text-align: center;padding-top: 40px;"><h2>Sweet Deals</h2></v-col>
-              <v-col cols="10">
+              <v-col cols="12" lg="2" sm="12" class="px-4 dealHeader" ><h2>Sweet Deals</h2></v-col>
+              <v-col cols="12" lg="10" sm="12">
                 <v-tabs class="mx-4 mt-4" color="primary">
                   <v-tab @click="$store.state.selectedCoins = ['BTC']">BTC</v-tab>
                   <v-tab @click="$store.state.selectedCoins = ['ETH']">ETH</v-tab>
@@ -17,10 +17,10 @@
                         <div class="mx-4">BTC mining earnings: </div>
                     </div>
                     <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
-                      <v-btn>
+                      <v-btn small>
                         USD
                       </v-btn>
-                      <v-btn>
+                      <v-btn small>
                         BTC
                       </v-btn>
                       </v-btn-toggle>
@@ -29,14 +29,14 @@
                          <v-tab-item>
                     <v-row class="d-flex" justify="space-between">
                       <div class="mx-4 mt-4">
-                        <div class="">ETH price: </div>
-                        <div class="">ETH mining earnings: </div>
+                        <div class="mx-4">ETH price: </div>
+                        <div class="mx-4">ETH mining earnings: </div>
                     </div>
                     <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
-                      <v-btn>
+                      <v-btn small>
                         USD
                       </v-btn>
-                      <v-btn>
+                      <v-btn small>
                         ETH
                       </v-btn>
                       </v-btn-toggle>
@@ -45,14 +45,14 @@
                          <v-tab-item>
                     <v-row class="d-flex" justify="space-between">
                       <div class="mx-4 mt-4">
-                        <div class="">BCH price: </div>
-                        <div class="">BCH mining earnings: </div>
+                        <div class="mx-4">BCH price: </div>
+                        <div class="mx-4">BCH mining earnings: </div>
                     </div>
                     <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
-                      <v-btn>
+                      <v-btn small>
                         USD
                       </v-btn>
-                      <v-btn>
+                      <v-btn small>
                         BCH
                       </v-btn>
                       </v-btn-toggle>
@@ -74,7 +74,7 @@
         <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
       </v-col>
       <v-col md="10" lg="10" sm="12" cols="12">
-        <v-row justify="space-between" align-content="center" class="caption" style="margin: 0">
+        <v-row justify="space-between" align-content="center" class="caption d-none d-sm-flex" style="margin: 0">
           <v-col cols="3">Contract Name</v-col>
           <v-col cols="2">Unit Cost (/T/Day)
              <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
@@ -202,6 +202,14 @@ export default {
 
 
   }
+}
+
+.dealHeader{
+   text-align: center;
+   padding-top: 40px;
+   @media (max-width: 500px) {
+     padding-top:0;
+   }
 }
 
 @media only screen and (max-width: 500px) {
