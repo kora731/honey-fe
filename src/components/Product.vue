@@ -11,7 +11,8 @@
        
       </v-col>
 
-      <v-col cols="5" class="d-flex align-center order-2 order-lg-1" xs="4" ml="2" lg="2">
+      <v-col cols="5" class="d-flex align-lg-center order-2 order-lg-1  flex-column flex-md-row" xs="4" ml="2" lg="2">
+        <span class="dealMeta">Unit Cost</span>
         <span class="black--text title-2">
           ${{item.contract_cost.toFixed(4)}}
           <span
@@ -40,8 +41,11 @@
       </v-col>
 
       <v-col cols="3" class="d-flex order-3" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
-        <div class="d-flex discount align-center">
-          <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>
+        <div class="d-flex discount align-lg-center">
+          <div class="d-flex discount flex-column align-self-center">
+            <span class="dealMeta">ROI</span>
+            <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>
+          </div>
         </div>
         <v-tooltip top max-width="400px" class="ml-2">
           <template v-slot:activator="{ on }">
@@ -146,6 +150,17 @@ export default {
   font-weight: 500;
   font-size: 18px;
   color: #333;
+}
+
+.dealMeta{
+  display: none;
+  @media (max-width: 500px) {
+      display: block;
+      font-size:12px;
+      text-align: left;
+      font-weight: 300;
+      color: #333;
+    }
 }
 
 @media only screen and (max-width: 500px) {
