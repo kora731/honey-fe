@@ -19,8 +19,8 @@
                     :value="n"
                     :label="(format && format.replace('$$', n)) || n"
             />
-            <span v-if="!showAll && items.length > 5" @click="showAll = true">show more</span>
-            <span v-if="showAll && items.length > 5" @click="showAll = false">show less</span>
+            <span v-if="!showAll && items.length > 5" @click="showAll = true" class="blue--text">Show more</span>
+            <span v-if="showAll && items.length > 5" @click="showAll = false"  class="blue--text">Show less</span>
           </v-row>
           <v-row v-if="expanded && !arrayMode">
             <v-checkbox
@@ -33,8 +33,8 @@
                     :value="n"
                     :label="(format && format.replace('$$', n)) || n"
             />
-            <span v-if="!showAll && items.length > 5" @click="showAll = true">show more</span>
-            <span v-if="showAll && items.length > 5" @click="showAll = false">show less</span>
+            <span v-if="!showAll && items.length > 5" @click="showAll = true" class="blue--text">Show more</span>
+            <span v-if="showAll && items.length > 5" @click="showAll = false" class="blue--text">Show less</span>
           </v-row>
         </v-container>
       </v-item-group>

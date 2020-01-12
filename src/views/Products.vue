@@ -4,7 +4,7 @@
          <v-col md="12" lg="12" sm="12" cols="12" >
             <v-row>
               <v-col cols="12" lg="2" sm="12" class="px-4 dealHeader" ><h2>Sweet Deals</h2></v-col>
-              <v-col cols="12" lg="10" sm="12">
+              <v-col cols="12" lg="10" sm="12" class="pa-4" style="background: white;">
                 <v-tabs class="mx-4 mt-4" color="primary">
                   <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
@@ -46,7 +46,7 @@
                   <v-col cols="2">Unit Cost (/T/Day)
                     <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
-                  <v-col cols="2">Stock and Promotion</v-col>
+                  <v-col cols="2"></v-col>
                   <v-col cols="2">ROI
                     <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
@@ -179,7 +179,7 @@ export default {
 .dealHeader{
    text-align: center;
    padding-top: 40px;
-   @media (max-width: 500px) {
+   @media (max-width: 1200px) {
      padding-top:0;
    }
 }

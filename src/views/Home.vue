@@ -378,6 +378,9 @@ export default {
   display: block;
   margin-left: 40px;
 }
+ .deal-header {
+    font-size: 20px !important;
+  }
 
 @media only screen and (max-width: 600px) {
   .deal-header {
@@ -434,11 +437,12 @@ export default {
 }
 @media only screen and (max-width: 400px) {
   .inputEmail {
-    width: 240px;
+    width: 280px;
   }
   .inputEmail .btn {
     position: absolute;
-    right: 56px;
+    right: 30px;
   }
 }
+
 </style>
