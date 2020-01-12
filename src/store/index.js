@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
@@ -16,9 +17,9 @@ export default new Vuex.Store({
   state: {
     products: [],
     summary: {
-      'BTC': { ...summaryData, unit: 'T', sellers: new Set() },
-      'ETH': { ...summaryData, unit: 'M', sellers: new Set() },
-      'BCH': { ...summaryData, unit: 'T', sellers: new Set() }
+      BTC: { ...summaryData, unit: 'T', sellers: new Set(), contracts: [] },
+      ETH: { ...summaryData, unit: 'M', sellers: new Set(), contracts: [] },
+      BCH: { ...summaryData, unit: 'T', sellers: new Set(), contracts: [] }
     },
     selectedCoins: ['BTC'],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
@@ -38,8 +39,16 @@ export default new Vuex.Store({
           summary.coinPrice = p.btc_price;
           summary.maxPayOff = Math.max(summary.maxPayOff, p.mining_payoff);
           summary.maxPayOffBtc = Math.max(summary.maxPayOffBtc, p.mining_payoff_btc);
+
+          summary.contracts.push(p);
         }
       });
+
+      state.summary.BTC.contracts = _.chain(state.summary.BTC.contracts)
+        .filter(v => v.duration < 365)
+        .sortBy(v => v.duration + (1 - v.expected_discount))
+        .sortedUniqBy(v => v.duration)
+        .value();
     },
     toggleFavorites(state, id) {
       if (state.favorites.indexOf(id) < 0) {

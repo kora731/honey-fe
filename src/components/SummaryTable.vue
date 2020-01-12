@@ -31,6 +31,13 @@
             Expected ROI
           </v-col>
         </v-row>
+        <v-row v-for="(c, idx) in summary[coin].contracts" :key="idx">
+          <v-col cols="3">{{c.duration}} Days</v-col>
+          <v-col cols="2">{{c.contract_cost.toFixed(4)}}(/{{summary[coin].unit}}/Day)</v-col>
+          <v-col cols="2"></v-col>
+          <v-col cols="2"></v-col>
+          <v-col cols="3">{{(c.mining_payoff / c.contract_cost) -1 | percent}}</v-col>
+        </v-row>
       </div>
     </v-tab-item>
   </v-tabs>
@@ -43,6 +50,9 @@ export default {
   name: "SummaryTable",
   computed: {
     ...mapState(["summary"])
+  },
+  filters: {
+    percent(v) { return v && (v * 100).toFixed(0) + '%'; }
   },
   data() {
     return {
