@@ -6,17 +6,15 @@
               <v-col cols="12" lg="2" sm="12" class="px-4 dealHeader" ><h2>Sweet Deals</h2></v-col>
               <v-col cols="12" lg="10" sm="12">
                 <v-tabs class="mx-4 mt-4" color="primary">
-                  <v-tab @click="$store.state.selectedCoins = ['BTC']">BTC</v-tab>
-                  <v-tab @click="$store.state.selectedCoins = ['ETH']">ETH</v-tab>
-                  <v-tab @click="$store.state.selectedCoins = ['BCH']">BCH</v-tab>
+                  <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
-                  <v-tab-item>
+                  <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
                     <v-row class="d-flex" justify="space-between">
                       <div class="mx-4 mt-4">
-                        <div class="mx-4">BTC price: </div>
-                        <div class="mx-4">BTC mining earnings: </div>
+                        <div class="mx-4">{{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}</div>
+                        <div class="mx-4">{{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}</div>
                     </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
+                    <v-btn-toggle mandatory class="mr-4 pr-4">
                       <v-btn small>
                         USD
                       </v-btn>
@@ -26,41 +24,9 @@
                       </v-btn-toggle>
                     </v-row>
                   </v-tab-item>
-                         <v-tab-item>
-                    <v-row class="d-flex" justify="space-between">
-                      <div class="mx-4 mt-4">
-                        <div class="mx-4">ETH price: </div>
-                        <div class="mx-4">ETH mining earnings: </div>
-                    </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
-                      <v-btn small>
-                        USD
-                      </v-btn>
-                      <v-btn small>
-                        ETH
-                      </v-btn>
-                      </v-btn-toggle>
-                    </v-row>
-                  </v-tab-item>
-                         <v-tab-item>
-                    <v-row class="d-flex" justify="space-between">
-                      <div class="mx-4 mt-4">
-                        <div class="mx-4">BCH price: </div>
-                        <div class="mx-4">BCH mining earnings: </div>
-                    </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
-                      <v-btn small>
-                        USD
-                      </v-btn>
-                      <v-btn small>
-                        BCH
-                      </v-btn>
-                      </v-btn-toggle>
-                    </v-row>
-                  </v-tab-item>
-               </v-tabs>      
+               </v-tabs>
               </v-col>
-              </v-row>   
+              </v-row>
         </v-col>
       </v-row>
     <v-row justify="center">
@@ -70,26 +36,27 @@
         </div>
 
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
-        <filter-panel v-model="filter.showFavOnly" title="Filters" :items="['Favorites']" />
+        <filter-panel ga="FilterSeller" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
       </v-col>
-       
+
+      <product-dialog />
       <v-col md="10" lg="10" sm="12" cols="12">
          <v-row justify="space-between" align-content="center" class="caption d-none d-sm-flex" style="margin: 0">
                   <v-col cols="3">Contract Name</v-col>
                   <v-col cols="2">Unit Cost (/T/Day)
-                    <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+                    <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
                   <v-col cols="2">Stock and Promotion</v-col>
                   <v-col cols="2">ROI
-                    <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+                    <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
-                  <v-col cols="3"></v-col>
+                  <v-col cols="3" />
         </v-row>
         <div class="productContainer">
           <product v-for="(item, index) in products.slice(0, 10)" :key="index" :item="item" />
-          <v-lazy v-for="(item, index) in products.slice(10)" :key="index">
-          <product :item="item" />
-        </v-lazy>
+          <v-lazy v-for="(item, index) in products.slice(10)" :key="index + 10">
+            <product :item="item" />
+          </v-lazy>
         </div>
       </v-col>
     </v-row>
@@ -100,13 +67,14 @@
 import { mapState } from "vuex";
 
 import Product from "../components/Product";
+import ProductDialog from "../components/ProductDialog";
 import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
-  components: { Product, FilterPanel },
+  components: { Product, ProductDialog, FilterPanel },
   computed: {
-    ...mapState(["favorites"]),
+    ...mapState(["favorites", "summary"]),
     filters() {
       const products = this.$store.state.products;
       const filters = products.filter(v => this.$store.state.selectedCoins.indexOf(v.coin) >= 0).reduce(
@@ -118,7 +86,7 @@ export default {
         },
         {
           durations: [],
-          coins: [],
+          coins: ["BTC", "ETH", "BCH"],
           sort: [
             {
               text: "↑ Contract cost",
@@ -139,6 +107,7 @@ export default {
       const res = this.$store.state.products.filter(
         v =>
           (!this.filter.showFavOnly || this.favorites.indexOf(v.id) >= 0) &&
+          (!this.filter.showInStockOnly || v.sold_percent < 100) &&
           (this.$store.state.selectedCoins.length === 0 ||
             this.$store.state.selectedCoins.indexOf(v.coin) >= 0) &&
           (this.filter.duration.length === 0 ||
@@ -163,7 +132,8 @@ export default {
       filter: {
         duration: [],
         sort: { field: "contract_cost", order: "asc" },
-        showFavOnly: false
+        showFavOnly: false,
+        showInStockOnly: false
       }
     };
   }

@@ -9,9 +9,9 @@
           <v-btn small>Total</v-btn>
         </v-btn-toggle>
       </v-col>
-      <v-col cols="1" style="text-align: right;">
-        <v-icon @click.stop="$emit('hide')">mdi-close</v-icon>
-      </v-col>
+<!--      <v-col cols="1" style="text-align: right;">-->
+<!--        <v-icon @click.stop="$emit('hide')">mdi-close</v-icon>-->
+<!--      </v-col>-->
     </v-row>
     <v-row>
       <v-col cols="12" sm="6">
