@@ -165,51 +165,7 @@
           </div>
         </div>
       </v-row>
-      <v-row align="center">
-        <!-- <div class="flex-grow-1 ma-2">
-          <div class="caption">
-            Today's Mining Income
-            <v-tooltip top max-width="400px">
-              <template v-slot:activator="{ on }">
-                <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-              </template>
-              Note: Sometimes called theoretical mining yield, is the actual mining income in
-              the past 24 hours ({{item.coin  === 'BTC' ? 'BTC: $ per Th per Day' : 'ETH: $ per Mh per Day'}}). This estimate of mining income assumes current difficulty and price
-              (Source: {{item.coin  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}).
-
-            </v-tooltip>
-          </div>
-          <div class="dealData">${{item.mining_payoff.toFixed(4)}} /TH/Day</div>
-        </div>-->
-        <!-- <div class="d-inline-flex ma-2 text-right">
-          <div style="flex-basis:auto;" class="mr-4">
-            <div class="caption">
-              Min Upfront Fee
-              <v-tooltip top max-width="400px">
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                </template>
-                Note: Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
-              </v-tooltip>
-            </div>
-            <div class="dealData mr-5">${{item.upfront_fee.toFixed(2)}}</div>
-          </div>
-          <div>
-            <div class="caption">
-              Additional Daily Fee
-              <v-tooltip top max-width="400px">
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                </template>
-                Note: Sometimes called maintenance fee, is the additional daily fee consists of several costs including but not limited to mining's electricity fee, mining farm maintenance, heat dissipation, operation and maintenance for miners etc.
-
-              </v-tooltip>
-            </div>
-            <div class="dealData mr-5">${{item.electricity_fee}} /T/Day</div>
-          </div>
-        </div>-->
-      </v-row>
-      <v-row></v-row>
+     
       <product-detail :item="item" :show="showDetail" @hide="showDetail = false" />
     </v-card-text>
   </v-card>
