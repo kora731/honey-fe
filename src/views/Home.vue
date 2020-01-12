@@ -13,7 +13,7 @@
         <div class="slogan">
           <span class="slogan-black">BEST PRICE x OBJECTIVE METRICS</span>
           <form
-            action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&amp;id=2f33950de0"
+            action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&id=2f33950de0"
             method="post"
             id="mc-embedded-subscribe-form"
             name="mc-embedded-subscribe-form"
@@ -45,67 +45,7 @@
 
     <v-row class="deals d-flex mb-10" justify="center">
       <v-row style="max-width: 1080px;" justify="center">
-        <v-tabs :centered="true">
-          <v-tab>BTC</v-tab>
-          <v-tab>ETH</v-tab>
-          <v-tab>BCH</v-tab>
-
-          <v-tab-item>
-            <v-row class="mx-4 pt-4 d-flex" justify="center">
-              <div class="mx-4">
-                <v-icon>mdi-coin</v-icon>
-                BTC price: $7.860.06
-                <span class="red--text">(-1.63%)</span>
-              </div>
-              <div class="mx-4">
-                <v-icon>mdi-treasure-chest</v-icon>
-                BTC mining earnings: $0.1432 /T/Day (0.0016 BTC)</div>
-            </v-row>
-            <div>
-              Lvzi to add the 6 product cards here from different duration categories
-              <v-row
-                justify="space-between"
-                align-content="center"
-                class="caption d-none d-sm-flex"
-                style="margin: 0"
-              >
-                <v-col cols="3">Contract Duration</v-col>
-                <v-col cols="2">
-                  Lowest Unit Cost (/T/Day)
-                </v-col>
-                <v-col cols="2">Stock and Promotion</v-col>
-                <v-col cols="2">
-                  Cost Basis
-                </v-col>
-                <v-col cols="3">
-                  Expected ROI
-                </v-col>
-              </v-row>
-            </div>
-          </v-tab-item>
-          <v-tab-item>
-            <v-row class="mx-4 pt-4 d-flex" justify="center">
-              <div class="mx-4">
-                <v-icon>mdi-coin</v-icon>
-                ETH price:</div>
-              <div class="mx-4">
-                <v-icon>mdi-treasure-chest</v-icon>
-                ETH mining earnings:</div>
-            </v-row>
-            <div>Lvzi to add the 6 product cards here from different duration categories</div>
-          </v-tab-item>
-          <v-tab-item>
-            <v-row class="mx-4 pt-4 d-flex" justify="center">
-              <div class="mx-4">
-                 <v-icon>mdi-coin</v-icon>
-                 BCH price:</div>
-              <div class="mx-4">
-                <v-icon>mdi-treasure-chest</v-icon>
-                BCH mining earnings:</div>
-            </v-row>
-            <div>Lvzi to add the 6 product cards here from different duration categories</div>
-          </v-tab-item>
-        </v-tabs>
+        <summary-table />
       </v-row>
     </v-row>
 
@@ -215,8 +155,11 @@
 </template>
 
 <script>
+import SummaryTable from "../components/SummaryTable";
+
 export default {
-  name: "home"
+  name: "home",
+  components: { SummaryTable }
 };
 </script>
 
