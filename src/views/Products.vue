@@ -6,17 +6,15 @@
               <v-col cols="12" lg="2" sm="12" class="px-4 dealHeader" ><h2>Sweet Deals</h2></v-col>
               <v-col cols="12" lg="10" sm="12">
                 <v-tabs class="mx-4 mt-4" color="primary">
-                  <v-tab @click="$store.state.selectedCoins = ['BTC']">BTC</v-tab>
-                  <v-tab @click="$store.state.selectedCoins = ['ETH']">ETH</v-tab>
-                  <v-tab @click="$store.state.selectedCoins = ['BCH']">BCH</v-tab>
+                  <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
-                  <v-tab-item>
+                  <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
                     <v-row class="d-flex" justify="space-between">
                       <div class="mx-4 mt-4">
-                        <div class="mx-4">BTC price: </div>
-                        <div class="mx-4">BTC mining earnings: </div>
+                        <div class="mx-4">{{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}</div>
+                        <div class="mx-4">{{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}</div>
                     </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
+                    <v-btn-toggle mandatory class="mr-4 pr-4">
                       <v-btn small>
                         USD
                       </v-btn>
@@ -26,41 +24,9 @@
                       </v-btn-toggle>
                     </v-row>
                   </v-tab-item>
-                         <v-tab-item>
-                    <v-row class="d-flex" justify="space-between">
-                      <div class="mx-4 mt-4">
-                        <div class="mx-4">ETH price: </div>
-                        <div class="mx-4">ETH mining earnings: </div>
-                    </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
-                      <v-btn small>
-                        USD
-                      </v-btn>
-                      <v-btn small>
-                        ETH
-                      </v-btn>
-                      </v-btn-toggle>
-                    </v-row>
-                  </v-tab-item>
-                         <v-tab-item>
-                    <v-row class="d-flex" justify="space-between">
-                      <div class="mx-4 mt-4">
-                        <div class="mx-4">BCH price: </div>
-                        <div class="mx-4">BCH mining earnings: </div>
-                    </div>
-                    <v-btn-toggle v-model="toggle_exclusive" mandatory class="mr-4 pr-4">
-                      <v-btn small>
-                        USD
-                      </v-btn>
-                      <v-btn small>
-                        BCH
-                      </v-btn>
-                      </v-btn-toggle>
-                    </v-row>
-                  </v-tab-item>
-               </v-tabs>      
+               </v-tabs>
               </v-col>
-              </v-row>   
+              </v-row>
         </v-col>
       </v-row>
     <v-row justify="center">
@@ -106,7 +72,7 @@ export default {
   name: "Products",
   components: { Product, FilterPanel },
   computed: {
-    ...mapState(["favorites"]),
+    ...mapState(["favorites", "summary"]),
     filters() {
       const products = this.$store.state.products;
       const filters = products.filter(v => this.$store.state.selectedCoins.indexOf(v.coin) >= 0).reduce(
@@ -118,7 +84,7 @@ export default {
         },
         {
           durations: [],
-          coins: [],
+          coins: ["BTC", "ETH", "BCH"],
           sort: [
             {
               text: "↑ Contract cost",
