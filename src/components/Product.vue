@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-3 v-card--hover" hover @click="$store.commit('selectProduct', item)" :ripple="false">
+  <v-card class="mb-3 v-card--hover" hover @click="showDetailFn()" :ripple="false">
     <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
 
     <v-row justify="space-between" align-content="center" style="margin: 0">
@@ -73,7 +73,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <product-detail :item="item" :show="showDetail" />
+    <product-detail :item="item" :show="shouldShowDetail" />
   </v-card>
 </template>
 
@@ -83,20 +83,30 @@ import ProductDetail from "./ProductDetail";
 
 export default {
   name: "Product",
-  props: ["item", "showDetail"],
+  props: ["item", "show-detail"],
   components: { ProductDetail },
   methods: {
     toggleFavorites(id) {
       this.$gtag.event("ToggleFavorites");
       this.$store.commit("toggleFavorites", id);
+    },
+    showDetailFn() {
+      if (this.$vuetify.breakpoint.xsOnly) {
+        this.$store.commit('selectProduct', this.item);
+      } else {
+        this.showDetailVal = !this.showDetailVal;
+      }
     }
   },
   computed: {
-    ...mapState(["favorites"])
+    ...mapState(["favorites"]),
+    shouldShowDetail() {
+      return this.showDetail || this.showDetailVal;
+    }
   },
   data() {
     return {
-      //showDetail: false
+      showDetailVal: false
     };
   }
 };
