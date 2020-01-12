@@ -3,15 +3,15 @@
     <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
 
     <v-row justify="space-between" align-content="center" style="margin: 0">
-      <v-col cols="12" class="py-4" xs="12" sm="3" ml="3" lg="3">
-        <div class="d-flex flex-column">
+      <v-col cols="8" class="py-4 order-0" xs="8" sm="8" ml="3" lg="3">
+        <div class="d-flex flex-lg-column align-center align-lg-start align-xl-start cardComp">
           <img style="width: 120px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
            <span class="black--text title-2">{{item.honeyLemon_contract_name}}</span>
         </div>
        
       </v-col>
 
-      <v-col cols="3" class="d-flex align-center" xs="3" ml="2" lg="2">
+      <v-col cols="5" class="d-flex align-center order-2 order-lg-1" xs="4" ml="2" lg="2">
         <span class="black--text title-2">
           ${{item.contract_cost.toFixed(4)}}
           <span
@@ -31,15 +31,15 @@
         </span>
       </v-col>
 
-      <v-col cols="3" class="d-flex align-center" xs="3" ml="2" lg="2">
+      <v-col cols="4" class="d-flex align-center order-1 order-lg-2" xs="4" ml="2" lg="2">
         <div
           style="display: block;"
           class="body-1 font-weight-medium"
-          v-if="item.sold_percent >= 99.999"
-        >OUT OF STOCK</div>
+          v-if="item.sold_percent >= 99.99"
+        ><span class="stockStyle">OUT OF STOCK</span></div>
       </v-col>
 
-      <v-col cols="4" class="d-flex" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
+      <v-col cols="3" class="d-flex order-3" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
         <div class="d-flex discount align-center">
           <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>
         </div>
@@ -52,7 +52,7 @@
         </v-tooltip>
       </v-col>
 
-      <v-col cols="2" class="d-lg-flex align-center"  xs="2" ml="3" lg="3">
+      <v-col cols="4" class="d-flex align-center order-4"  xs="2" ml="3" lg="3">
         <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
           <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
           <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
@@ -70,148 +70,7 @@
       </v-col>
     </v-row>
     <product-detail :item="item" :show="showDetail" @hide="showDetail = false" />
-    <v-card-text class="py-2 px-8" v-if="false">
-      <!-- <v-row align="center" justify="end">
 
-        <div
-                class="discount body-2"
-                label
-                small
-        >{{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
-        <v-tooltip top max-width="400px" class="ml-2">
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on" class="body-1 mx-1">mdi-help-circle-outline</v-icon>
-          </template>
-          Note: Discount calculated as the cost of buying {{item.coin}} compared to {{item.coin}} earned via buying the cloud mining contract.
-          The {{item.coin}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
-        </v-tooltip>
-        <span class="mr-2 caption">vs buying {{item.coin}} </span>
-      </v-row>-->
-      <v-row align="center" justify="space-between" align-content="center">
-        <!-- Contract Name -->
-        <div class="ma-2 flex-grow-1">
-          <div class="flex-grow-1">
-            <img style="width: 140px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
-          </div>
-          <span class="black--text title-2">{{item.honeyLemon_contract_name}}</span>
-
-          <!-- <p class="body-2 my-2">Estimated {{item.expected_breakeven_days.toFixed(0)}} Days to Breakeven</p> -->
-        </div>
-        <!-- Unit Cost -->
-        <div class="ma-2 flex-grow-1">
-          
-          <span class="black--text title-2">
-            ${{item.contract_cost.toFixed(4)}}
-            <span
-              v-if="item.coin !== 'ETH'"
-              class="subtitle-1"
-            >/T/Day</span>
-            <span v-if="item.coin === 'ETH'" class="subtitle-1">/M/Day</span>
-            <v-tooltip right max-width="400px">
-              <template v-slot:activator="{ on }">
-                <v-icon v-on="on" class="body-1 ml-1">mdi-help-circle-outline</v-icon>
-              </template>
-              <span>
-                Note: sum of upfront fees and present value of expected future cashflow earned over duration of the contract,
-                discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost (BTC: $ per Th per Day, or ETH: $ per Mh per Day)
-              </span>
-            </v-tooltip>
-          </span>
-          <p class="body-2 mb-1 mr-5 red--text min-text">Min Amount {{item.contract_size}}T</p>
-        </div>
-
-        <!-- Stock Promotion -->
-        <div class="ma-2 flex-shrink-0 flex-grow-0" style="width:240px;">
-          <div
-            style="display: block;"
-            class="body-1 font-weight-medium"
-            v-if="item.sold_percent >= 99.999"
-          >OUT OF STOCK</div>
-        </div>
-
-        <!-- ROI -->
-        <div
-          class="discount body-2 flex-grow-2"
-          label
-          small
-        >
-        {{(item.expected_discount * 100).toFixed(0)}}% OFF</div>
-        <v-tooltip top max-width="400px" class="ml-2">
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on" class="body-1 mx-1">mdi-help-circle-outline</v-icon>
-          </template>
-          Note: Discount calculated as the cost of buying {{item.coin}} compared to {{item.coin}} earned via buying the cloud mining contract.
-          The {{item.coin}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
-        </v-tooltip>
-        <!-- <span class="mr-2 caption">vs buying {{item.coin}} </span> -->
-        <!-- <p class="body-2 my-2">Estimated {{item.expected_breakeven_days.toFixed(0)}} Days to Breakeven</p> -->
-        <!-- Actions -->
-        <div class="flex-grow-0">
-          <div class="ma-2 d-flex" style="align-items: center;">
-            <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
-              <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
-              <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
-            </v-btn>
-            <v-btn
-              @click="$gtag.event('CheckItOut')"
-              :href="item.buy_url"
-              target="_blank"
-              color="primary"
-              class="check-btn"
-            >
-              <v-icon>mdi-open-in-new</v-icon>
-              <span class="ml-2">Check it out</span>
-            </v-btn>
-          </div>
-        </div>
-      </v-row>
-      <v-row align="center">
-        <!-- <div class="flex-grow-1 ma-2">
-          <div class="caption">
-            Today's Mining Income
-            <v-tooltip top max-width="400px">
-              <template v-slot:activator="{ on }">
-                <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-              </template>
-              Note: Sometimes called theoretical mining yield, is the actual mining income in
-              the past 24 hours ({{item.coin  === 'BTC' ? 'BTC: $ per Th per Day' : 'ETH: $ per Mh per Day'}}). This estimate of mining income assumes current difficulty and price
-              (Source: {{item.coin  === 'BTC' ? 'BTC.com' : 'sparkpool.com'}}).
-
-            </v-tooltip>
-          </div>
-          <div class="dealData">${{item.mining_payoff.toFixed(4)}} /TH/Day</div>
-        </div>-->
-        <!-- <div class="d-inline-flex ma-2 text-right">
-          <div style="flex-basis:auto;" class="mr-4">
-            <div class="caption">
-              Min Upfront Fee
-              <v-tooltip top max-width="400px">
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                </template>
-                Note: Sometimes called hashrate fee or contract fee, is the fee an investor needs to pay upfront in order to receive mining payoffs.
-              </v-tooltip>
-            </div>
-            <div class="dealData mr-5">${{item.upfront_fee.toFixed(2)}}</div>
-          </div>
-          <div>
-            <div class="caption">
-              Additional Daily Fee
-              <v-tooltip top max-width="400px">
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on" class="body-1">mdi-help-circle-outline</v-icon>
-                </template>
-                Note: Sometimes called maintenance fee, is the additional daily fee consists of several costs including but not limited to mining's electricity fee, mining farm maintenance, heat dissipation, operation and maintenance for miners etc.
-
-              </v-tooltip>
-            </div>
-            <div class="dealData mr-5">${{item.electricity_fee}} /T/Day</div>
-          </div>
-        </div>-->
-      </v-row>
-      <v-row></v-row>
-      <product-detail :item="item" :show="showDetail" @hide="showDetail = false" />
-    </v-card-text>
   </v-card>
 </template>
 
@@ -259,6 +118,9 @@ export default {
     }
   color: black;
   padding: 3px 10px 0;
+   @media (max-width: 500px) {
+       padding:0;
+    }
   // border-radius: 3px !important;
   font-weight: 500;
 }
@@ -275,6 +137,7 @@ export default {
     min-width: 40px !important;
     width: 40px !important;
     height: 40px !important;
+    box-shadow: none;
   }
 }
 
@@ -290,10 +153,31 @@ export default {
   .min-text {
     text-align: left;
   }
+  .title-2{
+    font-size: 14px !important;
+  }
+  .subtitle-1{
+    font-size: 12px !important;
+    font-weight: 400;
+  }
+  .body-1{
+    font-size: 14px !important;
+  }
 
   .dealData {
     margin-right: 0 !important;
     text-align: left;
+  }
+  .mdi-help-circle-outline {
+    display: none;
+  }
+  .cardComp img{
+    width: 100px !important;
+  }
+  .cardComp span{
+    margin-left: -10px !important;
+    font-weight: 500;
+    font-size: 14px;
   }
 }
 
@@ -312,5 +196,18 @@ export default {
 .v-card--link:before {
   background-color: #fff;
 }
+
+.stockStyle{
+    font-size: 0.85rem;
+    font-weight: 400;
+    background: #FFF2A9;
+    color: #9F8703;
+    padding: 4px;
+    border-radius: 4px;
+    @media (max-width: 500px) {
+      font-size: 0.6rem;
+    }
+}
+
 
 </style>
