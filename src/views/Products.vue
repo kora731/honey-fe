@@ -19,7 +19,7 @@
                         USD
                       </v-btn>
                       <v-btn small>
-                        BTC
+                        {{coin}}
                       </v-btn>
                       </v-btn-toggle>
                     </v-row>
