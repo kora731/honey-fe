@@ -44,7 +44,8 @@
         <div class="d-flex discount align-lg-center">
           <div class="d-flex discount flex-column align-self-center">
             <span class="dealMeta">ROI</span>
-            <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>
+<!--            <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>-->
+            <span class="body-2" label small>{{(item.mining_payoff / item.contract_cost * 100 - 100).toFixed(0)}}%</span>
           </div>
         </div>
         <v-tooltip top max-width="400px" class="ml-2">

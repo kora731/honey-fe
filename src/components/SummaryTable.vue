@@ -6,7 +6,7 @@
         <div class="mx-4">
           <v-icon>mdi-coin</v-icon>
           {{coin}} price: ${{summary[coin].coinPrice}}
-          <span class="red--text">(-1.63%)</span>
+<!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
         </div>
         <div class="mx-4">
           <v-icon>mdi-treasure-chest</v-icon>
@@ -27,7 +27,7 @@
         <v-row v-for="(c, idx) in summary[coin].contracts" :key="idx" justify="space-between" align-content="center" class="homeDeal">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.duration}} Days</v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost.toFixed(4)}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
-          <v-col cols="3" class="costCol">${{(1 / c.mining_payoff_btc) * c.contract_cost | price}} <span class="grey--text">per {{coin}}</span></v-col>
+          <v-col cols="3" class="costCol">${{c.contract_cost / c.mining_payoff_btc | price}} <span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">{{(c.mining_payoff / c.contract_cost) -1 | percent}}</v-col>
         </v-row>
       </div>
