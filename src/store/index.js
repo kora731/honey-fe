@@ -45,11 +45,16 @@ export default new Vuex.Store({
         }
       });
 
-      state.summary.BTC.contracts = _.chain(state.summary.BTC.contracts)
-        .filter(v => v.duration < 365)
+      const compact = (s, md) => _.chain(s.contracts)
+        .filter(v => v.duration <= md)
         .sortBy(v => v.duration + (1 - v.expected_discount))
         .sortedUniqBy(v => v.duration)
         .value();
+
+
+      state.summary.BTC.contracts = compact(state.summary.BTC, 360);
+      state.summary.ETH.contracts = compact(state.summary.ETH, 2000);
+      state.summary.BCH.contracts = compact(state.summary.BCH, 2000);
     },
     toggleFavorites(state, id) {
       if (state.favorites.indexOf(id) < 0) {
