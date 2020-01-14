@@ -18,9 +18,9 @@ export default new Vuex.Store({
     selectedProduct: null,
     products: [],
     summary: {
-      BTC: { ...summaryData, unit: 'T', sellers: new Set(), contracts: [] },
-      ETH: { ...summaryData, unit: 'M', sellers: new Set(), contracts: [] },
-      BCH: { ...summaryData, unit: 'T', sellers: new Set(), contracts: [] }
+      BTC: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
+      ETH: { ...summaryData, unit: 'M', sellers: new Set(), durationSellers: new Map(), contracts: [] },
+      BCH: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] }
     },
     selectedCoins: ['BTC'],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
@@ -48,9 +48,13 @@ export default new Vuex.Store({
       const compact = (s, md) => _.chain(s.contracts)
         .filter(v => v.duration <= md)
         .sortBy(v => v.duration + (1 - v.expected_discount))
-        .sortedUniqBy(v => v.duration)
+        .sortedUniqBy(v => {
+          const ds = s.durationSellers.get(v.duration) || new Set();
+          ds.add(v.issuers);
+          s.durationSellers.set(v.duration, ds);
+          return v.duration;
+        })
         .value();
-
 
       state.summary.BTC.contracts = compact(state.summary.BTC, 360);
       state.summary.ETH.contracts = compact(state.summary.ETH, 2000);
