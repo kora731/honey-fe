@@ -55,8 +55,9 @@
                   <v-col cols="2">Unit Cost (/T/Day)
                     <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
-                  <v-col cols="2">ROI
-                    <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+                  <v-col cols="2">
+<!--                    ROI-->
+<!--                    <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>-->
                   </v-col>
                   <v-col cols="2"></v-col>
                   <v-col cols="3" />
