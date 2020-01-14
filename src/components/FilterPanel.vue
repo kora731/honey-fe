@@ -59,7 +59,7 @@ export default {
     return {
       expanded: true,
       showAll: false,
-      selected: this.value.length >= 0 ? [...this.value] : this.value
+      selected: this.value
     };
   }
 }

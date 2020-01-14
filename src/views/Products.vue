@@ -5,7 +5,7 @@
             <v-row>
               <v-col cols="12" lg="2" sm="12" class="px-4 dealHeader" ><h2>Sweet Deals</h2></v-col>
               <v-col cols="12" lg="10" sm="12" class="pa-4" style="background: white;">
-                <v-tabs class="mx-4 mt-4" color="primary">
+                <v-tabs class="mx-4 mt-4" color="primary" v-model="activeCoinTab">
                   <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
                   <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
@@ -72,8 +72,8 @@ export default {
   components: { Product, ProductDialog, FilterPanel },
   watch: {
     '$store.state.selectedCoins'() {
-      this.filter.issuers.splice(0);
       this.filter.duration.splice(0);
+      this.filter.issuers.splice(0);
     }
   },
   computed: {
@@ -135,9 +135,13 @@ export default {
     }
   },
   data() {
+    const { coin, duration } = this.$route.query;
+    if (coin) this.$store.state.selectedCoins = [coin];
+
     return {
+      activeCoinTab: coin ? ["BTC", "ETH", "BCH"].indexOf(coin) : 0,
       filter: {
-        duration: [],
+        duration: duration ? [duration * 1] : [],
         issuers: [],
         sort: { field: "contract_cost", order: "asc" },
         showFavOnly: false,
