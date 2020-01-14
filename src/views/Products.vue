@@ -9,8 +9,8 @@
                   <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
                   <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
-                    <v-row class="d-flex" justify="space-between">
-                      <div class="mx-4 mt-4">
+                    <v-row class="d-flex flex-nowrap" justify="space-between" align="center">
+                      <div class="mx-4 mt-4 flex-grow-1 d-flex flex-wrap">
                         <div class="mx-4">{{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}</div>
                         <div class="mx-4">{{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}</div>
                       </div>
