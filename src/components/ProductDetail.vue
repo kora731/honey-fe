@@ -68,24 +68,16 @@ export default {
   components: { Colored },
   computed: {
     digits() { return this.selected === 0 ? 4 : 2; },
-    data() { return [this.daily, this.total][this.selected]; }
-  },
-  data() {
-    const { duration, contract_size, mining_payoff, daily_rate, management_fee, upfront_fee, electricity_fee, expected_breakeven_days } = this.item;
+    data() { return [this.daily, this.total][this.selected]; },
+    daily() {
+      const { duration, contract_size, mining_payoff, daily_rate, management_fee, upfront_fee, electricity_fee } = this.item;
 
-    const dailyPayOff = mining_payoff * contract_size;
-    const dailyUpfront = upfront_fee / duration;
-    const electricityFee = electricity_fee * contract_size * (1 - (1 + daily_rate) ** - duration) / daily_rate / duration;
-    const dailyTotalCost = management_fee + dailyUpfront + electricityFee;
+      const dailyPayOff = mining_payoff * contract_size;
+      const dailyUpfront = upfront_fee / duration;
+      const electricityFee = electricity_fee * contract_size * (1 - (1 + daily_rate) ** - duration) / daily_rate / duration;
+      const dailyTotalCost = management_fee + dailyUpfront + electricityFee;
 
-    const totalPayOff = dailyPayOff * duration;
-    const managementFeeTotal = management_fee * duration;
-    const electricityFeeTotal = electricityFee * duration;
-    const totalCost = managementFeeTotal + upfront_fee + electricityFeeTotal;
-
-    return {
-      selected: 0,
-      daily: {
+      return {
         payoff: dailyPayOff,
         management_fee,
         upfront_fee: dailyUpfront,
@@ -93,8 +85,17 @@ export default {
         total_cost: dailyTotalCost,
         profit: dailyPayOff - dailyTotalCost,
         roi: (dailyPayOff - dailyTotalCost) / dailyTotalCost
-      },
-      total: {
+      };
+    },
+    total() {
+      const { duration, management_fee, upfront_fee, expected_breakeven_days } = this.item;
+
+      const totalPayOff = this.daily.payoff * duration;
+      const managementFeeTotal = management_fee * duration;
+      const electricityFeeTotal = this.daily.electricity_fee * duration;
+      const totalCost = managementFeeTotal + upfront_fee + electricityFeeTotal;
+
+      return {
         payoff: totalPayOff,
         management_fee: managementFeeTotal,
         upfront_fee,
@@ -103,7 +104,12 @@ export default {
         profit: totalPayOff - totalCost,
         roi: (totalPayOff - totalCost) / totalCost,
         expected_breakeven_days
-      }
+      };
+    }
+  },
+  data() {
+    return {
+      selected: 0
     };
   }
 }

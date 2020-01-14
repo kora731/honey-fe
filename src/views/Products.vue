@@ -13,14 +13,10 @@
                       <div class="mx-4 mt-4">
                         <div class="mx-4">{{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}</div>
                         <div class="mx-4">{{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}</div>
-                    </div>
-                    <v-btn-toggle mandatory class="mr-4 pr-4">
-                      <v-btn small>
-                        USD
-                      </v-btn>
-                      <v-btn small>
-                        {{coin}}
-                      </v-btn>
+                      </div>
+                      <v-btn-toggle mandatory class="mr-4 pr-4">
+                        <v-btn small>USD</v-btn>
+                        <v-btn small>{{coin}}</v-btn>
                       </v-btn-toggle>
                     </v-row>
                   </v-tab-item>
@@ -46,10 +42,10 @@
                   <v-col cols="2">Unit Cost (/T/Day)
                     <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
-                  <v-col cols="2"></v-col>
                   <v-col cols="2">ROI
                     <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
                   </v-col>
+                  <v-col cols="2"></v-col>
                   <v-col cols="3" />
         </v-row>
         <div class="productContainer">
