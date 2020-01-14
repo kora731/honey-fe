@@ -50,8 +50,8 @@ export default {
     arrayMode() { return this.value.length >= 0; }
   },
   methods: {
-    onchange() {
-      this.$gtag.event(this.ga);
+    onchange(v) {
+      this.$gtag.event(this.ga, { event_category: "filter", event_label: v });
       if (this.arrayMode) this.$emit("input", this.selected);
     }
   },
