@@ -25,7 +25,7 @@
           <v-col cols="3" style="text-align:center;">Expected ROI</v-col>
         </v-row>
         <v-row v-for="(c, idx) in summary[coin].contracts" :key="idx" justify="space-between" align-content="center" class="homeDeal">
-          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.duration}} Days <v-chip small color="orange">{{summary[coin].durationSellers.get(c.duration).size}} Platforms</v-chip></v-col>
+          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.duration}} Days <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.duration).size}} Platforms</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost.toFixed(4)}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
           <v-col cols="3" class="costCol">${{c.contract_cost / c.mining_payoff_btc | price}} <span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">{{(c.mining_payoff / c.contract_cost) -1 | percent}}</v-col>
