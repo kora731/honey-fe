@@ -70,6 +70,12 @@ import FilterPanel from "../components/FilterPanel";
 export default {
   name: "Products",
   components: { Product, ProductDialog, FilterPanel },
+  watch: {
+    '$store.state.selectedCoins'() {
+      this.filter.issuers.splice(0);
+      this.filter.duration.splice(0);
+    }
+  },
   computed: {
     ...mapState(["favorites", "summary"]),
     filters() {
