@@ -63,7 +63,7 @@
           <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
         </v-btn>
         <v-btn
-          @click="$gtag.event('CheckItOut')"
+          @click="$gtag.event(item.coin, { event_category: 'check-it-out', event_label: item.duration })"
           :href="item.buy_url"
           target="_blank"
           color="white"
@@ -88,7 +88,7 @@ export default {
   components: { ProductDetail },
   methods: {
     toggleFavorites(id) {
-      this.$gtag.event("ToggleFavorites");
+      this.$gtag.event("toggle-favorites", { event_label: id });
       this.$store.commit("toggleFavorites", id);
     },
     showDetailFn() {
