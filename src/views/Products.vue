@@ -26,7 +26,7 @@
         </v-col>
       </v-row>
     <v-row justify="center">
-      <v-col class="filterPanel">
+      <v-col class="filterPanel" v-if="!$vuetify.breakpoint.xsOnly">
         <div class="mx-3">
           <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
         </div>
@@ -34,6 +34,18 @@
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
         <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="FilterSeller" />
         <filter-panel ga="FilterSeller" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
+      </v-col>
+
+      <v-navigation-drawer v-model="drawer" absolute right temporary v-if="$vuetify.breakpoint.xsOnly">
+        <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
+        <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="FilterSeller" />
+        <filter-panel ga="FilterSeller" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
+      </v-navigation-drawer>
+      <v-col class="filterPanel d-flex align-center" v-if="$vuetify.breakpoint.xsOnly">
+        <div class="mx-3 flex-grow-1">
+          <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
+        </div>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       </v-col>
 
       <product-dialog />
@@ -139,6 +151,7 @@ export default {
     if (coin) this.$store.state.selectedCoins = [coin];
 
     return {
+      drawer: false,
       activeCoinTab: coin ? ["BTC", "ETH", "BCH"].indexOf(coin) : 0,
       filter: {
         duration: duration ? [duration * 1] : [],
