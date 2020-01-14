@@ -3,6 +3,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+import issuers from './issuers'
+
 Vue.use(Vuex);
 
 const summaryData = {
@@ -83,5 +85,6 @@ export default new Vuex.Store({
     },
   },
   modules: {
+    issuers
   }
 })

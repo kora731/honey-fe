@@ -41,18 +41,17 @@
       <v-col cols="12" sm="6" style="background: #FCFBF4;">
         <h4>DETAILS</h4>
         <v-simple-table dense class="detailTable">
-          <tr><td>Founded</td><td>2014</td></tr>
-          <tr><td>Guaranteed Uptime</td><td>95%???</td></tr>
+          <tr><td>Guaranteed Uptime</td><td>{{issuer.guaranteedUptime}}</td></tr>
           <tr><td>Minimal Amount</td><td>{{item.contract_size}}{{item.coin === 'ETH' ? 'M' : 'T'}}</td></tr>
-          <tr><td>Available Date</td><td>???</td></tr>
+          <tr><td>Delivery Time</td><td>{{deliveryTime}}</td></tr>
         </v-simple-table>
         <div class="my-2"></div>
         <h4>PAYMENT</h4>
         <v-simple-table dense class="detailTable">
-          <tr><td>Payment Term</td><td>Pay as you go/ Pay all upfront / Set and forget???</td></tr>
-          <tr><td>Accepted Payment</td><td>???</td></tr>
-          <tr><td>Payout Type</td><td>???</td></tr>
-          <tr><td>Referral</td><td>???</td></tr>
+<!--          <tr><td>Payment Term</td><td>Pay as you go/ Pay all upfront / Set and forget???</td></tr>-->
+          <tr><td>Accepted Payment</td><td><pre>{{issuer.acceptedPayment}}</pre></td></tr>
+          <tr><td>Payout Type</td><td><pre>{{issuer.payout && issuer.payout.replace('$coin', item.coin)}}</pre></td></tr>
+<!--          <tr><td>Referral</td><td>???</td></tr>-->
         </v-simple-table>
       </v-col>
     </v-row>
@@ -67,6 +66,8 @@ export default {
   props: ["item", "show"],
   components: { Colored },
   computed: {
+    issuer() { return this.$store.state.issuers.data[this.item.issuers] || {}; },
+    deliveryTime() { return this.item.id.endsWith('_futures') ? this.issuer.deliveryTimeFutures : this.issuer.deliveryTime },
     digits() { return this.selected === 0 ? 4 : 2; },
     data() { return [this.daily, this.total][this.selected]; },
     daily() {
