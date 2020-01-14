@@ -32,6 +32,7 @@
         </div>
 
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="FilterDuration" />
+        <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="FilterSeller" />
         <filter-panel ga="FilterSeller" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
       </v-col>
 
@@ -77,11 +78,13 @@ export default {
         (m, v) => {
           if (m.durations.indexOf(v.duration) < 0) m.durations.push(v.duration);
           if (m.coins.indexOf(v.coin) < 0) m.coins.push(v.coin);
+          if (m.issuers.indexOf(v.issuers) < 0) m.issuers.push(v.issuers);
 
           return m;
         },
         {
           durations: [],
+          issuers: [],
           coins: ["BTC", "ETH", "BCH"],
           sort: [
             {
@@ -104,6 +107,8 @@ export default {
         v =>
           (!this.filter.showFavOnly || this.favorites.indexOf(v.id) >= 0) &&
           (!this.filter.showInStockOnly || v.sold_percent < 100) &&
+          (this.filter.issuers.length === 0 ||
+            this.filter.issuers.indexOf(v.issuers) >= 0) &&
           (this.$store.state.selectedCoins.length === 0 ||
             this.$store.state.selectedCoins.indexOf(v.coin) >= 0) &&
           (this.filter.duration.length === 0 ||
@@ -127,6 +132,7 @@ export default {
     return {
       filter: {
         duration: [],
+        issuers: [],
         sort: { field: "contract_cost", order: "asc" },
         showFavOnly: false,
         showInStockOnly: false
