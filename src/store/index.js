@@ -7,6 +7,7 @@ import issuers from './issuers'
 
 Vue.use(Vuex);
 
+const coins = ['BTC', 'ETH', 'BCH', 'BSV', 'ETC'];
 const summaryData = {
   coinPrice: 0,
   maxDiscount: 0,
@@ -20,12 +21,13 @@ export default new Vuex.Store({
     selectedProduct: null,
     niceHash: { minPrice: 0, avgPrice: 0 },
     products: [],
-    coins: ['BTC', 'ETH', 'BCH', 'BSV', 'ETC'],
+    coins,
     summary: {
       BTC: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
       ETH: { ...summaryData, unit: 'M', sellers: new Set(), durationSellers: new Map(), contracts: [] },
       BCH: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
-      BSV: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] }
+      BSV: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
+      ETC: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] }
     },
     selectedCoins: ['BTC'],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
@@ -65,6 +67,7 @@ export default new Vuex.Store({
       state.summary.ETH.contracts = compact(state.summary.ETH, 2000);
       state.summary.BCH.contracts = compact(state.summary.BCH, 2000);
       state.summary.BSV.contracts = compact(state.summary.BSV, 2000);
+      state.summary.ETC.contracts = compact(state.summary.ETC, 2000);
     },
     toggleFavorites(state, id) {
       if (state.favorites.indexOf(id) < 0) {
