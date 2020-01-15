@@ -10,7 +10,7 @@
         </div>
         <div class="mx-4">
           <v-icon>mdi-treasure-chest</v-icon>
-          {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}} /T/Day ({{summary[coin].maxPayOffBtc.toFixed(8)}} BTC)</div>
+          {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc.toFixed(8)}} BTC)</div>
       </v-row>
       <div class="pa-4">
         <v-row
