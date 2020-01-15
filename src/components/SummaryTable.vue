@@ -1,5 +1,5 @@
 <template>
-  <v-tabs :centered="true">
+  <v-tabs centered center-active>
     <v-tab v-for="coin of coins" :key="'tab-' + coin">{{coin}}</v-tab>
     <v-tab-item  v-for="coin of coins" :key="'tab-item-' + coin">
       <v-row class="mx-4 pt-4 d-flex font-weight-light" justify="center">

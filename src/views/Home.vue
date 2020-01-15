@@ -43,10 +43,8 @@
       </v-col>
     </v-row>
 
-    <v-row class="deals d-flex mb-10" justify="center">
-      <v-row style="max-width: 1080px;" justify="center">
-        <summary-table />
-      </v-row>
+    <v-row class="deals mb-10" justify="center">
+      <summary-table style="margin: 0 auto; max-width: 1080px;" />
     </v-row>
 
     <v-row class="faq d-flex" justify="center">
