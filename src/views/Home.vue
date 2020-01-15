@@ -37,9 +37,9 @@
 
     <v-row class="mt-10 dealContainer" justify="center">
       <v-col style="max-width: 1080px; text-align:center">
-        <div
-          class="display-2 deal-header"
-        >Discover best deals in cloud mining contracts listed across reputable platforms:</div>
+        <div class="display-2 deal-header">
+          Discover the best prices in mining contracts listed across major platforms.
+        </div>
       </v-col>
     </v-row>
 
@@ -281,7 +281,6 @@ export default {
             margin-top: 10px;
             padding: 2px 5px;
             font-size: 24px;
-            font-style: italic;
             font-weight: 600;
 
             @media (max-width: 500px) {
@@ -376,9 +375,10 @@ export default {
   display: block;
   margin-left: 40px;
 }
- .deal-header {
-    font-size: 20px !important;
-  }
+.deal-header {
+  font-size: 24px !important;
+  font-weight: bold;
+}
 
 @media only screen and (max-width: 600px) {
   .deal-header {

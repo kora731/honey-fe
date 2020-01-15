@@ -25,13 +25,13 @@
           <v-col cols="3" class="costCol">Cost Basis</v-col>
           <v-col cols="3" style="text-align:center;">Expected ROI</v-col>
         </v-row>
-        <v-row justify="space-between" align-content="center" class="homeDeal" @click="goToNicehash(coin)">
+        <v-row justify="space-between" align-content="center" class="homeDeal v-card--hover" @click="goToNicehash(coin)">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" ><v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / getFactor(coin)).toFixed(4)}}<span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
           <v-col cols="3" class="costCol">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / summary[coin].maxPayOffBtc / getFactor(coin)).toFixed(4)}}<span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">N/A</v-col>
         </v-row>
-        <v-row v-for="(c, idx) in summary[coin].contracts" @click="jump(coin, c.duration)" :key="idx" justify="space-between" align-content="center" class="homeDeal">
+        <v-row v-for="(c, idx) in summary[coin].contracts" @click="jump(coin, c.duration)" :key="idx" justify="space-between" align-content="center" class="homeDeal v-card--hover">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.duration}} Days <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.duration).size}} Platforms</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost.toFixed(4)}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
           <v-col cols="3" class="costCol">${{c.contract_cost / c.mining_payoff_btc | price}} <span class="grey--text">per {{coin}}</span></v-col>
@@ -77,6 +77,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.v-card--hover:hover {
+  -webkit-box-shadow: 0px 0px 0px 2px rgba(255, 229, 0, 0.8),
+  0px 2px 2px 2px rgba(251, 255, 0, 0.2);
+  box-shadow: 0px 0px 0px 2px rgba(255, 229, 0, 0.8),
+  0px 2px 2px 2px rgba(251, 255, 0, 0.2);
+}
 
 .homeDeal{
     margin:12px;
