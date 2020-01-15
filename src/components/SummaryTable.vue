@@ -56,7 +56,7 @@ export default {
   methods: {
     goToNicehash(coin) {
       this.$gtag.event("nicehash", { event_category: 'check-it-out', event_label: coin });
-      location.href = "https://www.nicehash.com/";
+      window.open("https://www.nicehash.com/my/marketplace/SHA256");
     },
     jump(coin, duration) {
       location.href = "#/products?" + qs.encode({ coin, duration });
