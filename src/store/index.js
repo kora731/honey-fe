@@ -18,6 +18,7 @@ const summaryData = {
 export default new Vuex.Store({
   state: {
     selectedProduct: null,
+    niceHash: { minPrice: 0, avgPrice: 0 },
     products: [],
     summary: {
       BTC: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
@@ -73,6 +74,9 @@ export default new Vuex.Store({
     },
     selectProduct(state, product) {
       state.selectedProduct = product;
+    },
+    setNiceHash(state, desc) {
+      Object.assign(state.niceHash, desc);
     }
   },
   actions: {
@@ -82,7 +86,18 @@ export default new Vuex.Store({
       const lastUpdate = Math.max(...data.map(v => v.update_time));
 
       commit('setProducts', data.filter(v => lastUpdate - v.update_time < 3600));
-    },
+
+      const niceHash = await axios.get('https://api.i43.io/nicehash/main/api/v2/hashpower/orderBook?algorithm=SHA256');
+      const orders = [...niceHash.data.stats.EU.orders, ...niceHash.data.stats.USA.orders]
+        .filter(o => o.type === 'STANDARD' && o.acceptedSpeed > 0 || o.payingSpeed > 0);
+
+      const minPrice = Math.min(...orders.map(o => o.price));
+      const [t, tv] = orders.reduce((m, v) => {
+        return [m[0] + v.price * (v.acceptedSpeed * 1 + v.payingSpeed * 1), m[1] + v.acceptedSpeed * 1 + v.payingSpeed * 1];
+      }, [0, 0]);
+
+      commit('setNiceHash', { minPrice, avgPrice: t / tv });
+    }
   },
   modules: {
     issuers
