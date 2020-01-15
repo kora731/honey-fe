@@ -19,22 +19,7 @@
         ><span class="stockStyle">OUT OF STOCK</span></div>
       </v-col>
 
-      <v-col cols="3" class="d-flex order-3" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
-        <div class="d-flex discount align-lg-center">
-          <div class="d-flex discount flex-column align-self-center">
-            <span class="dealMeta">ROI</span>
-<!--            <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>-->
-            <span class="body-2" label small>{{(item.mining_payoff / item.contract_cost * 100 - 100).toFixed(0)}}%</span>
-          </div>
-        </div>
-        <v-tooltip top max-width="400px" class="ml-2">
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on" class="body-1 mx-1">mdi-help-circle-outline</v-icon>
-          </template>
-          Note: Discount calculated as the cost of buying {{item.coin}} compared to {{item.coin}} earned via buying the cloud mining contract.
-          The {{item.coin}} earned via contract is calculated based on static projection of theoretical mining payoff given network difficulty and coin price at the moment
-        </v-tooltip>
-      </v-col>
+      <product-value-slot2 :item="item" :s2="s2" :currency="currency" />
 
       <v-col cols="4" class="d-flex align-center order-4"  xs="2" ml="3" lg="3">
         <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
@@ -62,11 +47,12 @@ import { mapState } from "vuex";
 import { unit, price } from "../filters";
 import ProductDetail from "./ProductDetail";
 import ProductValueSlot1 from "./ProductValueSlot1";
+import ProductValueSlot2 from "./ProductValueSlot2";
 
 export default {
   name: "Product",
   props: ["item", "show-detail", "s1", "s2", "currency"],
-  components: { ProductDetail, ProductValueSlot1 },
+  components: { ProductDetail, ProductValueSlot1, ProductValueSlot2 },
   filters: { unit, price },
   methods: {
     toggleFavorites(id) {
@@ -104,20 +90,6 @@ export default {
   padding: 2px 10px;
   color: white;
   border-radius: 0 !important;
-  font-weight: 500;
-}
-
-.discount {
-  background: #FFFACC;
-  @media (max-width: 800px) {
-       background: transparent;
-    }
-  color: black;
-  padding: 3px 10px 0;
-   @media (max-width: 500px) {
-       padding:0;
-    }
-  // border-radius: 3px !important;
   font-weight: 500;
 }
 

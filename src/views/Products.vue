@@ -187,11 +187,11 @@ export default {
       ],
       slot1: ["Unit Cost", "(/T/Day)", "contract_cost"],
       slot2Menu: [
-        ["ROI", 'roi'],
+        ["ROI", item => item.mining_payoff / item.contract_cost - 1],
         ["Breakeven Days", "expected_breakeven_days"],
-        ["%OFF vs buying", "off"]
+        ["%OFF vs buying", item => (item.btc_price - item.contract_cost / item.mining_payoff_btc) / item.btc_price]
       ],
-      slot2: ["ROI", 'roi'],
+      slot2: ["ROI", item => item.mining_payoff / item.contract_cost - 1],
       drawer: false,
       activeCoinTab: coin ? ["BTC", "ETH", "BCH"].indexOf(coin) : 0,
       filter: {

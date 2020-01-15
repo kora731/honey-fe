@@ -7,3 +7,7 @@ export function unit(v, coin) {
 export function price(v, coin, d = 4) {
   return v && `${coins[coin]}${(v * 1).toFixed(d)}`;
 }
+
+export function percent(v, d = 0) {
+  return v && (v * 100).toFixed(d) + '%';
+}
