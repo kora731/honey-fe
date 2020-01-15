@@ -24,10 +24,10 @@
           <v-col cols="3" class="costCol">Cost Basis</v-col>
           <v-col cols="3" style="text-align:center;">Expected ROI</v-col>
         </v-row>
-        <v-row justify="space-between" align-content="center" class="homeDeal">
+        <v-row justify="space-between" align-content="center" class="homeDeal" v-if="coin !== 'ETH'">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" ><v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{(niceHash.minPrice * btcPrice / 1000).toFixed(4)}}<span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
-          <v-col cols="3" class="costCol">{{(niceHash.minPrice * btcPrice / btcPayOff / 1000).toFixed(4)}}<span class="grey--text">per {{coin}}</span></v-col>
+          <v-col cols="3" class="costCol">{{(niceHash.minPrice * btcPrice / summary[coin].maxPayOffBtc / 1000).toFixed(4)}}<span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">N/A</v-col>
         </v-row>
         <v-row v-for="(c, idx) in summary[coin].contracts" @click="jump(coin, c.duration)" :key="idx" justify="space-between" align-content="center" class="homeDeal">
@@ -51,9 +51,6 @@ export default {
     ...mapState(["summary", "niceHash"]),
     btcPrice() {
       return this.$store.state.summary.BTC.coinPrice;
-    },
-    btcPayOff() {
-      return this.$store.state.summary.BTC.maxPayOffBtc;
     }
   },
   methods: {
