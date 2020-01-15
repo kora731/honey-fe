@@ -2,7 +2,7 @@
   <v-tabs centered center-active>
     <v-tab v-for="coin of coins" :key="'tab-' + coin">{{coin}}</v-tab>
     <v-tab-item  v-for="coin of coins" :key="'tab-item-' + coin">
-      <v-row class="mx-4 pt-4 d-flex font-weight-light" justify="center">
+      <v-row class="mx-4 pt-4 d-flex font-weight-light" :justify="$vuetify.breakpoint.xsOnly ? 'start' : 'center'">
         <div class="mx-4">
           <v-icon>mdi-coin</v-icon>
           {{coin}} price: ${{summary[coin].coinPrice}}
@@ -10,7 +10,8 @@
         </div>
         <div class="mx-4">
           <v-icon>mdi-treasure-chest</v-icon>
-          {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc.toFixed(8)}} BTC)</div>
+          {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc.toFixed(8)}} BTC)
+        </div>
       </v-row>
       <div class="pa-4">
         <v-row
