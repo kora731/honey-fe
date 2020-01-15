@@ -85,7 +85,7 @@ export default new Vuex.Store({
       const data = res.data;
       const lastUpdate = Math.max(...data.map(v => v.update_time));
 
-      commit('setProducts', data.filter(v => lastUpdate - v.update_time < 3600));
+      commit('setProducts', data.filter(v => v.sold_percent < 99.99 && lastUpdate - v.update_time < 3600));
 
       const niceHash = await axios.get('https://api.i43.io/nicehash/main/api/v2/hashpower/orderBook?algorithm=SHA256');
       const orders = [...niceHash.data.stats.EU.orders, ...niceHash.data.stats.USA.orders]

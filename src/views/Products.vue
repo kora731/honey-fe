@@ -33,13 +33,13 @@
 
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="duration" />
         <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="seller" />
-        <filter-panel ga="misc" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
+        <filter-panel ga="misc" title="Filters" :value="filter" :items="[['Favorites', 'showFavOnly']]" />
       </v-col>
 
       <v-navigation-drawer v-model="drawer" absolute right temporary v-if="$vuetify.breakpoint.xsOnly">
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="duration" />
         <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="seller" />
-        <filter-panel ga="misc" title="Filters" :value="filter" :items="[['In Stock', 'showInStockOnly'], ['Favorites', 'showFavOnly']]" />
+        <filter-panel ga="misc" title="Filters" :value="filter" :items="[['Favorites', 'showFavOnly']]" />
       </v-navigation-drawer>
       <v-col class="filterPanel d-flex align-center" v-if="$vuetify.breakpoint.xsOnly">
         <div class="mx-3 flex-grow-1">
