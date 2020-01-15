@@ -23,7 +23,24 @@
           <v-col cols="3">Contract Duration</v-col>
           <v-col cols="3">Lowest Unit Cost</v-col>
           <v-col cols="3" class="costCol">Cost Basis</v-col>
-          <v-col cols="3" style="text-align:center;">Expected ROI</v-col>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-col cols="3" style="text-align:center;">
+                {{slot2[0]}}
+                <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+              </v-col>
+            </template>
+            <v-list>
+              <v-list-item v-for="[title, field] of slot2Menu"
+                           :key="title"
+                           @click="slot2 = [title, field]"
+              >
+                <v-list-item-title>{{title}}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+<!--          <v-col cols="3" style="text-align:center;">Expected ROI</v-col>-->
         </v-row>
         <v-row justify="space-between" align-content="center" class="homeDeal v-card--hover" @click="goToNicehash(coin)">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" ><v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
@@ -35,7 +52,12 @@
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.duration}} Days <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.duration).size}} Platforms</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost.toFixed(4)}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
           <v-col cols="3" class="costCol">${{c.contract_cost / c.mining_payoff_btc | price}} <span class="grey--text">per {{coin}}</span></v-col>
-          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">{{(c.mining_payoff / c.contract_cost) -1 | percent}}</v-col>
+          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" v-if="slot2[1] !== 'expected_breakeven_days'">
+            {{c[slot2[1]] || slot2[1](c) | percent}}
+          </v-col>
+          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" v-if="slot2[1] === 'expected_breakeven_days'">
+            {{c.expected_breakeven_days.toFixed(0)}}
+          </v-col>
         </v-row>
       </div>
     </v-tab-item>
@@ -72,6 +94,16 @@ export default {
   filters: {
     percent(v) { return v && (v * 100).toFixed(0) + '%'; },
     price(v) { return v && v.toFixed(2); }
+  },
+  data() {
+    return {
+      slot2Menu: [
+        ["ROI", item => item.mining_payoff / item.contract_cost - 1],
+        ["Breakeven Days", "expected_breakeven_days"],
+        ["%OFF vs buying", item => (item.btc_price - item.contract_cost / item.mining_payoff_btc) / item.btc_price]
+      ],
+      slot2: ["ROI", item => item.mining_payoff / item.contract_cost - 1]
+    };
   }
 }
 </script>
