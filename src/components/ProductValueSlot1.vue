@@ -27,7 +27,6 @@ export default {
   computed: {
     val() {
       const [,,field] = this.s1;
-      window.console.log(field);
       let v = this.item[field] || field(this.item);
       if (this.currency !== 'USD') v /= this.item.btc_price;
       return v;
