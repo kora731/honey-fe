@@ -20,10 +20,12 @@ export default new Vuex.Store({
     selectedProduct: null,
     niceHash: { minPrice: 0, avgPrice: 0 },
     products: [],
+    coins: ['BTC', 'ETH', 'BCH', 'BSV', 'ETC'],
     summary: {
       BTC: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
       ETH: { ...summaryData, unit: 'M', sellers: new Set(), durationSellers: new Map(), contracts: [] },
-      BCH: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] }
+      BCH: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
+      BSV: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] }
     },
     selectedCoins: ['BTC'],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
@@ -62,6 +64,7 @@ export default new Vuex.Store({
       state.summary.BTC.contracts = compact(state.summary.BTC, 360);
       state.summary.ETH.contracts = compact(state.summary.ETH, 2000);
       state.summary.BCH.contracts = compact(state.summary.BCH, 2000);
+      state.summary.BSV.contracts = compact(state.summary.BSV, 2000);
     },
     toggleFavorites(state, id) {
       if (state.favorites.indexOf(id) < 0) {
@@ -96,6 +99,7 @@ export default new Vuex.Store({
         return [m[0] + v.price * (v.acceptedSpeed * 1 + v.payingSpeed * 1), m[1] + v.acceptedSpeed * 1 + v.payingSpeed * 1];
       }, [0, 0]);
 
+      window.console.log(minPrice, t / tv);
       commit('setNiceHash', { minPrice, avgPrice: t / tv });
     }
   },

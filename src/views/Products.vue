@@ -15,8 +15,8 @@
                         <div class="mx-4">{{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}</div>
                       </div>
                       <v-btn-toggle mandatory class="mr-4 pr-4">
-                        <v-btn small>USD</v-btn>
-                        <v-btn small>{{coin}}</v-btn>
+                        <v-btn small @click="currency='USD'">USD</v-btn>
+                        <v-btn small @click="currency=coin">{{coin}}</v-btn>
                       </v-btn-toggle>
                     </v-row>
                   </v-tab-item>
@@ -51,22 +51,47 @@
       <product-dialog />
       <v-col md="10" lg="10" sm="12" cols="12">
          <v-row justify="space-between" align-content="center" class="caption d-none d-sm-flex" style="margin: 0">
-                  <v-col cols="3">Contract Name</v-col>
-                  <v-col cols="2">Unit Cost (/T/Day)
-                    <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
-                  </v-col>
-                  <v-col cols="2" v-if="$vuetify.breakpoint.lg" />
-                  <v-col cols="2">
-                    ROI
-                    <v-icon class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
-                  </v-col>
+           <v-col cols="3">Contract Name</v-col>
+           <v-col cols="2">
+             <v-menu offset-y>
+               <template v-slot:activator="{ on }">
+                   {{slot1[0]}}{{slot1[1]}}
+                   <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+               </template>
+               <v-list>
+                 <v-list-item v-for="[title, suffix, field] of slot1Menu"
+                              :key="title"
+                              @click="slot1 = [title, suffix, field]"
+                 >
+                   <v-list-item-title>{{title}}</v-list-item-title>
+                 </v-list-item>
+               </v-list>
+             </v-menu>
+           </v-col>
+           <v-col cols="2" v-if="$vuetify.breakpoint.lg" />
+           <v-col cols="2">
+             <v-menu offset-y>
+               <template v-slot:activator="{ on }">
+                    {{slot2[0]}}
+                    <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+               </template>
+               <v-list>
+                 <v-list-item v-for="[title, field] of slot2Menu"
+                              :key="title"
+                              @click="slot2 = [title, field]"
+                 >
+                   <v-list-item-title>{{title}}</v-list-item-title>
+                 </v-list-item>
+               </v-list>
+             </v-menu>
+           </v-col>
                   <v-col cols="2" v-if="!$vuetify.breakpoint.lg" />
                   <v-col cols="3" />
         </v-row>
         <div class="productContainer">
-          <product v-for="(item, index) in products.slice(0, 10)" :key="index" :item="item" />
+          <product v-for="(item, index) in products.slice(0, 10)" :s1="slot1" :s2="slot2" :currency="currency" :key="index" :item="item" />
           <v-lazy v-for="(item, index) in products.slice(10)" :key="index + 10">
-            <product :item="item" />
+            <product :item="item" :s1="slot1" :s2="slot2" :currency="currency"/>
           </v-lazy>
         </div>
       </v-col>
@@ -153,6 +178,20 @@ export default {
     if (coin) this.$store.state.selectedCoins = [coin];
 
     return {
+      currency: "USD",
+      slot1Menu: [
+        ["Unit Cost", "(/T/Day)", "unitCost"],
+        ["Total Cost", "", "contract_cost"],
+        ["Daily Income", "", "mining_payoff"],
+        ["Total Income", "", "totalPayoff"]
+      ],
+      slot1: ["Unit Cost", "(/T/Day)", "unitCost"],
+      slot2Menu: [
+        ["ROI", 'roi'],
+        ["Breakeven Days", "expected_breakeven_days"],
+        ["%OFF vs buying", "off"]
+      ],
+      slot2: ["ROI", 'roi'],
       drawer: false,
       activeCoinTab: coin ? ["BTC", "ETH", "BCH"].indexOf(coin) : 0,
       filter: {
