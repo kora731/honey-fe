@@ -1,36 +1,15 @@
 <template>
   <v-card class="mb-3 v-card--hover" hover @click="showDetailFn()" :ripple="false">
     <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
-
     <v-row justify="space-between" align-content="center" style="margin: 0">
       <v-col cols="8" class="py-4 order-0" xs="8" sm="8" ml="3" lg="3">
         <div class="d-flex flex-lg-column align-center align-lg-start align-xl-start cardComp">
           <img style="width: 120px" :src="require(`../assets/platformlogo/${item.issuers}.png`)" />
            <span class="black--text title-2">{{item.honeyLemon_contract_name}}</span>
         </div>
-       
       </v-col>
 
-      <v-col cols="5" class="d-flex align-lg-center order-2 order-lg-1  flex-column flex-md-row" xs="4" ml="2" lg="2">
-        <span class="dealMeta">Unit Cost</span>
-        <span class="black--text title-2">
-          ${{item.contract_cost.toFixed(4)}}
-          <span
-            v-if="item.coin !== 'ETH'"
-            class="subtitle-1"
-          >/T/Day</span>
-          <span v-if="item.coin === 'ETH'" class="subtitle-1">/M/Day</span>
-          <v-tooltip right max-width="400px">
-            <template v-slot:activator="{ on }">
-              <v-icon v-on="on" class="body-1 ml-1">mdi-help-circle-outline</v-icon>
-            </template>
-            <span>
-              Note: sum of upfront fees and present value of expected future cashflow earned over duration of the contract,
-              discounted with CeFi/DeFi interest rate (See Messari), divided into unit cost (BTC: $ per Th per Day, or ETH: $ per Mh per Day)
-            </span>
-          </v-tooltip>
-        </span>
-      </v-col>
+      <product-value-slot1 :item="item" :s1="s1" :currency="currency" />
 
       <v-col cols="4" class="d-flex align-center order-1 order-lg-2" xs="4" ml="2" lg="2">
         <div
@@ -80,12 +59,15 @@
 
 <script>
 import { mapState } from "vuex";
+import { unit, price } from "../filters";
 import ProductDetail from "./ProductDetail";
+import ProductValueSlot1 from "./ProductValueSlot1";
 
 export default {
   name: "Product",
-  props: ["item", "show-detail"],
-  components: { ProductDetail },
+  props: ["item", "show-detail", "s1", "s2", "currency"],
+  components: { ProductDetail, ProductValueSlot1 },
+  filters: { unit, price },
   methods: {
     toggleFavorites(id) {
       this.$gtag.event("toggle-favorites", { event_label: id });
