@@ -19,7 +19,10 @@ const summaryData = {
 export default new Vuex.Store({
   state: {
     selectedProduct: null,
-    niceHash: { minPrice: 0, avgPrice: 0 },
+    niceHash: {
+      SHA256: { minPrice: 0, avgPrice: 0 },
+      DAGGERHASHIMOTO: { minPrice: 0, avgPrice: 0 }
+    },
     products: [],
     coins,
     summary: {
@@ -81,8 +84,8 @@ export default new Vuex.Store({
     selectProduct(state, product) {
       state.selectedProduct = product;
     },
-    setNiceHash(state, desc) {
-      Object.assign(state.niceHash, desc);
+    setNiceHash(state, { algorithm, data }) {
+      Object.assign(state.niceHash[algorithm], data);
     }
   },
   actions: {
@@ -93,17 +96,22 @@ export default new Vuex.Store({
 
       commit('setProducts', data.filter(v => v.sold_percent < 99.99 && lastUpdate - v.update_time < 3600));
 
-      const niceHash = await axios.get('https://api.i43.io/nicehash/main/api/v2/hashpower/orderBook?algorithm=SHA256');
-      const orders = [...niceHash.data.stats.EU.orders, ...niceHash.data.stats.USA.orders]
-        .filter(o => o.type === 'STANDARD' && o.acceptedSpeed > 0 || o.payingSpeed > 0);
+      const nicehHashData = async algorithm => {
+        const { data } = await axios.get('https://api.i43.io/nicehash/main/api/v2/hashpower/orderBook?algorithm=' + algorithm);
+        const orders = [...data.stats.EU.orders, ...data.stats.USA.orders]
+          .filter(o => o.type === 'STANDARD' && o.acceptedSpeed > 0 || o.payingSpeed > 0);
 
-      const minPrice = Math.min(...orders.map(o => o.price));
-      const [t, tv] = orders.reduce((m, v) => {
-        return [m[0] + v.price * (v.acceptedSpeed * 1 + v.payingSpeed * 1), m[1] + v.acceptedSpeed * 1 + v.payingSpeed * 1];
-      }, [0, 0]);
+        const minPrice = Math.min(...orders.map(o => o.price));
+        const [t, tv] = orders.reduce((m, v) => {
+          return [m[0] + v.price * (v.acceptedSpeed * 1 + v.payingSpeed * 1), m[1] + v.acceptedSpeed * 1 + v.payingSpeed * 1];
+        }, [0, 0]);
 
-      window.console.log(minPrice, t / tv);
-      commit('setNiceHash', { minPrice, avgPrice: t / tv });
+        window.console.log(minPrice, t / tv);
+        commit('setNiceHash',  { algorithm, data: { minPrice, avgPrice: t / tv }});
+      };
+
+      nicehHashData('SHA256');
+      nicehHashData('DAGGERHASHIMOTO');
     }
   },
   modules: {

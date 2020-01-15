@@ -24,10 +24,10 @@
           <v-col cols="3" class="costCol">Cost Basis</v-col>
           <v-col cols="3" style="text-align:center;">Expected ROI</v-col>
         </v-row>
-        <v-row justify="space-between" align-content="center" class="homeDeal" v-if="coin !== 'ETH'" @click="goToNicehash(coin)">
+        <v-row justify="space-between" align-content="center" class="homeDeal" @click="goToNicehash(coin)">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" ><v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
-          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{(niceHash.avgPrice * btcPrice / 1000).toFixed(4)}}<span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
-          <v-col cols="3" class="costCol">{{(niceHash.avgPrice * btcPrice / summary[coin].maxPayOffBtc / 1000).toFixed(4)}}<span class="grey--text">per {{coin}}</span></v-col>
+          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / getFactor(coin)).toFixed(4)}}<span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
+          <v-col cols="3" class="costCol">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / summary[coin].maxPayOffBtc / getFactor(coin)).toFixed(4)}}<span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">N/A</v-col>
         </v-row>
         <v-row v-for="(c, idx) in summary[coin].contracts" @click="jump(coin, c.duration)" :key="idx" justify="space-between" align-content="center" class="homeDeal">
@@ -57,6 +57,12 @@ export default {
     goToNicehash(coin) {
       this.$gtag.event("nicehash", { event_category: 'check-it-out', event_label: coin });
       window.open("https://www.nicehash.com/my/marketplace/SHA256");
+    },
+    getAlg(coin) {
+      return coin === 'ETH' || coin === 'ETC' ? 'DAGGERHASHIMOTO' : 'SHA256';
+    },
+    getFactor(coin) {
+      return coin === 'ETH' || coin === 'ETC' ? 1000 * 1000 : 1000;
     },
     jump(coin, duration) {
       location.href = "#/products?" + qs.encode({ coin, duration });
