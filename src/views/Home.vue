@@ -24,7 +24,7 @@
             <div
               class="desc"
             >We aggregate and rate existing cloud mining contracts, for transparency, standardization and price discovery.</div>
-            <div class="desc sign_up">Sign up for fresh updates & never miss a juicy deal.</div>
+            <div class="desc sign_up">Sign up for fresh updates.</div>
 
             <div class="row form inputEmail">
               <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />

@@ -46,4 +46,19 @@ export default {
     color: #333;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .title-2{
+    font-size: 14px !important;
+  }
+
+  .subtitle-1{
+    font-size: 12px !important;
+    font-weight: 400;
+  }
+
+  .body-1{
+    font-size: 14px !important;
+  }
+}
 </style>

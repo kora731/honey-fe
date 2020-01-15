@@ -5,7 +5,7 @@
             <v-row>
               <v-col cols="12" lg="2" sm="12" class="px-4 dealHeader" ><h2>Sweet Deals</h2></v-col>
               <v-col cols="12" lg="10" sm="12" class="pa-4" style="background: white;">
-                <v-tabs class="mx-4 mt-4" color="primary" v-model="activeCoinTab">
+                <v-tabs class="mt-4" color="primary" v-model="activeCoinTab">
                   <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
                   <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
@@ -35,17 +35,16 @@
         <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="seller" />
         <filter-panel ga="misc" title="Filters" :value="filter" :items="[['Favorites', 'showFavOnly']]" />
       </v-col>
-
-      <v-navigation-drawer v-model="drawer" absolute right temporary v-if="$vuetify.breakpoint.xsOnly">
+      <v-navigation-drawer v-model="drawer" absolute temporary v-if="$vuetify.breakpoint.xsOnly">
         <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="duration" />
         <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="seller" />
         <filter-panel ga="misc" title="Filters" :value="filter" :items="[['Favorites', 'showFavOnly']]" />
       </v-navigation-drawer>
       <v-col class="filterPanel d-flex align-center" v-if="$vuetify.breakpoint.xsOnly">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <div class="mx-3 flex-grow-1">
           <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
         </div>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       </v-col>
 
       <product-dialog />
@@ -88,12 +87,12 @@
                   <v-col cols="2" v-if="!$vuetify.breakpoint.lg" />
                   <v-col cols="3" />
         </v-row>
-        <div class="productContainer">
+<!--        <div class="productContainer">-->
           <product v-for="(item, index) in products.slice(0, 10)" :s1="slot1" :s2="slot2" :currency="currency" :key="index" :item="item" />
           <v-lazy v-for="(item, index) in products.slice(10)" :key="index + 10">
             <product :item="item" :s1="slot1" :s2="slot2" :currency="currency"/>
           </v-lazy>
-        </div>
+<!--        </div>-->
       </v-col>
     </v-row>
   </v-container>
