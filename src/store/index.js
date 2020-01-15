@@ -30,7 +30,7 @@ export default new Vuex.Store({
       ETH: { ...summaryData, unit: 'M', sellers: new Set(), durationSellers: new Map(), contracts: [] },
       BCH: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
       BSV: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
-      ETC: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] }
+      ETC: { ...summaryData, unit: 'M', sellers: new Set(), durationSellers: new Map(), contracts: [] }
     },
     selectedCoins: ['BTC'],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]')

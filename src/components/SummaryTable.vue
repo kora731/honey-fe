@@ -20,7 +20,7 @@
           style="margin: 0; margin-top: 24px;"
         >
           <v-col cols="3">Contract Duration</v-col>
-          <v-col cols="3">Lowest Unit Cost (/T/Day)</v-col>
+          <v-col cols="3">Lowest Unit Cost</v-col>
           <v-col cols="3" class="costCol">Cost Basis</v-col>
           <v-col cols="3" style="text-align:center;">Expected ROI</v-col>
         </v-row>
