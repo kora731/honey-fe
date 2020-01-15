@@ -115,7 +115,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["favorites", "summary"]),
+    ...mapState(["favorites", "summary", "coins"]),
     filters() {
       const products = this.$store.state.products;
       const filters = products.filter(v => this.$store.state.selectedCoins.indexOf(v.coin) >= 0).reduce(
@@ -129,7 +129,7 @@ export default {
         {
           durations: [],
           issuers: [],
-          coins: ["BTC", "ETH", "BCH"],
+          coins: this.coins,
           sort: [
             {
               text: "↑ Contract cost",
@@ -192,7 +192,7 @@ export default {
       ],
       slot2: ["ROI", item => item.mining_payoff / item.contract_cost - 1],
       drawer: false,
-      activeCoinTab: coin ? ["BTC", "ETH", "BCH"].indexOf(coin) : 0,
+      activeCoinTab: coin ? this.$store.state.coins.indexOf(coin) : 0,
       filter: {
         duration: duration ? [duration * 1] : [],
         issuers: [],

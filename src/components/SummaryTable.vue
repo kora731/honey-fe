@@ -48,7 +48,7 @@ import { mapState } from "vuex";
 export default {
   name: "SummaryTable",
   computed: {
-    ...mapState(["summary", "niceHash"]),
+    ...mapState(["summary", "niceHash", "coins"]),
     btcPrice() {
       return this.$store.state.summary.BTC.coinPrice;
     }
@@ -65,11 +65,6 @@ export default {
   filters: {
     percent(v) { return v && (v * 100).toFixed(0) + '%'; },
     price(v) { return v && v.toFixed(2); }
-  },
-  data() {
-    return {
-      coins: ["BTC", "ETH", "BCH", "BSV"]
-    };
   }
 }
 </script>
