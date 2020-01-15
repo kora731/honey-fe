@@ -3,12 +3,11 @@
     <v-row class="layout">
       <div class="innerContent">
         <div class="slogan mr-4">
-          <span class="slogan-yellow">SWEET DEALS</span>
+          <span class="slogan-yellow">THE LEMON DILEMMA</span>
           <br />
-          <span class="slogan-yellow">IN CRYPTO</span>
+          <span class="slogan-yellow"> IN CLOUD MINING?</span>
           <br />
-          <span class="slogan-yellow">MINING</span>
-          <br />
+          <div class="desc">We aggregate and rate available mining contracts,<br/> for transparency, standardization, price discovery.</div>
         </div>
         <div class="slogan">
           <span class="slogan-black">BEST PRICE x OBJECTIVE METRICS</span>
@@ -21,10 +20,7 @@
             target="_blank"
             novalidate
           >
-            <div
-              class="desc"
-            >We aggregate and rate existing cloud mining contracts, for transparency, standardization and price discovery.</div>
-            <div class="desc sign_up">Sign up for fresh updates.</div>
+            <div class="desc sign_up">Sign up for fresh updates on sweet deals in crypto mining.</div>
 
             <div class="row form inputEmail">
               <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
@@ -245,7 +241,7 @@ export default {
           flex-direction: initial;
           .slogan:first-child {
             flex-grow: 1;
-            font-size: 48px;
+            font-size: 40px;
             margin-bottom: 0;
           }
 
@@ -301,8 +297,8 @@ export default {
         margin: 10px 0;
       }
       &.sign_up {
-        margin: 60px 0 20px 0;
-        @media (max-width: 500px) {
+        margin: 100px 0 20px 0;
+        @media (max-width: 900px) {
           margin: 20px 0 10px 0;
         }
       }
