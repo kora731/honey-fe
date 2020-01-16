@@ -1,6 +1,6 @@
 <template>
-  <v-tabs centered center-active>
-    <v-tab v-for="coin of coins" :key="'tab-' + coin">{{coin}}</v-tab>
+  <v-tabs centered center-active v-model="activeCoinTab">
+    <v-tab v-for="coin of coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
     <v-tab-item  v-for="coin of coins" :key="'tab-item-' + coin">
       <v-row class="mx-4 pt-4 d-flex font-weight-light" :justify="$vuetify.breakpoint.xsOnly ? 'start' : 'center'">
         <div class="mx-4">
@@ -98,6 +98,7 @@ export default {
   },
   data() {
     return {
+      activeCoinTab: this.$store.state.coins.indexOf(this.$store.state.selectedCoins[0]),
       slot2Menu: [
         ["ROI", item => item.mining_payoff / item.contract_cost - 1],
         ["Breakeven Days", "expected_breakeven_days"],

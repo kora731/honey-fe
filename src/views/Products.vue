@@ -192,7 +192,7 @@ export default {
       ],
       slot2: ["ROI", item => item.mining_payoff / item.contract_cost - 1],
       drawer: false,
-      activeCoinTab: coin ? this.$store.state.coins.indexOf(coin) : 0,
+      activeCoinTab: this.$store.state.coins.indexOf(coin || this.$store.state.selectedCoins[0]),
       filter: {
         duration: duration ? [duration * 1] : [],
         issuers: [],
