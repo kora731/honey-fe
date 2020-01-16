@@ -43,7 +43,7 @@
 <!--          <v-col cols="3" style="text-align:center;">Expected ROI</v-col>-->
         </v-row>
         <v-row justify="space-between" align-content="center" class="homeDeal v-card--hover" @click="goToNicehash(coin)">
-          <v-col cols="4" xs="4" sm="3" md="3" lg="3" ><v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
+          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >Real time <v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / getFactor(coin)).toFixed(4)}}<span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
           <v-col cols="3" class="costCol">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / summary[coin].maxPayOffBtc / getFactor(coin)).toFixed(4)}}<span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">N/A</v-col>

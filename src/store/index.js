@@ -7,7 +7,7 @@ import issuers from './issuers'
 
 Vue.use(Vuex);
 
-const coins = ['BTC', 'ETH', 'BCH', 'BSV', 'ETC'];
+const coins = ['BTC', 'ETH', 'BCH'];
 const summaryData = {
   coinPrice: 0,
   maxDiscount: 0,
