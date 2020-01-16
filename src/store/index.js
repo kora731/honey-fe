@@ -106,7 +106,7 @@ export default new Vuex.Store({
           return [m[0] + v.price * (v.acceptedSpeed * 1 + v.payingSpeed * 1), m[1] + v.acceptedSpeed * 1 + v.payingSpeed * 1];
         }, [0, 0]);
 
-        window.console.log(minPrice, t / tv);
+        // window.console.log(minPrice, t / tv);
         commit('setNiceHash',  { algorithm, data: { minPrice, avgPrice: t / tv }});
       };
 
