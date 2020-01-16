@@ -13,7 +13,9 @@ const summaryData = {
   maxDiscount: 0,
   maxPayOff: 0,
   maxPayOffBtc: 0,
-  price: 0
+  price: 0,
+  hashrate: 0,
+  reward: 0
 };
 
 export default new Vuex.Store({
@@ -28,9 +30,7 @@ export default new Vuex.Store({
     summary: {
       BTC: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
       ETH: { ...summaryData, unit: 'M', sellers: new Set(), durationSellers: new Map(), contracts: [] },
-      BCH: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
-      BSV: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] },
-      ETC: { ...summaryData, unit: 'M', sellers: new Set(), durationSellers: new Map(), contracts: [] }
+      BCH: { ...summaryData, unit: 'T', sellers: new Set(), durationSellers: new Map(), contracts: [] }
     },
     selectedCoins: ['BTC'],
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]')
@@ -69,8 +69,9 @@ export default new Vuex.Store({
       state.summary.BTC.contracts = compact(state.summary.BTC, 360);
       state.summary.ETH.contracts = compact(state.summary.ETH, 2000);
       state.summary.BCH.contracts = compact(state.summary.BCH, 2000);
-      state.summary.BSV.contracts = compact(state.summary.BSV, 2000);
-      state.summary.ETC.contracts = compact(state.summary.ETC, 2000);
+    },
+    setHashrate(state, o) {
+      Object.assign(state.summary[o.coin], o);
     },
     toggleFavorites(state, id) {
       if (state.favorites.indexOf(id) < 0) {
@@ -95,6 +96,19 @@ export default new Vuex.Store({
       const lastUpdate = Math.max(...data.map(v => v.update_time));
 
       commit('setProducts', data.filter(v => v.sold_percent < 99.99 && lastUpdate - v.update_time < 3600));
+
+      const getChainInfo = async coin => {
+        const { data } = await axios.get(`https://api.i43.io/crypto/data/blockchain/histo/day?fsym=${coin}&limit=2`);
+        if (data.Data) {
+          const [d0, d1] = data.Data.Data;
+          const stats = { coin, hashrate: d1.hashrate, reward: d1.current_supply - d0.current_supply };
+          commit('setHashrate', stats);
+        }
+      };
+
+      getChainInfo('BTC');
+      getChainInfo('ETH');
+      getChainInfo('BCH');
 
       const nicehHashData = async algorithm => {
         const { data } = await axios.get('https://api.i43.io/nicehash/main/api/v2/hashpower/orderBook?algorithm=' + algorithm);
