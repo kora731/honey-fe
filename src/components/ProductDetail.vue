@@ -71,11 +71,14 @@ export default {
     digits() { return this.selected === 0 ? 4 : 2; },
     data() { return [this.daily, this.total][this.selected]; },
     daily() {
-      const { duration, contract_size, mining_payoff, daily_rate, management_fee, upfront_fee, electricity_fee } = this.item;
+      let { duration, contract_size, mining_payoff, daily_rate, management_fee, upfront_fee, electricity_fee } = this.item;
 
       const dailyPayOff = mining_payoff * contract_size;
       const dailyUpfront = upfront_fee / duration;
       const electricityFee = electricity_fee * contract_size * (1 - (1 + daily_rate) ** - duration) / daily_rate / duration;
+      management_fee = (dailyPayOff - dailyUpfront - electricityFee) * management_fee;
+      if (management_fee < 0) management_fee = 0;
+
       const dailyTotalCost = management_fee + dailyUpfront + electricityFee;
 
       return {
@@ -89,10 +92,10 @@ export default {
       };
     },
     total() {
-      const { duration, management_fee, upfront_fee, expected_breakeven_days } = this.item;
+      const { duration, upfront_fee, expected_breakeven_days } = this.item;
 
       const totalPayOff = this.daily.payoff * duration;
-      const managementFeeTotal = management_fee * duration;
+      const managementFeeTotal = this.daily.management_fee * duration;
       const electricityFeeTotal = this.daily.electricity_fee * duration;
       const totalCost = managementFeeTotal + upfront_fee + electricityFeeTotal;
 
