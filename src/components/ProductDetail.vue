@@ -4,7 +4,7 @@
     <v-row>
       <v-col cols="11">
         Review:&nbsp;&nbsp;
-        <v-btn-toggle dense v-model="selected">
+        <v-btn-toggle dense mandatory v-model="selected">
           <v-btn small>Daily</v-btn>
           <v-btn small>Total</v-btn>
         </v-btn-toggle>
