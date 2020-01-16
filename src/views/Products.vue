@@ -68,24 +68,24 @@
              </v-menu>
            </v-col>
            <v-col cols="2" v-if="$vuetify.breakpoint.lg" />
-           <v-col cols="2">
-             <v-menu offset-y>
-               <template v-slot:activator="{ on }">
-                    {{slot2[0]}}
-                    <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
-               </template>
-               <v-list>
-                 <v-list-item v-for="[title, field] of slot2Menu"
-                              :key="title"
-                              @click="slot2 = [title, field]"
-                 >
-                   <v-list-item-title>{{title}}</v-list-item-title>
-                 </v-list-item>
-               </v-list>
-             </v-menu>
-           </v-col>
-                  <v-col cols="2" v-if="!$vuetify.breakpoint.lg" />
-                  <v-col cols="3" />
+           <v-menu offset-y>
+             <template v-slot:activator="{ on }">
+               <v-col cols="2">
+                 <span style="margin-left: 10px;">{{slot2[0]}}</span>
+                 <v-icon v-on="on" class="body-1 mx-1">mdi-arrow-down-drop-circle-outline</v-icon>
+               </v-col>
+             </template>
+             <v-list>
+               <v-list-item v-for="[title, field] of slot2Menu"
+                            :key="title"
+                            @click="slot2 = [title, field]"
+               >
+                 <v-list-item-title>{{title}}</v-list-item-title>
+               </v-list-item>
+             </v-list>
+           </v-menu>
+           <v-col cols="2" v-if="!$vuetify.breakpoint.lg" />
+           <v-col cols="3" />
         </v-row>
 <!--        <div class="productContainer">-->
           <product v-for="(item, index) in products.slice(0, 10)" :s1="slot1" :s2="slot2" :currency="currency" :key="index" :item="item" />
