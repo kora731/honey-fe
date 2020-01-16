@@ -46,6 +46,11 @@ export default {
   }
 }
 
+.body-2 {
+  text-align: center;
+  width: 27px;
+}
+
 @media only screen and (max-width: 500px) {
   .title-2{
     font-size: 14px !important;
