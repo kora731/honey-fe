@@ -137,7 +137,7 @@ export default {
           coins: this.coins,
           sort: [
             {
-              text: "↑ Unit cost",
+              text: "↑ Unit price",
               value: { field: "contract_cost", order: "asc" }
             },
             {

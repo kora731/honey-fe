@@ -22,7 +22,7 @@
           style="margin: 0; margin-top: 24px;"
         >
           <v-col cols="3">Contract Duration</v-col>
-          <v-col cols="3">Lowest Unit Cost</v-col>
+          <v-col cols="3">Lowest Unit Price</v-col>
           <v-col cols="3" class="costCol">Cost Basis</v-col>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
