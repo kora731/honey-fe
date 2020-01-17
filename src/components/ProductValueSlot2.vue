@@ -5,7 +5,7 @@
         <span class="dealMeta">ROI</span>
         <!--            <span class="body-2" label small>{{(item.expected_discount * 100).toFixed(0)}}% OFF</span>-->
         <span class="body-2" label small v-if="typeof s2[1] === 'string'">{{(val * 1).toFixed(0)}}</span>
-        <span class="body-2" label small v-if="typeof s2[1] !== 'string'">{{val | percent}}</span>
+        <span class="body-2" :class="getValueColor(val)" label small v-if="typeof s2[1] !== 'string'">{{val | percent}}</span>
       </div>
     </div>
     <v-tooltip top max-width="400px" class="ml-2">
@@ -20,11 +20,13 @@
 
 <script>
 import { percent } from "../filters";
+import { getValueColor } from "../utils";
 
 export default {
   name: "ProductValueSlot1",
   props: ["item", "s2", "currency"],
   filters: { percent },
+  methods: { getValueColor },
   computed: {
     val() {
       const [,field] = this.s2;

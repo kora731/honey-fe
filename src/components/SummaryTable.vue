@@ -53,7 +53,7 @@
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.durationAlias}} <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.duration).size}} Platforms</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost | price}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
           <v-col cols="3" class="costCol">{{c.contract_cost / c.mining_payoff_btc | price('USD', 2)}} <span class="grey--text">per {{coin}}</span></v-col>
-          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" v-if="slot2[1] !== 'expected_breakeven_days'">
+          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" :class="getValueColor(c[slot2[1]] || slot2[1](c))" v-if="slot2[1] !== 'expected_breakeven_days'">
             {{c[slot2[1]] || slot2[1](c) | percent}}
           </v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" v-if="slot2[1] === 'expected_breakeven_days'">
@@ -70,6 +70,7 @@ import qs from "querystring";
 import { mapState } from "vuex";
 
 import { percent, price, unit } from "../filters";
+import { getValueColor } from "../utils";
 
 export default {
   name: "SummaryTable",
@@ -80,6 +81,7 @@ export default {
     }
   },
   methods: {
+    getValueColor,
     goToNicehash(coin) {
       this.$gtag.event("nicehash", { event_category: 'check-it-out', event_label: coin });
       window.open("https://www.nicehash.com/my/marketplace/SHA256");
