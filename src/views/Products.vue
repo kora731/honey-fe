@@ -31,7 +31,7 @@
           <v-select label="Sort by" :items="filters.sort" v-model="filter.sort" />
         </div>
 
-        <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$ days" ga="duration" />
+        <filter-panel v-model="filter.duration" title="Duration" :items="filters.durations" format="$$" ga="duration" />
         <filter-panel v-model="filter.issuers" title="Seller" :items="filters.issuers" format="$$" ga="seller" />
         <filter-panel ga="misc" title="Filters" :value="filter" :items="[['Favorites', 'showFavOnly']]" />
       </v-col>
@@ -118,9 +118,14 @@ export default {
     ...mapState(["favorites", "summary", "coins"]),
     filters() {
       const products = this.$store.state.products;
+      const durationSet = new Set();
       const filters = products.filter(v => this.$store.state.selectedCoins.indexOf(v.coin) >= 0).reduce(
         (m, v) => {
-          if (m.durations.indexOf(v.duration) < 0) m.durations.push(v.duration);
+          if (!durationSet.has(v.durationAlias)) {
+            durationSet.add(v.durationAlias);
+            m.durations.push([v.duration, v.durationAlias]);
+          }
+
           if (m.coins.indexOf(v.coin) < 0) m.coins.push(v.coin);
           if (m.issuers.indexOf(v.issuers) < 0) m.issuers.push(v.issuers);
 
@@ -143,7 +148,7 @@ export default {
         }
       );
 
-      filters.durations.sort((a, b) => a - b);
+      filters.durations = filters.durations.sort((a, b) => a[0] - b[0]).map(v => v[1]);
       return filters;
     },
     products() {
@@ -156,7 +161,7 @@ export default {
           (this.$store.state.selectedCoins.length === 0 ||
             this.$store.state.selectedCoins.indexOf(v.coin) >= 0) &&
           (this.filter.duration.length === 0 ||
-            this.filter.duration.indexOf(v.duration) >= 0)
+            this.filter.duration.indexOf(v.durationAlias) >= 0)
       );
 
       const minCost = Math.min(...res.map(v => v.contract_cost * 1));
