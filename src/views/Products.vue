@@ -179,12 +179,12 @@ export default {
     return {
       currency: "USD",
       slot1Menu: [
-        ["Unit Cost", "(/T/Day)", "contract_cost"],
+        ["Unit Price", " ", "contract_cost"],
         ["Total Cost", "", item => item.contract_cost * item.contract_size * item.duration],
         ["Daily Income", "", "mining_payoff"],
         ["Total Income", "", item => item.mining_payoff * item.contract_size * item.duration]
       ],
-      slot1: ["Unit Cost", "(/T/Day)", "contract_cost"],
+      slot1: ["Unit Price", " ", "contract_cost"],
       slot2Menu: [
         ["ROI", item => item.mining_payoff / item.contract_cost - 1],
         ["Breakeven Days", "expected_breakeven_days"],

@@ -48,7 +48,7 @@ export default {
 
 .body-2 {
   text-align: center;
-  width: 27px;
+  width: 35px;
 }
 
 @media only screen and (max-width: 500px) {
