@@ -145,7 +145,7 @@ export default {
               value: { field: "upfront_fee", order: "asc" }
             },
             {
-              text: "ROI",
+              text: "↓ ROI",
               value: { field: item => item.mining_payoff / item.contract_cost - 1, order: "desc" }
             }
           ]
