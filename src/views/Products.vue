@@ -14,9 +14,9 @@
                         <div class="mx-4">{{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}</div>
                         <div class="mx-4">{{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}</div>
                       </div>
-                      <v-btn-toggle mandatory class="mr-4 pr-4">
+                      <v-btn-toggle mandatory class="mr-4 pr-4" v-model="csel">
                         <v-btn small @click="currency='USD'">USD</v-btn>
-                        <v-btn small @click="currency=coin">{{coin}}</v-btn>
+                        <v-btn small @click="currency='COIN'">{{coin}}</v-btn>
                       </v-btn-toggle>
                     </v-row>
                   </v-tab-item>
@@ -177,6 +177,7 @@ export default {
     if (coin) this.$store.state.selectedCoins = [coin];
 
     return {
+      csel: 0,
       currency: "USD",
       slot1Menu: [
         ["Unit Price", " ", "contract_cost"],
