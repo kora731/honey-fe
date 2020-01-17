@@ -45,14 +45,14 @@
         </v-row>
         <v-row justify="space-between" align="center" align-content="center" class="homeDeal v-card--hover" @click="goToNicehash(coin)">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >Real time <v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
-          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / getFactor(coin)).toFixed(4)}}<span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
-          <v-col cols="3" class="costCol">{{(niceHash[getAlg(coin)].avgPrice * btcPrice / summary[coin].maxPayOffBtc / getFactor(coin)).toFixed(4)}}<span class="grey--text">per {{coin}}</span></v-col>
+          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{niceHash[getAlg(coin)].avgPrice * btcPrice / getFactor(coin) | price}}<span class="grey--text"> (/{{summary[coin].unit}}/Day)</span></v-col>
+          <v-col cols="3" class="costCol">{{niceHash[getAlg(coin)].avgPrice * btcPrice / summary[coin].maxPayOffBtc / getFactor(coin) | price}}<span class="grey--text"> per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">N/A</v-col>
         </v-row>
         <v-row v-for="(c, idx) in summary[coin].contracts" @click="jump(coin, c.duration)" :key="idx" justify="space-between"  align="center" align-content="center" class="homeDeal v-card--hover">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.duration}} Days <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.duration).size}} Platforms</v-chip></v-col>
-          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost.toFixed(4)}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
-          <v-col cols="3" class="costCol">${{c.contract_cost / c.mining_payoff_btc | price}} <span class="grey--text">per {{coin}}</span></v-col>
+          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost | price}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
+          <v-col cols="3" class="costCol">{{c.contract_cost / c.mining_payoff_btc | price}} <span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" v-if="slot2[1] !== 'expected_breakeven_days'">
             {{c[slot2[1]] || slot2[1](c) | percent}}
           </v-col>
@@ -68,6 +68,8 @@
 <script>
 import qs from "querystring";
 import { mapState } from "vuex";
+
+import { percent, price, unit } from "../filters";
 
 export default {
   name: "SummaryTable",
@@ -93,8 +95,9 @@ export default {
     }
   },
   filters: {
-    percent(v) { return v && (v * 100).toFixed(0) + '%'; },
-    price(v) { return v && v.toFixed(2); }
+    percent,
+    unit,
+    price
   },
   data() {
     return {
