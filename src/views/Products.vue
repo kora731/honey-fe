@@ -94,7 +94,7 @@
            <v-col cols="3" />
         </v-row>
 <!--        <div class="productContainer">-->
-          <product v-for="(item, index) in products.slice(0, 10)" :s1="slot1" :s2="slot2" :currency="currency" :key="index" :item="item" />
+          <product v-for="(item, index) in products.slice(0, 10)" :idx="index" :s1="slot1" :s2="slot2" :currency="currency" :key="index" :item="item" />
           <v-lazy v-for="(item, index) in products.slice(10)" :key="index + 10">
             <product :item="item" :s1="slot1" :s2="slot2" :currency="currency"/>
           </v-lazy>

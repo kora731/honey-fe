@@ -51,7 +51,7 @@ import ProductValueSlot2 from "./ProductValueSlot2";
 
 export default {
   name: "Product",
-  props: ["item", "show-detail", "s1", "s2", "currency"],
+  props: ["item", "show-detail", "idx", "s1", "s2", "currency"],
   components: { ProductDetail, ProductValueSlot1, ProductValueSlot2 },
   filters: { unit, price },
   methods: {
@@ -75,7 +75,7 @@ export default {
   },
   data() {
     return {
-      showDetailVal: false
+      showDetailVal: !this.$vuetify.breakpoint.xsOnly && this.idx === 0
     };
   }
 };
