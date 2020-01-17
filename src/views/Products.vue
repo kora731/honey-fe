@@ -143,6 +143,10 @@ export default {
             {
               text: "↑ Upfront fees",
               value: { field: "upfront_fee", order: "asc" }
+            },
+            {
+              text: "ROI",
+              value: { field: item => item.mining_payoff / item.contract_cost - 1, order: "desc" }
             }
           ]
         }
@@ -169,9 +173,11 @@ export default {
 
       if (this.filter.sort) {
         const { field, order } = this.filter.sort;
-        res.sort((a, b) =>
-          order === "asc" ? a[field] - b[field] : b[field] - a[field]
-        );
+        res.sort((a, b) => {
+          const fa = a[field] || field(a);
+          const fb = b[field] || field(b);
+          return order === "asc" ? fa - fb : fb - fa;
+        });
       }
 
       return res;
