@@ -101,6 +101,8 @@
 <script>
 import { mapState } from "vuex";
 
+import { getDurationAlias } from "../store";
+
 import Product from "../components/Product";
 import ProductDialog from "../components/ProductDialog";
 import FilterPanel from "../components/FilterPanel";
@@ -206,7 +208,7 @@ export default {
       drawer: false,
       activeCoinTab: this.$store.state.coins.indexOf(coin || this.$store.state.selectedCoins[0]),
       filter: {
-        duration: duration ? [duration * 1] : [],
+        duration: duration ? [getDurationAlias(duration * 1)] : [],
         issuers: [],
         sort: { field: "contract_cost", order: "asc" },
         showFavOnly: false,

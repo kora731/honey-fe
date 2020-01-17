@@ -28,6 +28,7 @@ function getDurationAlias(d) {
   else return years + ' years';
 }
 
+export { getDurationAlias }
 export default new Vuex.Store({
   state: {
     selectedProduct: null,
