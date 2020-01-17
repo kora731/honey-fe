@@ -98,8 +98,9 @@ export default new Vuex.Store({
       commit('setProducts', data.filter(v => v.sold_percent < 99.99 && lastUpdate - v.update_time < 3600));
 
       const getChainInfo = async coin => {
-        const { data } = await axios.get(`https://api.i43.io/crypto/data/blockchain/histo/day?fsym=${coin}&limit=2`);
+        const { data } = await axios.get(`https://api.i43.io/crypto/data/blockchain/histo/day?fsym=${coin}&limit=3`);
         if (data.Data) {
+          if (data.Data.Data.length > 2) data.Data.Data.shift();
           const [d0, d1] = data.Data.Data;
           const stats = { coin, hashrate: d1.hashrate, reward: d1.current_supply - d0.current_supply };
           commit('setHashrate', stats);

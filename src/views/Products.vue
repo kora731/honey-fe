@@ -159,8 +159,8 @@ export default {
             this.filter.duration.indexOf(v.duration) >= 0)
       );
 
-      const minCost = Math.min(...res.map(v => v.contract_cost));
-      res.forEach(v => { if (v.contract_cost === minCost) v.isBestDeal = true; });
+      const minCost = Math.min(...res.map(v => v.contract_cost * 1));
+      res.forEach(v => v.isBestDeal = v.contract_cost * 1 === minCost);
 
       if (this.filter.sort) {
         const { field, order } = this.filter.sort;
