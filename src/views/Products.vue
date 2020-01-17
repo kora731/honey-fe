@@ -11,8 +11,14 @@
                   <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
                     <v-row class="d-flex flex-nowrap" justify="space-between" align="center">
                       <div class="mx-4 mt-4 flex-grow-1 d-flex flex-wrap">
-                        <div class="mx-4">{{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}</div>
-                        <div class="mx-4">{{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}</div>
+                        <div class="mx-4 d-flex align-center">
+                          <v-icon>mdi-coin</v-icon>
+                          {{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}
+                        </div>
+                        <div class="mx-4 d-flex align-center">
+                          <v-icon>mdi-treasure-chest</v-icon>
+                          {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}
+                        </div>
                       </div>
                       <v-btn-toggle mandatory class="mr-4 pr-4" v-model="csel">
                         <v-btn small @click="currency='USD'">USD</v-btn>

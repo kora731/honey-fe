@@ -34,7 +34,7 @@
     <v-row class="mt-10 dealContainer" justify="center">
       <v-col style="max-width: 1080px; text-align:center">
         <div class="display-2 deal-header">
-          Discover the best prices in mining contracts listed across major platforms.
+          Discover mining contracts listed across major platforms.
         </div>
       </v-col>
     </v-row>

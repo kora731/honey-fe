@@ -3,12 +3,12 @@
     <v-tab v-for="coin of coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
     <v-tab-item  v-for="coin of coins" :key="'tab-item-' + coin">
       <v-row class="mx-4 pt-4 d-flex font-weight-light" :justify="$vuetify.breakpoint.xsOnly ? 'start' : 'center'">
-        <div class="mx-4">
+        <div class="mx-4 d-flex align-center">
           <v-icon>mdi-coin</v-icon>
           {{coin}} price: ${{summary[coin].coinPrice}}
 <!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
         </div>
-        <div class="mx-4">
+        <div class="mx-4 d-flex align-center">
           <v-icon>mdi-treasure-chest</v-icon>
           {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc.toFixed(8)}} BTC)
         </div>
@@ -22,7 +22,7 @@
           style="margin: 0; margin-top: 24px;"
         >
           <v-col cols="3">Contract Duration</v-col>
-          <v-col cols="3">Lowest Unit Price</v-col>
+          <v-col cols="3">Best Unit Price</v-col>
           <v-col cols="3" class="costCol">Cost Basis</v-col>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
