@@ -22,7 +22,7 @@
       <product-value-slot2 :item="item" :s2="s2" :currency="currency" />
 
       <v-col cols="4" class="d-flex align-center order-4"  xs="2" ml="3" lg="3">
-        <v-btn text icon color="black" @click="toggleFavorites(item.id)" class="mr-2">
+        <v-btn text icon color="black" @click.stop="toggleFavorites(item.id)" class="mr-2">
           <v-icon v-if="favorites.indexOf(item.id) < 0">mdi-heart-outline</v-icon>
           <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
         </v-btn>
