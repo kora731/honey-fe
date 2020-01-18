@@ -1,5 +1,6 @@
 <template>
   <v-card class="mb-3 v-card--hover" hover @click="showDetailFn()" :ripple="false">
+    <v-btn v-if="showDetail" @click="$emit('close')" icon style="position: absolute; top: 0; right: 0"><v-icon>mdi-close</v-icon></v-btn>
     <div class="bestDeal body-2" v-if="item.isBestDeal">BEST DEAL</div>
     <v-row justify="space-between" align-content="center" style="margin: 0">
       <v-col cols="8" class="py-4 order-0" xs="8" sm="8" ml="3" lg="3">

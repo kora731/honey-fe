@@ -53,7 +53,7 @@
         </div>
       </v-col>
 
-      <product-dialog />
+      <product-dialog :s1="slot1" :s2="slot2" :currency="currency" />
       <v-col md="10" lg="10" sm="12" cols="12">
          <v-row justify="space-between" align-content="center" class="caption d-none d-sm-flex" style="margin: 0">
            <v-col cols="3">Contract Name</v-col>
