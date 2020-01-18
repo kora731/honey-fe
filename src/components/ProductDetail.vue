@@ -120,6 +120,10 @@ export default {
 </script>
 
 <style scoped>
+.v-data-table {
+  background-color: unset!important;
+}
+
 .v-data-table--dense td {
     height: 24px;
     width: 50%;
