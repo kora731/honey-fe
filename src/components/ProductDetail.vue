@@ -124,6 +124,10 @@ export default {
   background-color: unset!important;
 }
 
+pre {
+  font-family: inherit!important;
+}
+
 .v-data-table--dense td {
     height: 24px;
     width: 50%;
