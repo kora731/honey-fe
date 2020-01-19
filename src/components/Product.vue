@@ -28,7 +28,7 @@
           <v-icon v-if="favorites.indexOf(item.id) >= 0" color="red">mdi-heart</v-icon>
         </v-btn>
         <v-btn
-          @click.stop="$gtag.event(item.coin, { event_category: 'check-it-out', event_label: item.id })"
+          @click.stop="window.fbq('trackCustom', 'check-it-out', { id: item.id, coin: item.coin }) | $gtag.event(item.coin, { event_category: 'check-it-out', event_label: item.id })"
           :href="item.buy_url"
           target="_blank"
           color="white"
@@ -76,6 +76,7 @@ export default {
   },
   data() {
     return {
+      window,
       showDetailVal: !this.$vuetify.breakpoint.xsOnly && this.idx === 0
     };
   }
