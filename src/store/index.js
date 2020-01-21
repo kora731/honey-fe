@@ -71,9 +71,9 @@ export default new Vuex.Store({
       const compact = s => _.chain(s.contracts)
         .sortBy(['durationAlias', 'contract_cost'])
         .sortedUniqBy(v => {
-          const ds = s.durationSellers.get(v.duration) || new Set();
+          const ds = s.durationSellers.get(v.durationAlias) || new Set();
           ds.add(v.issuers);
-          s.durationSellers.set(v.duration, ds);
+          s.durationSellers.set(v.durationAlias, ds);
           return v.durationAlias;
         })
         .sortBy('duration')
