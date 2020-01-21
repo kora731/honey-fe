@@ -50,7 +50,7 @@
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">N/A</v-col>
         </v-row>
         <v-row v-for="(c, idx) in summary[coin].contracts" @click="jump(coin, c.duration)" :key="idx" justify="space-between"  align="center" align-content="center" class="homeDeal v-card--hover">
-          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.durationAlias}} <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.duration).size}} Platforms</v-chip></v-col>
+          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.durationAlias}} <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.durationAlias).size}} Platforms</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost | price}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
           <v-col cols="3" class="costCol">{{c.contract_cost / c.mining_payoff_btc | price('USD', 2)}} <span class="grey--text">per {{coin}}</span></v-col>
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" :class="getValueColor(c[slot2[1]] || slot2[1](c))" v-if="slot2[1] !== 'expected_breakeven_days'">
