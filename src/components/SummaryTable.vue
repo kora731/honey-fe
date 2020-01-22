@@ -61,6 +61,8 @@
           </v-col>
         </v-row>
       </div>
+
+      <summary-chart :summary="summary[coin]" :coin="coin" />
     </v-tab-item>
   </v-tabs>
 </template>
@@ -68,12 +70,14 @@
 <script>
 import qs from "querystring";
 import { mapState } from "vuex";
+import SummaryChart from "./SummaryChart";
 
 import { percent, price, unit } from "../filters";
 import { getValueColor } from "../utils";
 
 export default {
   name: "SummaryTable",
+  components: { SummaryChart },
   computed: {
     ...mapState(["summary", "niceHash", "coins"]),
     btcPrice() {
