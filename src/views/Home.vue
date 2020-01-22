@@ -140,8 +140,6 @@
     </v-row>
     <v-row justify="center">
        <v-col style="max-width: 1080px;">
-       <div class="display-2 my-4">Price Diagram</div>
-       <v-img src="../assets/diagram.png"></v-img>
         <!-- <v-row justify="center">
           <v-btn color="#ffe500" class="ma-4"><span class="black--text">Download</span></v-btn>
           <v-btn color="#ffe500" class="ma-4"><span class="black--text">Share</span></v-btn>
