@@ -1,10 +1,13 @@
+import qs from "querystring";
 <template>
   <div ref="chart-container" />
 </template>
 
 <script>
+import _ from 'lodash';
+import qs from 'querystring';
 import Highcharts from 'highcharts';
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 
 export default {
   name: 'SummaryChart',
@@ -13,10 +16,14 @@ export default {
     ...mapState(['niceHash'])
   },
   methods: {
+    jump(coin, duration) {
+      location.href = "#/products?" + qs.encode({ coin, duration });
+    },
     draw() {
       const unit = this.summary.unit;
       const algorithm = this.coin === 'ETH' || this.coin === 'ETC' ? 'DAGGERHASHIMOTO' : 'SHA256';
       const factor = this.coin === 'ETH' || this.coin === 'ETC' ? 1000 * 1000 : 1000;
+      const jump = _.throttle(this.jump, 1000);
 
       Highcharts.chart(this.$refs['chart-container'], {
         title: {
@@ -52,8 +59,8 @@ export default {
                 color: '#cece4b',
                 fontStyle: 'italic'
               },
-              text: 'Daily mining payoff.',
-              x: -50
+              text: 'Mining earnings',
+              x: -30
             },
             zIndex: 3
           }]
@@ -75,6 +82,18 @@ export default {
         },
 
         plotOptions: {
+          series: {
+            point: {
+              events: {
+                click(e) {
+                  if (Date.now() - e.point.lastClick < 500) {
+                    jump(this.coin, e.point.x);
+                  }
+                  e.point.lastClick = Date.now();
+                }
+              }
+            }
+          },
           line: {
             dataLabels: {
               enabled: true,
