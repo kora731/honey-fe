@@ -40,7 +40,23 @@ export default {
           },
           gridLineWidth: 0,
           minorGridLineWidth: 0,
-          min: 0
+          min: 0,
+          plotLines: [{
+            color: '#cece4b',
+            dashStyle: 'dash',
+            width: 2,
+            value: this.summary.contracts[0] && this.summary.contracts[0].mining_payoff,
+            label: {
+              align: 'right',
+              style: {
+                color: '#cece4b',
+                fontStyle: 'italic'
+              },
+              text: 'Daily mining payoff.',
+              x: -50
+            },
+            zIndex: 3
+          }]
         }],
 
         xAxis: {
