@@ -13,7 +13,7 @@
           <span class="slogan-black">Best Price x Objective Metrics</span>
 
            <div class="desc">We aggregate and rate available mining contracts,<br/> for transparency, standardization, price discovery.</div>
-          <v-btn color="black" to="/products"><span class="white--text">GET SWEET DEALS</span><v-img src="../assets/deals.png" max-height="30px" max-width="104px" contain></v-img></v-btn>
+          <v-btn color="black" to="/products" class="home-cta"><span class="white--text">GET SWEET DEALS</span><v-img src="../assets/deals.png" max-height="28px" max-width="96px" contain></v-img></v-btn>
         </div>
       </div>
     </v-row>
@@ -266,6 +266,11 @@ export default {
     }
   }
 }
+.home-cta{
+    border-radius: 6px;
+    border: 3px solid #ffe500 !important;
+}
+
 .dealData {
   //headline font-weight-medium black--text
   font-weight: 500;

@@ -1,6 +1,6 @@
 <template>
-  <v-container style="max-width:1280px;">
-    <div ref="nicehash" style="height: 400px;" />
+  <v-container style="max-width:1080px;">
+    <div ref="nicehash" style="height: 600px;" />
   </v-container>
 </template>
 
