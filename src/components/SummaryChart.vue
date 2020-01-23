@@ -108,7 +108,7 @@ export default {
             dataLabels: {
               enabled: true,
               formatter: function () {
-                return Highcharts.numberFormat(this.y,4);
+                return this.point.desc + '<br/>' + Highcharts.numberFormat(this.y,4);
               },
               style: { color: '#cece4b' }
             },
