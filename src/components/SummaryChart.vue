@@ -111,8 +111,8 @@ export default {
             point: {
               events: {
                 click(e) {
-                  if (Date.now() - e.point.lastClick < 500) {
-                    jump(this.coin, e.point.x);
+                  if (Date.now() - e.point.lastClick < 500 && e.point.x > Date.now()) {
+                    jump(this.coin, e.point.duration);
                   }
                   e.point.lastClick = Date.now();
                 }
@@ -157,6 +157,7 @@ export default {
               x: Date.now() + c.duration * 1000 * 86400,
               y: c.contract_cost,
               desc: c.durationAlias,
+              duration: c.duration,
               platforms: 'Platforms: ' + this.summary.durationSellers.get(c.durationAlias).size
             }))
           ]
