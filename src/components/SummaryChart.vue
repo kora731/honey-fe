@@ -9,6 +9,11 @@ import qs from 'querystring';
 import Highcharts from 'highcharts';
 import { mapState } from 'vuex';
 
+const halvingDates = {
+  'BTC': Date.parse('May 12, 2020'),
+  'BCH': Date.parse('May 24, 2020')
+};
+
 export default {
   name: 'SummaryChart',
   props: ['summary', 'coin'],
@@ -54,37 +59,22 @@ export default {
           gridLineWidth: 0,
           minorGridLineWidth: 0,
           min: 0,
-          plotLines: [{
+          plotLines: (Date.now() < halvingDates[this.coin] ? [0, halvingDates[this.coin]] : [0]).map((ts, i, arr) => ({
             color: 'white',
             dashStyle: 'dash',
             width: 1,
-            value: this.summary.contracts[0] && this.summary.contracts[0].mining_payoff,
+            value: this.summary.contracts[0] && this.summary.contracts[0].mining_payoff / (i + 1),
             label: {
               align: 'right',
               style: {
                 color: '#cece4b',
                 fontStyle: 'italic'
               },
-              text: 'Pre-halving block reward',
+              text: arr.length === 1 ? 'Block reward' : i === 0 ? 'Pre-halving block reward' : 'Post-halving block reward',
               x: -30
             },
             zIndex: 3
-          }, {
-            color: 'white',
-            dashStyle: 'dash',
-            width: 1,
-            value: this.summary.contracts[0] && this.summary.contracts[0].mining_payoff / 2,
-            label: {
-              align: 'right',
-              style: {
-                color: '#cece4b',
-                fontStyle: 'italic'
-              },
-              text: 'Post-halving block reward',
-              x: -30
-            },
-            zIndex: 3
-          }]
+          }))
         }],
 
         xAxis: {
@@ -98,11 +88,11 @@ export default {
           },
           dateTimeLabelFormats: {
             month: '%b %Y',
-            year: '%Y'
+            year: '%b %Y'
           },
-          plotBands: [{
+          plotBands: Date.now() < halvingDates[this.coin] && [{
             from: 0,
-            to: Date.parse('May 12, 2020'),
+            to: halvingDates[this.coin],
             // to: Date.parse('2024'),
             color: 'rgba(255, 255, 0, 0.2)',
             width: 1
