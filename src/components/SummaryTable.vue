@@ -2,24 +2,41 @@
   <v-tabs centered center-active v-model="activeCoinTab">
     <v-tab v-for="coin of coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
     <v-tab-item  v-for="coin of coins" :key="'tab-item-' + coin">
-      <v-row class="mx-4 pt-4 d-flex font-weight-light" :justify="$vuetify.breakpoint.xsOnly ? 'start' : 'center'">
-        <div class="mx-4 d-flex align-center">
-          <v-icon>mdi-coin</v-icon>
-          {{coin}} price: {{summary[coin].coinPrice | price('USD', 2) }}
+      <v-row class="mx-4 font-weight-medium body-2 d-flex tableHeader" style="background: white;" >
+        <v-col col="12" xs="12" md="6" lg="3">
+          <div class="caption grey--text">{{coin}} block rewards (last 24 hr):</div> 
+          <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}} ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}})</div>
+        </v-col>
+        <v-col col="12" xs="12"  md="6" lg="3">
+          <div class="caption grey--text">{{coin}} price:</div>
+          <div>{{summary[coin].coinPrice | price('USD', 2) }}</div>
 <!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
-        </div>
-        <div class="mx-4 d-flex align-center">
-          <v-icon>mdi-treasure-chest</v-icon>
-          {{coin}} block rewards: {{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}})
-        </div>
+        </v-col>
+        <v-col col="12" xs="12"  md="6" lg="3">
+          <div class="caption grey--text">{{coin}} Hashrate:</div> 
+          <div>105,53X,XXXT</div>
+        </v-col>
+        <v-col col="12" xs="12" md="6" lg="3">
+          <div class="caption grey--text">{{coin}} mining earnings:</div> 
+          <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}}) </div>
+        </v-col>
       </v-row>
-      <div class="pa-4">
+      <div class="pa-2">
+        <v-chip small color="#ffe500" class="ma-2 font-weight-bold">Spot Contracts</v-chip>
+         <v-row justify="space-between" align="center" align-content="center" class="homeDeal v-card--hover" @click="goToNicehash(coin)">
+          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >Real time <v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
+          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{niceHash[getAlg(coin)].avgPrice * btcPrice / getFactor(coin) | price}}<span class="grey--text"> (/{{summary[coin].unit}}/Day)</span></v-col>
+          <v-col cols="3" class="costCol">{{niceHash[getAlg(coin)].avgPrice * btcPrice / summary[coin].maxPayOffBtc / getFactor(coin) | price('USD', 2)}}<span class="grey--text"> per {{coin}}</span></v-col>
+          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">Discount  -47%</v-col>
+        </v-row>
+
+        <v-chip small color="#ffe500" class="ma-2 font-weight-bold">Forward Contracts</v-chip>
         <v-row
           justify="space-between"
           align="center"
           align-content="center"
           class="caption d-flex"
-          style="margin: 0; margin-top: 24px;"
+          style="margin: 0;"
         >
           <v-col cols="3">Contract Duration</v-col>
           <v-col cols="3">Best Unit Price</v-col>
@@ -43,12 +60,7 @@
 
 <!--          <v-col cols="3" style="text-align:center;">Expected ROI</v-col>-->
         </v-row>
-        <v-row justify="space-between" align="center" align-content="center" class="homeDeal v-card--hover" @click="goToNicehash(coin)">
-          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >Real time <v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
-          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{niceHash[getAlg(coin)].avgPrice * btcPrice / getFactor(coin) | price}}<span class="grey--text"> (/{{summary[coin].unit}}/Day)</span></v-col>
-          <v-col cols="3" class="costCol">{{niceHash[getAlg(coin)].avgPrice * btcPrice / summary[coin].maxPayOffBtc / getFactor(coin) | price('USD', 2)}}<span class="grey--text"> per {{coin}}</span></v-col>
-          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">N/A</v-col>
-        </v-row>
+       
         <v-row v-for="(c, idx) in summary[coin].contracts" @click="jump(coin, c.duration)" :key="idx" justify="space-between"  align="center" align-content="center" class="homeDeal v-card--hover">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >{{c.durationAlias}} <v-chip small color="cyan lighten-4">{{summary[coin].durationSellers.get(c.durationAlias).size}} Platforms</v-chip></v-col>
           <v-col cols="5" xs="5" sm="3"  md="3" lg="3">{{c.contract_cost | price}} <span class="grey--text">(/{{summary[coin].unit}}/Day)</span></v-col>
@@ -59,6 +71,14 @@
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI" v-if="slot2[1] === 'expected_breakeven_days'">
             {{c.expected_breakeven_days.toFixed(0)}}
           </v-col>
+        </v-row>
+
+        <v-chip small color="#ffe500" class="ma-2 font-weight-bold">Other Contracts</v-chip>
+         <v-row justify="space-between" align="center" align-content="center" class="homeDeal v-card--hover">
+          <v-col cols="4" xs="4" sm="3" md="3" lg="3" >Miner Lifetime<v-chip small color="cyan lighten-4">3 Platforms</v-chip></v-col>
+          <v-col cols="5" xs="5" sm="3"  md="3" lg="3">Price <span class="grey--text"> (/{{summary[coin].unit}})</span></v-col>
+          <v-col cols="3" class="costCol"> - <span class="grey--text"> per {{coin}}</span></v-col>
+          <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">Breakeven 45 days</v-col>
         </v-row>
       </div>
 
@@ -145,6 +165,10 @@ export default {
 @media only screen and (max-width: 600px) {
     .costCol{
       display: none;
+    }
+    .tableHeader
+    {
+      display: none !important;
     }
 }
 </style>

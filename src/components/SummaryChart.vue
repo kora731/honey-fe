@@ -36,7 +36,7 @@ export default {
         title: {
           text: `${this.coin} Mining Contracts Price over Duration`,
           style: {
-            fontSize: 15,
+            fontSize: 18,
             color: 'white'
           }
         },
