@@ -13,7 +13,7 @@
           <span class="slogan-black">BEST PRICE x OBJECTIVE METRICS</span>
          
            <div class="desc">We aggregate and rate available mining contracts,<br/> for transparency, standardization, price discovery.</div>
-          <v-btn color="black" to="/products"><span class="white--text">CHECK OUT SWEET DEALS</span><v-img src="../assets/deals.png" max-height="30px" max-width="104px" contain></v-img></v-btn>
+          <v-btn color="black" to="/products"><span class="white--text">GET SWEET DEALS</span><v-img src="../assets/deals.png" max-height="30px" max-width="104px" contain></v-img></v-btn>
         </div>
       </div>
     </v-row>
@@ -29,10 +29,34 @@
     <v-row class="deals" justify="center">
       <summary-table style="margin: 0 auto; max-width: 1080px;" />
     </v-row>
-    
-     <v-row class="deals mb-10" justify="center">
-       <v-btn tile outlined color="primary" class="ma-4" to="/products">EXPLORE SWEET DEALS</v-btn>
-      </v-row>
+
+    <v-row justify="center">
+      <v-col style="max-width: 1080px;">
+        <!-- <v-row justify="center">
+          <v-btn color="#ffe500" class="ma-4"><span class="black--text">Download</span></v-btn>
+          <v-btn color="#ffe500" class="ma-4"><span class="black--text">Share</span></v-btn>
+        </v-row> -->
+
+        <v-row justify="center" class="mb-10">
+          <form
+                  action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&id=2f33950de0"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="validate mt-10"
+                  target="_blank"
+                  novalidate
+          >
+
+            <div class="desc sign_up">Sign up for fresh updates and juicy analytics.</div>
+            <div class="row form inputEmail">
+              <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
+              <input type="submit" class="btn btnGo" value="GO!" />
+            </div>
+          </form>
+        </v-row>
+      </v-col>
+    </v-row>
 
     <v-row class="faq d-flex" justify="center">
       <v-row style="max-width: 1080px;" class="mt-10">
@@ -135,37 +159,7 @@
           </v-expansion-panels>
         </div>
       </v-row>
-
-
     </v-row>
-    <v-row justify="center">
-       <v-col style="max-width: 1080px;">
-        <!-- <v-row justify="center">
-          <v-btn color="#ffe500" class="ma-4"><span class="black--text">Download</span></v-btn>
-          <v-btn color="#ffe500" class="ma-4"><span class="black--text">Share</span></v-btn>
-        </v-row> -->
-
-       <v-row justify="center" class="mb-10">
-        <form
-              action="https://market.us4.list-manage.com/subscribe/post?u=466b3785cad82e2db6271ffcc&id=2f33950de0"
-              method="post"
-              id="mc-embedded-subscribe-form"
-              name="mc-embedded-subscribe-form"
-              class="validate mt-10"
-              target="_blank"
-              novalidate
-            >
-              
-              <div class="desc sign_up">Sign up for fresh updates on sweet deals in crypto mining.</div>
-              <div class="row form inputEmail">
-                <input id="email" name="EMAIL" type="email" placeholder="Enter email address" />
-                <input type="submit" class="btn btnGo" value="GO!" />
-              </div>
-            </form>
-          </v-row>
-          </v-col>
-      </v-row>
-
   </v-container>
 </template>
 

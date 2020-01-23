@@ -5,12 +5,12 @@
       <v-row class="mx-4 pt-4 d-flex font-weight-light" :justify="$vuetify.breakpoint.xsOnly ? 'start' : 'center'">
         <div class="mx-4 d-flex align-center">
           <v-icon>mdi-coin</v-icon>
-          {{coin}} price: ${{summary[coin].coinPrice}}
+          {{coin}} price: {{summary[coin].coinPrice | price('USD', 2) }}
 <!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
         </div>
         <div class="mx-4 d-flex align-center">
           <v-icon>mdi-treasure-chest</v-icon>
-          {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc.toFixed(8)}} BTC)
+          {{coin}} mining earnings: {{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}})
         </div>
       </v-row>
       <div class="pa-4">

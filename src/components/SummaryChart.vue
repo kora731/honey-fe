@@ -28,11 +28,17 @@ export default {
       Highcharts.chart(this.$refs['chart-container'], {
         title: {
           text: `${this.coin} Mining Contracts Price over Duration`,
-          style: { color: 'white' }
+          style: {
+            fontSize: 15,
+            color: 'white'
+          }
         },
 
         chart: {
-          backgroundColor: '#000'
+          backgroundColor: '#000',
+          style: {
+            fontFamily: '"Roboto", Helvetica, Arial, sans-serif'
+          }
         },
 
         colors: ['#cece4b'],
@@ -67,14 +73,21 @@ export default {
         }],
 
         xAxis: {
+          type: 'datetime',
           title: {
-            text: 'Contract Duration (Days)',
+            text: 'Expiry Date',
             style: { color: 'white' }
           },
           labels: {
             style: { color: '#ccc' }
           },
-          gridLineWidth: 1
+          dateTimeLabelFormats: {
+            year: '%Y'
+          },
+          tickInterval: 365 * 86400 * 1000,
+          gridLineWidth: 0,
+          tickWidth: 0,
+          endOnTick: false
         },
 
         legend: {
@@ -127,9 +140,9 @@ export default {
             valueSuffix: `$/${this.summary.unit}/Day`
           },
           data: [
-            { x: 0, y: this.niceHash[algorithm].avgPrice * this.$store.state.summary.BTC.coinPrice / factor, desc: 'Real Time', platforms: '' },
+            { x: Date.now(), y: this.niceHash[algorithm].avgPrice * this.$store.state.summary.BTC.coinPrice / factor, desc: 'Real Time', platforms: '' },
             ...this.summary.contracts.map(c => ({
-              x: c.duration,
+              x: Date.now() + c.duration * 1000 * 86400,
               y: c.contract_cost,
               desc: c.durationAlias,
               platforms: 'Platforms: ' + this.summary.durationSellers.get(c.durationAlias).size
