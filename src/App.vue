@@ -67,6 +67,8 @@ export default {
 </script>
 
 <style lang="scss">
+
+
 .nav-active{
   border-bottom: 3px solid #ffe500;
   padding: 6px;

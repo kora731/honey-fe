@@ -10,23 +10,22 @@
          
         </div>
         <div class="slogan">
-          <span class="slogan-black">Best Price x Objective Metrics</span>
-
-           <div class="desc">We aggregate and rate available mining contracts,<br/> for transparency, standardization, price discovery.</div>
+        
+           <div class="desc mt-4">We aggregate and rate available mining contracts,<br/> for transparency, standardization, price discovery.</div>
           <v-btn color="black" to="/products" class="home-cta"><span class="white--text">GET SWEET DEALS</span><v-img src="../assets/deals.png" max-height="28px" max-width="96px" contain></v-img></v-btn>
         </div>
       </div>
     </v-row>
 
-    <v-row class="mt-10 dealContainer" justify="center">
+    <v-row class="pt-10 dealContainer" justify="center" style="background: #FFFCDF;">
       <v-col style="max-width: 1080px; text-align:center">
         <div class="display-2 deal-header">
-          Discover the best prices across major cloud mining platforms.
+          Discover the best prices across major cloud mining platforms
         </div>
       </v-col>
     </v-row>
 
-    <v-row class="deals" justify="center">
+    <v-row class="deals" justify="center"  style="background: #FFFCDF;">
       <summary-table style="margin: 0 auto; max-width: 1080px;" />
     </v-row>
 
@@ -135,11 +134,11 @@ export default {
           }
         }
 
-        @media (min-width: 900px) {
+        @media (min-width: 700px) {
           flex-direction: initial;
           .slogan:first-child {
             flex-grow: 1;
-            font-size: 36px;
+            font-size: 28px;
             margin-bottom: 0;
             margin-left: 10px;
           }
@@ -149,7 +148,7 @@ export default {
           }
         }
 
-        @media (min-width: 1200px) {
+        @media (min-width: 1080px) {
           flex-direction: initial;
           .slogan:first-child {
             flex-grow: 1;
@@ -159,6 +158,7 @@ export default {
 
           .slogan:last-child {
             margin-right: 20px;
+            flex-grow: 1;
           }
         }
         .slogan {
@@ -173,14 +173,16 @@ export default {
             font-weight: bold;
             line-height: 64px;
             letter-spacing: 2px;
-            margin: 10px 0;
+            margin: 10px 30px;
             box-shadow: 1px 2px 4px #888888;
             text-shadow: 1px 1px 1px #888888;
 
             @media (max-width: 500px) {
-              font-size: 24px;
+              font-size: 20px;
               line-height: 32px;
+              margin: 0;
               margin-top: 10px;
+              
             }
           }
 

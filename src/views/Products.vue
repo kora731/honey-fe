@@ -9,17 +9,26 @@
                   <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
                   <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
-                    <v-row class="d-flex flex-nowrap" justify="space-between" align="center">
-                      <div class="mx-4 mt-4 flex-grow-1 d-flex flex-wrap">
-                        <div class="mx-4 d-flex align-center">
-                          <v-icon>mdi-coin</v-icon>
-                          {{coin}} price: {{summary[coin].coinPrice | price('USD', 2)}}
+                    <v-row class="d-flex" justify="space-between" align="center">
+                        <div class="v-row mx-4 font-weight-medium body-2 d-flex flex-grow-1 tableHeader" style="background: white;">
+                            <v-col col="12" xs="6" md="3" lg="3">
+                              <div class="caption grey--text">{{coin}} block rewards (last 24 hr):</div> 
+                              <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}} ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}})</div>
+                            </v-col>
+                            <v-col col="12" xs="6" md="3" lg="3">
+                              <div class="caption grey--text">{{coin}} price:</div>
+                              <div>{{summary[coin].coinPrice | price('USD', 2) }}</div>
+                    <!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
+                            </v-col>
+                            <v-col col="12" xs="6" md="3" lg="3">
+                              <div class="caption grey--text">{{coin}} Hashrate:</div> 
+                              <div>105,53X,XXXT</div>
+                            </v-col>
+                            <v-col col="12" xs="6" md="3" lg="3">
+                              <div class="caption grey--text">{{coin}} mining earnings:</div> 
+                              <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}}) </div>
+                            </v-col>
                         </div>
-                        <div class="mx-4 d-flex align-center">
-                          <v-icon>mdi-treasure-chest</v-icon>
-                          {{coin}} block rewards: {{summary[coin].maxPayOff | price('USD', 4)}}/{{coin | unit}}
-                        </div>
-                      </div>
                       <v-btn-toggle mandatory class="mr-4 pr-4" v-model="csel">
                         <v-btn small @click="currency='USD'">USD</v-btn>
                         <v-btn small @click="currency='COIN'">{{coin}}</v-btn>
