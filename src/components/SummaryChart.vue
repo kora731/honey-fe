@@ -83,6 +83,8 @@ export default {
             width: 1,
             label: {
               text: 'Pre-halving',
+              y: -10,
+              verticalAlign: 'bottom',
               style: {
                 color: 'white'
               }
@@ -139,7 +141,7 @@ export default {
             valueSuffix: `$/${this.summary.unit}/Day`
           },
           data: [
-            { x: Date.now(), y: this.niceHash[algorithm].avgPrice * this.$store.state.summary.BTC.coinPrice / factor, desc: 'Real Time', platforms: '' },
+            { x: Date.now(), y: this.niceHash[algorithm].avgPrice * this.$store.state.summary.BTC.coinPrice / factor, desc: 'NiceHash', platforms: '' },
             ...this.summary.contracts.filter(c => c.duration <= 730).map(c => ({
               x: Date.now() + c.duration * 1000 * 86400,
               y: c.contract_cost,
