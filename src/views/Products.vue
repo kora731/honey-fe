@@ -17,7 +17,7 @@
                         </div>
                         <div class="mx-4 d-flex align-center">
                           <v-icon>mdi-treasure-chest</v-icon>
-                          {{coin}} mining earnings: {{summary[coin].maxPayOff | price('USD', 4)}}
+                          {{coin}} block rewards: {{summary[coin].maxPayOff | price('USD', 4)}}/{{coin | unit}}
                         </div>
                       </div>
                       <v-btn-toggle mandatory class="mr-4 pr-4" v-model="csel">
@@ -108,7 +108,7 @@
 import { mapState } from "vuex";
 
 import { getDurationAlias } from "../store";
-import { price } from "../filters";
+import { price, unit } from "../filters";
 
 import Product from "../components/Product";
 import ProductDialog from "../components/ProductDialog";
@@ -116,7 +116,7 @@ import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
-  filters: { price },
+  filters: { price, unit },
   components: { Product, ProductDialog, FilterPanel },
   watch: {
     '$store.state.selectedCoins'() {

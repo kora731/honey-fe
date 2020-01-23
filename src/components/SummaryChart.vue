@@ -93,7 +93,6 @@ export default {
           plotBands: Date.now() < halvingDates[this.coin] && [{
             from: 0,
             to: halvingDates[this.coin],
-            // to: Date.parse('2024'),
             color: 'rgba(255, 255, 0, 0.2)',
             width: 1
           }],

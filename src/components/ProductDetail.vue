@@ -17,7 +17,7 @@
       <v-col cols="12" sm="6">
         <h4>INCOME</h4>
         <v-simple-table dense>
-          <tr><td>Mining Earnings</td><td><colored :value="data.payoff" :digits="digits" /></td></tr>
+          <tr><td>Block Rewards</td><td><colored :value="data.payoff" :digits="digits" /></td></tr>
         </v-simple-table>
         <v-divider />
         <h4>COST</h4>
