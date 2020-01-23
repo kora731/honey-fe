@@ -4,10 +4,12 @@ import qs from "querystring";
 </template>
 
 <script>
-import _ from 'lodash';
 import qs from 'querystring';
 import Highcharts from 'highcharts';
 import { mapState } from 'vuex';
+
+import SL from 'highcharts/modules/series-label';
+SL(Highcharts);
 
 const halvingDates = {
   'BTC': Date.parse('May 12, 2020'),
@@ -28,7 +30,7 @@ export default {
       const unit = this.summary.unit;
       const algorithm = this.coin === 'ETH' || this.coin === 'ETC' ? 'DAGGERHASHIMOTO' : 'SHA256';
       const factor = this.coin === 'ETH' || this.coin === 'ETC' ? 1000 * 1000 : 1000;
-      const jump = _.throttle(this.jump, 1000);
+      const { coin } = this;
 
       Highcharts.chart(this.$refs['chart-container'], {
         title: {
@@ -59,22 +61,6 @@ export default {
           gridLineWidth: 0,
           minorGridLineWidth: 0,
           min: 0,
-          plotLines: (Date.now() < halvingDates[this.coin] ? [0, halvingDates[this.coin]] : [0]).map((ts, i, arr) => ({
-            color: 'white',
-            dashStyle: 'dash',
-            width: 1,
-            value: this.summary.contracts[0] && this.summary.contracts[0].mining_payoff / (i + 1),
-            label: {
-              align: 'right',
-              style: {
-                color: '#cece4b',
-                fontStyle: 'italic'
-              },
-              text: arr.length === 1 ? 'Block reward' : i === 0 ? 'Pre-halving block reward' : 'Post-halving block reward',
-              x: -30
-            },
-            zIndex: 3
-          }))
         }],
 
         xAxis: {
@@ -94,7 +80,13 @@ export default {
             from: 0,
             to: halvingDates[this.coin],
             color: 'rgba(255, 255, 0, 0.2)',
-            width: 1
+            width: 1,
+            label: {
+              text: 'Pre-halving',
+              style: {
+                color: 'white'
+              }
+            }
           }],
           // tickInterval: 365 * 86400 * 1000,
           gridLineWidth: 0,
@@ -107,23 +99,16 @@ export default {
         },
 
         plotOptions: {
-          series: {
-            point: {
-              events: {
-                click(e) {
-                  if (Date.now() - e.point.lastClick < 500) {
-                    jump(this.coin, e.point.x);
-                  }
-                  e.point.lastClick = Date.now();
-                }
-              }
-            }
-          },
           line: {
+            states: {
+              inactive: {
+                opacity: 1
+              }
+            },
             dataLabels: {
               enabled: true,
               formatter: function () {
-                return Highcharts.numberFormat(this.y,4);
+                return this.point.desc + '<br/>' + Highcharts.numberFormat(this.y,4);
               },
               style: { color: '#cece4b' }
             },
@@ -132,19 +117,21 @@ export default {
         },
 
         tooltip: {
-          // headerFormat: '<span style="font-size: 10px">Duration: {point.desc} Days</span><br/>',
+          useHTML: true,
+          style: {
+            pointerEvents: 'auto'
+          },
           formatter() {
             return `
               Duration: ${this.point.desc}<br/>
               Best Price: ${this.y.toFixed(4)}$/${unit}/Day<br/>
-              ${this.point.platforms}<br/>
-              Double click for details.
-            `;
+              ${this.point.platforms}
+            ` + (this.point.duration ? `<a href="#/products?coin=${coin}&duration=${this.point.duration}" style="display: block; text-align: center;">Details</a>` : '');
           }
         },
 
         series: [{
-          name: 'Best price',
+          name: '',
           type: 'line',
           yAxis: 0,
           tooltip: {
@@ -157,8 +144,31 @@ export default {
               x: Date.now() + c.duration * 1000 * 86400,
               y: c.contract_cost,
               desc: c.durationAlias,
+              duration: c.duration,
               platforms: 'Platforms: ' + this.summary.durationSellers.get(c.durationAlias).size
             }))
+          ]
+        }, {
+          name: 'Block rewards',
+          type: 'line',
+          yAxis: 0,
+          color: 'white',
+          enableMouseTracking: false,
+          dataLabels: { enabled: false },
+          marker: {
+            enabled: false
+          },
+          dashStyle: 'dash',
+          data: [
+            [Date.now(), this.summary.contracts[0] && this.summary.contracts[0].mining_payoff],
+            ...halvingDates[coin] ?
+              [
+                [halvingDates[coin], this.summary.contracts[0] && this.summary.contracts[0].mining_payoff],
+                [halvingDates[coin], this.summary.contracts[0] && this.summary.contracts[0].mining_payoff / 2],
+                [Date.now() + 730 * 1000 * 86400, this.summary.contracts[0] && this.summary.contracts[0].mining_payoff / 2]
+              ] : [
+                [Date.now() + 730 * 1000 * 86400, this.summary.contracts[0] && this.summary.contracts[0].mining_payoff]
+              ]
           ]
         }]
       });
