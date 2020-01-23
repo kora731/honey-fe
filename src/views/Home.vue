@@ -153,7 +153,7 @@ export default {
           flex-direction: initial;
           .slogan:first-child {
             flex-grow: 1;
-            font-size: 40px;
+            font-size: 30px;
             margin-bottom: 0;
           }
 
@@ -168,7 +168,7 @@ export default {
           }
           &-yellow {
             background-color: #ffe500;
-            padding: 5px 10px;
+            padding: 0 10px;
             font-style: italic;
             font-weight: bold;
             line-height: 64px;
