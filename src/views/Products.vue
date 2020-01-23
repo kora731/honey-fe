@@ -13,11 +13,11 @@
                       <div class="mx-4 mt-4 flex-grow-1 d-flex flex-wrap">
                         <div class="mx-4 d-flex align-center">
                           <v-icon>mdi-coin</v-icon>
-                          {{coin}} price: ${{summary[coin].coinPrice.toFixed(2)}}
+                          {{coin}} price: {{summary[coin].coinPrice | price('USD', 2)}}
                         </div>
                         <div class="mx-4 d-flex align-center">
                           <v-icon>mdi-treasure-chest</v-icon>
-                          {{coin}} mining earnings: ${{summary[coin].maxPayOff.toFixed(4)}}
+                          {{coin}} mining earnings: {{summary[coin].maxPayOff | price('USD', 4)}}
                         </div>
                       </div>
                       <v-btn-toggle mandatory class="mr-4 pr-4" v-model="csel">
@@ -108,6 +108,7 @@
 import { mapState } from "vuex";
 
 import { getDurationAlias } from "../store";
+import { price } from "../filters";
 
 import Product from "../components/Product";
 import ProductDialog from "../components/ProductDialog";
@@ -115,6 +116,7 @@ import FilterPanel from "../components/FilterPanel";
 
 export default {
   name: "Products",
+  filters: { price },
   components: { Product, ProductDialog, FilterPanel },
   watch: {
     '$store.state.selectedCoins'() {

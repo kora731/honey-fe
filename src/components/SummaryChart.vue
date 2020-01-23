@@ -55,9 +55,9 @@ export default {
           minorGridLineWidth: 0,
           min: 0,
           plotLines: [{
-            color: '#cece4b',
+            color: 'white',
             dashStyle: 'dash',
-            width: 2,
+            width: 1,
             value: this.summary.contracts[0] && this.summary.contracts[0].mining_payoff,
             label: {
               align: 'right',
@@ -65,7 +65,22 @@ export default {
                 color: '#cece4b',
                 fontStyle: 'italic'
               },
-              text: 'Mining earnings',
+              text: 'Pre-halving block reward',
+              x: -30
+            },
+            zIndex: 3
+          }, {
+            color: 'white',
+            dashStyle: 'dash',
+            width: 1,
+            value: this.summary.contracts[0] && this.summary.contracts[0].mining_payoff / 2,
+            label: {
+              align: 'right',
+              style: {
+                color: '#cece4b',
+                fontStyle: 'italic'
+              },
+              text: 'Post-halving block reward',
               x: -30
             },
             zIndex: 3
@@ -82,9 +97,17 @@ export default {
             style: { color: '#ccc' }
           },
           dateTimeLabelFormats: {
+            month: '%b %Y',
             year: '%Y'
           },
-          tickInterval: 365 * 86400 * 1000,
+          plotBands: [{
+            from: 0,
+            to: Date.parse('May 12, 2020'),
+            // to: Date.parse('2024'),
+            color: 'rgba(255, 255, 0, 0.2)',
+            width: 1
+          }],
+          // tickInterval: 365 * 86400 * 1000,
           gridLineWidth: 0,
           tickWidth: 0,
           endOnTick: false
@@ -141,7 +164,7 @@ export default {
           },
           data: [
             { x: Date.now(), y: this.niceHash[algorithm].avgPrice * this.$store.state.summary.BTC.coinPrice / factor, desc: 'Real Time', platforms: '' },
-            ...this.summary.contracts.map(c => ({
+            ...this.summary.contracts.filter(c => c.duration <= 730).map(c => ({
               x: Date.now() + c.duration * 1000 * 86400,
               y: c.contract_cost,
               desc: c.durationAlias,
