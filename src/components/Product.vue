@@ -13,11 +13,16 @@
       <product-value-slot1 :item="item" :s1="s1" :currency="currency" />
 
       <v-col cols="4" class="d-flex align-center order-1 order-lg-2" xs="4" ml="2" lg="2">
-        <div
+        <!-- <div
           style="display: block;"
           class="body-1 font-weight-medium"
           v-if="item.sold_percent >= 99.99"
-        ><span class="stockStyle">OUT OF STOCK</span></div>
+        ><span class="stockStyle">OUT OF STOCK</span></div> -->
+        <div
+          style="display: block;"
+          class="title-2 font-weight-normal flex-grow-1 text-right mr-2"
+          >
+        <span>Min {{item.contract_size}}{{item.coin === 'ETH' ? 'M' : 'T'}}</span></div>
       </v-col>
 
       <product-value-slot2 :item="item" :s2="s2" :currency="currency" />

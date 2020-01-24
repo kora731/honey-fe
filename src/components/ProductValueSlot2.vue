@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="3" class="d-flex order-3" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
+  <v-col cols="2" class="d-flex order-3" style="padding-top: 0; padding-bottom: 0;"  xs="4" ml="2" lg="2">
     <div class="d-flex discount align-lg-center d-flex align-center">
       <div class="d-flex discount flex-column align-self-center">
         <span class="dealMeta">ROI</span>

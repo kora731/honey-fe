@@ -11,22 +11,22 @@
                   <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
                     <v-row class="d-flex" justify="space-between" align="center">
                         <div class="v-row mx-4 font-weight-medium body-2 d-flex flex-grow-1 tableHeader" style="background: white;">
-                            <v-col col="12" xs="6" md="3" lg="3">
+                            <v-col class="headerNum">
                               <div class="caption grey--text">{{coin}} block rewards (last 24 hr):</div> 
-                              <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}} ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}})</div>
+                              <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}</div>
                             </v-col>
-                            <v-col col="12" xs="6" md="3" lg="3">
+                            <v-col class="headerNum">
                               <div class="caption grey--text">{{coin}} price:</div>
                               <div>{{summary[coin].coinPrice | price('USD', 2) }}</div>
                     <!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
                             </v-col>
-                            <v-col col="12" xs="6" md="3" lg="3">
+                             <v-col class="headerNum">
                               <div class="caption grey--text">{{coin}} Hashrate:</div> 
                               <div>105,53X,XXXT</div>
                             </v-col>
-                            <v-col col="12" xs="6" md="3" lg="3">
+                            <v-col class="headerNum">
                               <div class="caption grey--text">{{coin}} mining earnings:</div> 
-                              <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}}) </div>
+                              <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day</div>
                             </v-col>
                         </div>
                       <v-btn-toggle mandatory class="mr-4 pr-4" v-model="csel">
@@ -292,6 +292,21 @@ export default {
   .mdi-help-circle-outline {
     display: none;
   }
+  .dealHeader
+  {
+    display: none;
+  }
+
+  .tableHeader{
+      flex-direction: column;
+  }
+  .headerNum{
+    padding: 4px;
+  }
+  .v-btn-toggle{
+    margin:16px;
+  }
+
 }
 
 body{

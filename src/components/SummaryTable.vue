@@ -21,7 +21,7 @@
           <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}}) </div>
         </v-col>
       </v-row>
-      <div class="pa-2">
+      <div class="pa-2 homeNum">
         <v-chip small color="#ffe500" class="ma-2 font-weight-bold">Spot Contracts</v-chip>
          <v-row justify="space-between" align="center" align-content="center" class="homeDeal v-card--hover" @click="goToNicehash(coin)">
           <v-col cols="4" xs="4" sm="3" md="3" lg="3" >Real time <v-chip small color="cyan lighten-4">NiceHash</v-chip></v-col>
@@ -157,7 +157,16 @@ export default {
   color: #222;
   background-color: #FFFACC !important;
   text-align: center;
+  font-weight: 600;
 }
+
+.homeNum{
+  font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    font-size:14px;
+  }
+}
+
 
 .costCol{
       display: block;
@@ -166,9 +175,8 @@ export default {
     .costCol{
       display: none;
     }
-    .tableHeader
-    {
-      display: none !important;
-    }
+  .tableHeader .col{
+    flex-basis: auto;
+  }
 }
 </style>
