@@ -39,7 +39,13 @@
           color="white"
           class="check-btn"
         >
-          <v-icon>mdi-open-in-new</v-icon>
+          <v-img
+            alt="Honey Lemon Logo"
+            class="logoCheck"
+            contain
+            src="../assets/hl-logo.png"
+            width="20"
+          />
           <span class="ml-2">Check it out</span>
         </v-btn>
       </v-col>

@@ -3,20 +3,20 @@
     <v-tab v-for="coin of coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
     <v-tab-item  v-for="coin of coins" :key="'tab-item-' + coin">
       <v-row class="mx-4 font-weight-medium body-2 d-flex tableHeader" style="background: white;" >
-        <v-col col="12" xs="12" md="6" lg="3">
+        <v-col col="6" xs="6" md="6" lg="3">
           <div class="caption grey--text">{{coin}} block rewards (last 24 hr):</div> 
           <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}} ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}})</div>
         </v-col>
-        <v-col col="12" xs="12"  md="6" lg="3">
+        <v-col col="6" xs="6"  md="6" lg="3">
           <div class="caption grey--text">{{coin}} price:</div>
           <div>{{summary[coin].coinPrice | price('USD', 2) }}</div>
 <!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
         </v-col>
-        <v-col col="12" xs="12"  md="6" lg="3">
+        <v-col col="6" xs="6"  md="6" lg="3">
           <div class="caption grey--text">{{coin}} Hashrate:</div> 
           <div>105,53X,XXXT</div>
         </v-col>
-        <v-col col="12" xs="12" md="6" lg="3">
+        <v-col col="6" xs="6" md="6" lg="3">
           <div class="caption grey--text">{{coin}} mining earnings:</div> 
           <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}/Day ({{summary[coin].maxPayOffBtc | price(coin, 8, 'BCH ')}}) </div>
         </v-col>
@@ -81,8 +81,13 @@
           <v-col cols="3" xs="3" sm="3"  md="3" lg="3" class="dealROI">Breakeven 45 days</v-col>
         </v-row>
       </div>
-
+        <v-row justify="center">
+              <v-card class="diagramTitle d-inline-flex justify-center pa-2">
+            <div>Market at a glance</div>
+            </v-card>
+        </v-row>
       <summary-chart :summary="summary[coin]" :coin="coin" />
+   
     </v-tab-item>
   </v-tabs>
 </template>
@@ -171,6 +176,15 @@ export default {
 .costCol{
       display: block;
     }
+
+.diagramTitle{
+    background: #ffe500;
+    box-shadow: 1px 2px 4px #888888;
+    color: black;
+    margin-bottom:-10px;
+    z-index: 1000;
+}
+
 @media only screen and (max-width: 600px) {
     .costCol{
       display: none;
