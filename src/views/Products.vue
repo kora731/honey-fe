@@ -4,14 +4,14 @@
          <v-col md="12" lg="12" sm="12" cols="12" >
             <v-row>
               <v-col cols="12" lg="2" sm="12" class="px-4 dealHeader" ><h2>Sweet Deals</h2></v-col>
-              <v-col cols="12" lg="10" sm="12" class="pa-4" style="background: white;">
+              <v-col cols="12" lg="10" sm="12" class="pa-4" style="background: white; margin-top: -20px;">
                 <v-tabs center-active color="primary" v-model="activeCoinTab">
                   <v-tab v-for="coin of filters.coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
 
                   <v-tab-item v-for="coin of filters.coins" :key="'tab-item-' + coin">
                     <v-row class="d-flex" justify="space-between" align="center">
                         <div class="v-row mx-4 font-weight-medium body-2 d-flex flex-grow-1 tableHeader" style="background: white;">
-                            <v-col class="headerNum">
+                            <v-col class="headerNum pcOnly">
                               <div class="caption grey--text">{{coin}} block rewards (last 24 hr):</div> 
                               <div>{{summary[coin].maxPayOff | price}} /{{summary[coin].unit}}</div>
                             </v-col>
@@ -20,7 +20,7 @@
                               <div>{{summary[coin].coinPrice | price('USD', 2) }}</div>
                     <!--          <span class="red&#45;&#45;text">(-1.63%)</span>-->
                             </v-col>
-                             <v-col class="headerNum">
+                             <v-col class="headerNum pcOnly">
                               <div class="caption grey--text">{{coin}} Hashrate:</div> 
                               <div>105,53X,XXXT</div>
                             </v-col>
@@ -83,6 +83,7 @@
              </v-menu>
            </v-col>
            <v-col cols="2" v-if="$vuetify.breakpoint.lg" />
+           <v-col cols="2" v-if="!$vuetify.breakpoint.lg" />
            <v-menu offset-y>
              <template v-slot:activator="{ on }">
                <v-col cols="2">
@@ -99,7 +100,7 @@
                </v-list-item>
              </v-list>
            </v-menu>
-           <v-col cols="2" v-if="!$vuetify.breakpoint.lg" />
+          
            <v-col cols="3" />
         </v-row>
 <!--        <div class="productContainer">-->
@@ -305,6 +306,9 @@ export default {
   }
   .v-btn-toggle{
     margin:16px;
+  }
+  .pcOnly{
+    display: none;
   }
 
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-tabs centered center-active v-model="activeCoinTab">
+  <v-tabs centered center-active v-model="activeCoinTab" class="dealsTab">
     <v-tab v-for="coin of coins" :key="'tab-' + coin" @click="$store.state.selectedCoins = [coin]">{{coin}}</v-tab>
     <v-tab-item  v-for="coin of coins" :key="'tab-item-' + coin">
       <v-row class="mx-4 font-weight-medium body-2 d-flex tableHeader" style="background: white;" >
@@ -82,7 +82,7 @@
         </v-row>
       </div>
         <v-row justify="center">
-              <v-card class="diagramTitle d-inline-flex justify-center pa-2">
+              <v-card class="diagramTitle d-inline-flex justify-center pa-2 display-1 font-weight-bold">
             <div>Market at a glance</div>
             </v-card>
         </v-row>
@@ -156,7 +156,12 @@ export default {
     margin:12px;
     background: #fafafa;
     border-radius: 6px;
+    font-size: 16px;
 }
+.homeDeal .grey--text{
+      font-size: 14px;
+}
+
 .dealROI
 {
   color: #222;
@@ -183,6 +188,7 @@ export default {
     color: black;
     margin-bottom:-10px;
     z-index: 1000;
+    padding: 12px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -191,6 +197,10 @@ export default {
     }
   .tableHeader .col{
     flex-basis: auto;
+  }
+
+  .dealsTab{
+    margin-top: -20px;
   }
 }
 </style>

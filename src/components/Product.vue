@@ -43,7 +43,7 @@
             alt="Honey Lemon Logo"
             class="logoCheck"
             contain
-            src="../assets/hl-logo.png"
+            src="../assets/deal.svg"
             width="20"
           />
           <span class="ml-2">Check it out</span>

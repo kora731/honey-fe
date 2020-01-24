@@ -12,7 +12,7 @@
         <div class="slogan">
         
            <div class="desc mt-4">We aggregate and rate available mining contracts, for transparency, standardization, price discovery.</div>
-          <v-btn color="black" to="/products" class="home-cta"><span class="white--text">GET SWEET DEALS</span><v-img src="../assets/deals.png" max-height="28px" max-width="96px" contain></v-img></v-btn>
+          <v-btn color="black" to="/products" class="home-cta"><span class="white--text display-1 font-weight-bold">GET SWEET DEALS</span><v-img src="../assets/deals.png" max-height="28px" max-width="96px" contain></v-img></v-btn>
         </div>
       </div>
     </v-row>
@@ -204,7 +204,7 @@ export default {
     }
 
     .desc {
-      margin: 10px 0 10px 0;
+      margin: 10px 0 24px 0;
       font-size: 20px;
       max-width: 640px;
       @media (max-width: 500px) {
@@ -272,6 +272,7 @@ export default {
 .home-cta{
     border-radius: 6px;
     border: 3px solid #ffe500 !important;
+    padding: 20px !important;
 }
 
 .dealData {
@@ -299,7 +300,11 @@ export default {
 @media only screen and (max-width: 600px) {
   .deal-header {
     font-size: 16px !important;
+    padding-top: 0;
   }
+  .dealContainer{
+    display: none !important;
+    }
   .slogan {
     font-size: 18px;
   }
